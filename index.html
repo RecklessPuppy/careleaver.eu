@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careleaver verstehen & stärken – Ressourcen & Tools (Österreich)</title>
+    <meta name="description" content="Praktische Checklisten, Rechte-Karten, Timeline, Anspruchs-Check, Unterlagen-Generator & Kontakte für Careleaver in Österreich – druck- & handytauglich">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --primary-color:#2c3e50;
+            --secondary-color:#3498db;
+            --accent-color:#e74c3c;
+            --text-color:#333;
+            --bg-color:#fff;
+            --border-color:#ddd;
+            --light-bg:#f8f9fa;
+            --success:#4caf50;
+            --warning:#ffc107;
+            --muted:#6c757d;
+        }
+        html{scroll-behavior:smooth}
+        body{
+            font-family:'Inter', -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+            line-height:1.6;color:var(--text-color);background:var(--bg-color);font-size:16px;
+        }
+        .container{max-width:900px;margin:0 auto;padding:0 20px}
+
+        /* Skip link */
+        .skip-link{
+            position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;
+        }
+        .skip-link:focus{
+            position:fixed;left:16px;top:16px;width:auto;height:auto;background:#fff;
+            border:2px solid var(--secondary-color);padding:10px 14px;z-index:2000
+        }
+
+        /* Header */
+        header{
+            background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));
+            color:#fff;padding:40px 0;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.1)
+        }
+        header h1{font-size:2.4rem;margin-bottom:10px;font-weight:700}
+        header .subtitle{font-size:1.05rem;opacity:.95;margin-bottom:8px}
+        .header-meta{font-size:.9rem;opacity:.85}
+        .header-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+        .header-buttons button{
+            background:#fff;color:var(--primary-color);border:none;padding:10px 18px;border-radius:24px;
+            font-size:.98rem;font-weight:600;cursor:pointer;transition:all .3s ease;
+            box-shadow:0 2px 5px rgba(0,0,0,.08)
+        }
+        .header-buttons button:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,.12)}
+
+        /* Crisis bar */
+        .crisis-bar{
+            position:sticky;top:0;z-index:1100;background:#fff7e6;border-bottom:2px solid var(--warning);
+            color:#5c4400;padding:10px 0;font-size:.98rem
+        }
+        .crisis-wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
+        .crisis-pill{
+            display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;background:#fff;
+            border:1px solid rgba(0,0,0,.1);text-decoration:none;color:inherit;box-shadow:0 1px 2px rgba(0,0,0,.05)
+        }
+        .crisis-pill strong{color:var(--accent-color);letter-spacing:.01em}
+        .crisis-pill:hover{border-color:var(--warning);transform:translateY(-1px)}
+
+        /* Nav */
+        nav{
+            background:#fff;position:sticky;top:52px;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,.08);
+            border-bottom:2px solid var(--secondary-color)
+        }
+        nav ul{list-style:none;display:flex;justify-content:space-around;flex-wrap:wrap}
+        nav li{flex:1;min-width:150px}
+        nav a{
+            display:block;padding:14px 10px;text-decoration:none;color:var(--text-color);text-align:center;
+            transition:all .3s ease;font-weight:600;border-bottom:3px solid transparent
+        }
+        nav a:hover, nav a.active{background:var(--light-bg);color:var(--secondary-color);border-bottom-color:var(--secondary-color)}
+        .icon{font-size:1.2rem;margin-right:8px}
+
+        /* Sections */
+        main{padding:36px 0}
+        section{
+            margin-bottom:60px;padding:28px;background:#fff;border-radius:10px;
+            box-shadow:0 2px 10px rgba(0,0,0,.05);border:1px solid var(--border-color);
+            page-break-before:always
+        }
+        section:first-child{page-break-before:auto}
+        h2{
+            color:var(--primary-color);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--secondary-color);
+            font-size:1.8rem;display:flex;align-items:center;gap:10px
+        }
+        h3{color:var(--primary-color);margin:22px 0 12px;font-size:1.2rem}
+        .intro{
+            font-size:1.05rem;margin-bottom:16px;padding:14px;background:var(--light-bg);
+            border-left:4px solid var(--secondary-color);border-radius:6px
+        }
+
+        /* Checklists */
+        .checklist-item{margin-bottom:22px;padding:18px;background:var(--light-bg);border-radius:8px;border:1px solid var(--border-color);transition:all .3s ease}
+        .checklist-item:hover{box-shadow:0 4px 12px rgba(0,0,0,.08);transform:translateY(-2px)}
+        .checklist-header{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+        .checkbox{width:24px;height:24px;border:2px solid var(--secondary-color);border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:all .3s ease}
+        .checkbox:hover{background:var(--secondary-color)}
+        .checkbox.checked{background:var(--secondary-color);color:#fff}
+        .checkbox.checked::after{content:"✓";color:#fff;font-weight:700}
+        .checklist-title{font-weight:700;font-size:1.08rem;color:var(--primary-color)}
+        .checklist-content{margin-left:34px}
+        .checklist-content ul{list-style:none;margin:8px 0}
+        .checklist-content li{padding-left:20px;margin-bottom:5px;position:relative}
+        .checklist-content li::before{content:"•";position:absolute;left:0;color:var(--secondary-color);font-weight:700}
+        .next-step{margin-top:12px;padding:10px;background:#fff;border-left:4px solid var(--accent-color);border-radius:4px}
+        .next-step strong{color:var(--accent-color)}
+
+        /* Mini cards */
+        .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:14px}
+        .mini-card{border:1px solid var(--border-color);border-radius:8px;padding:14px;background:#fff}
+        .mini-card h4{margin:0 0 8px;color:var(--primary-color);font-size:1.05rem}
+        .mini-card p{margin:4px 0;font-size:.98rem}
+        .badge{display:inline-block;background:#eef7ff;border:1px solid #cfe8ff;padding:2px 8px;border-radius:14px;font-size:.82rem;color:#1b5c8a}
+
+        /* Rights grid */
+        .rights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:12px}
+        .right-card{padding:18px;background:#fff;border:2px solid var(--border-color);border-radius:8px;transition:all .3s ease}
+        .right-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.1);transform:translateY(-3px);border-color:var(--secondary-color)}
+        .article-number{display:inline-block;background:var(--secondary-color);color:#fff;padding:4px 10px;border-radius:20px;font-weight:700;margin-bottom:8px}
+        .article-short{font-style:italic;color:#666;margin:8px 0;padding:8px;background:var(--light-bg);border-radius:4px}
+        .article-action{margin-top:10px;padding:10px;background:#e8f5e9;border-left:4px solid #4caf50;border-radius:4px}
+
+        /* Tools */
+        .tool-card{border:1px solid var(--border-color);border-radius:10px;padding:16px;background:#fff;margin-bottom:16px}
+        .tool-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .tool-row .form-group{margin:0}
+        .radio-group{display:flex;flex-wrap:wrap;gap:8px}
+        .radio-pill{border:1px solid var(--border-color);padding:6px 10px;border-radius:18px;cursor:pointer}
+        .radio-pill input{margin-right:6px}
+        .result-box{padding:12px;background:#eef7ff;border:1px solid #cfe8ff;border-radius:8px;margin-top:12px}
+        .result-box h4{margin:0 0 8px;color:var(--primary-color)}
+        .result-list{margin-left:18px}
+        .small-muted{font-size:.92rem;color:var(--muted)}
+
+        /* Contacts */
+        .contact-card{margin-bottom:16px;padding:16px;background:#fff;border:1px solid var(--border-color);border-radius:8px;transition:all .3s ease}
+        .contact-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+        .contact-name{font-weight:700;color:var(--primary-color);font-size:1.08rem;margin-bottom:4px}
+        .contact-purpose{color:#666;margin-bottom:8px;font-style:italic}
+        .contact-info{display:flex;flex-direction:column;gap:5px}
+        .contact-detail{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+        .contact-detail strong{color:var(--secondary-color);min-width:90px}
+        .contact-link{
+            display:inline-flex;align-items:center;gap:6px;color:#2c3e50;text-decoration:none;
+            background-color:rgba(52,152,219,.08);border:1px solid rgba(52,152,219,.2);
+            border-radius:4px;padding:4px 8px 3px;transition:all .2s ease;line-height:1.3;box-shadow:0 1px 2px rgba(0,0,0,.05)
+        }
+        .contact-link:hover{color:#e74c3c;background:rgba(231,76,60,.08);border-color:rgba(231,76,60,.3);transform:translateY(-1px)}
+        .link-icon{font-size:.8em;opacity:.7;transition:transform .2s ease}
+        .contact-link:hover .link-icon{transform:translate(1px,-1px)}
+        .link-text{font-family:'Roboto Mono','SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;font-size:.9em;letter-spacing:-.01em;font-weight:500;position:relative;top:.5px}
+
+        /* Info */
+        .info-box{padding:12px;background:#fff3cd;border:1px solid var(--warning);border-radius:6px;margin:16px 0}
+        .tip-box{padding:12px;background:#d4edda;border:1px solid #28a745;border-radius:6px;margin:16px 0}
+        .tip-box strong,.info-box strong{color:#155724}
+
+        /* Footer */
+        footer{background:var(--primary-color);color:#fff;padding:28px 0;text-align:center;margin-top:60px}
+        footer p{margin-bottom:8px;opacity:.9}
+
+        /* Utilities */
+        .mt-2{margin-top:12px}.mt-3{margin-top:18px}.mb-2{margin-bottom:12px}.mb-3{margin-bottom:18px}
+        .text-center{text-align:center}
+        .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+        a:focus,button:focus,input:focus,textarea:focus,select:focus{outline:2px solid var(--secondary-color);outline-offset:2px}
+
+        /* Tabs (Bundesländer) */
+        .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+        .tab-btn{padding:6px 10px;border:1px solid var(--border-color);border-radius:16px;background:#fff;cursor:pointer}
+        .tab-btn.active{background:#eef7ff;border-color:#cfe8ff;color:#1b5c8a}
+        .tab-panel{display:none}
+        .tab-panel.active{display:block}
+
+        /* Mobile */
+        @media (max-width:768px){
+            header h1{font-size:1.8rem}
+            nav{top:68px}
+            nav ul{flex-direction:column}
+            nav li{min-width:100%}
+            nav a{padding:12px}
+            section{padding:20px}
+            .tool-row{grid-template-columns:1fr}
+        }
+
+        /* Print */
+        @media print{
+            body{font-size:12pt;line-height:1.5}
+            .skip-link,.crisis-bar,nav,.header-buttons{display:none}
+            header{page-break-after:avoid;background:none!important;color:#000!important;padding:16px 0}
+            header h1{color:#000!important}
+            section{page-break-before:always;page-break-inside:avoid;box-shadow:none;border:1px solid #000;margin-bottom:24px}
+            section:first-of-type{page-break-before:auto}
+            .checkbox{border:1px solid #000!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+            a{color:#000!important;text-decoration:underline}
+            .info-box,.tip-box{border:1px solid #000;background:none!important}
+            footer{page-break-before:always;background:none!important;color:#000!important;border-top:1px solid #000}
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
+    <!-- Header -->
+    <header role="banner">
+        <div class="container">
+            <h1>Careleaver verstehen & stärken</h1>
+            <p class="subtitle">Checklisten, Rechte‑Karten, Timeline, Anspruchs‑Check, Unterlagen‑Generator & Kontakte – druck‑ & handytauglich (Österreich)</p>
+            <p class="header-meta">Stand der Information: <strong>November 2025</strong> · Bitte regionale Aktualitäten prüfen.</p>
+            <div class="header-buttons" role="group" aria-label="Schnellaktionen">
+                <button onclick="window.print()" aria-label="Seite drucken">📄 Alles drucken</button>
+                <button onclick="savePDF()" aria-label="Als PDF speichern">💾 PDF speichern</button>
+                <button onclick="scrollToSection('hinweise')" aria-label="Zu Kontakt & Impressum">📧 Kontakt & Impressum</button>
+                <button onclick="clearLocalData()" aria-label="Eingaben löschen">🧹 Eingaben löschen</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Crisis Bar -->
+    <div class="crisis-bar" role="region" aria-label="Krisenhilfe sofort">
+        <div class="container crisis-wrap">
+            <span class="sr-only">Soforthilfe:</span>
+            <a class="crisis-pill" href="tel:112"><strong>112</strong> Euro‑Notruf</a>
+            <a class="crisis-pill" href="tel:133"><strong>133</strong> Polizei</a>
+            <a class="crisis-pill" href="tel:144"><strong>144</strong> Rettung</a>
+            <a class="crisis-pill" href="tel:+43131330"><strong>01 313 30</strong> PSD Wien (24/7)</a>
+            <a class="crisis-pill" href="tel:147"><strong>147</strong> Rat auf Draht</a>
+            <a class="crisis-pill" href="sms:0800133133"><strong>0800 133 133</strong> SMS/Fax (gehörlos)</a>
+            <a class="crisis-pill" href="https://www.dec112.at/" target="_blank" rel="noopener">DEC112‑App ↗</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Hauptnavigation">
+        <ul>
+            <li><a href="#checkliste" onclick="setActive(this)"><span class="icon">✅</span> 5 S‑Checkliste</a></li>
+            <li><a href="#timeline" onclick="setActive(this)"><span class="icon">🕒</span> Timeline</a></li>
+            <li><a href="#rechte" onclick="setActive(this)"><span class="icon">⚖️</span> Rechte‑Kompakt</a></li>
+            <li><a href="#tools" onclick="setActive(this)"><span class="icon">🛠️</span> Tools</a></li>
+            <li><a href="#kontakte" onclick="setActive(this)"><span class="icon">📇</span> Kontakte Wien</a></li>
+            <li><a href="#bundeslaender" onclick="setActive(this)"><span class="icon">🗺️</span> Bundesländer</a></li>
+            <li><a href="#massnahmeplan" onclick="setActive(this)"><span class="icon">🗂️</span> Maßnahmeplan</a></li>
+            <li><a href="#hinweise" onclick="setActive(this)">ℹ️ Hinweise</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <main id="main">
+        <div class="container">
+
+            <!-- 1: 5S -->
+            <section id="checkliste" aria-labelledby="h-checkliste">
+                <h2 id="h-checkliste"><span class="icon">✅</span> 5 S‑Checkliste der Verselbständigung</h2>
+                <div class="intro">Behalte die fünf zentralen Bereiche im Blick & setze <strong>heute</strong> einen nächsten Schritt.</div>
+
+                <!-- S: Wohnraum -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checkbox" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Sicherer Wohnraum abhaken"></div>
+                        <div class="checklist-title">Sicherer Wohnraum</div>
+                    </div>
+                    <div class="checklist-content">
+                        <ul>
+                            <li>Wohnbeihilfe (MA 50)</li>
+                            <li>Wohnticket/Startwohnungen (Wohnberatung Wien)</li>
+                            <li>Übergangswohnen (z. B. JUCA, betreute Wohnmöglichkeiten)</li>
+                            <li>Notschlafstellen (Kurzübernachtung)</li>
+                        </ul>
+                        <div class="next-step"><strong>Nächster Schritt:</strong> Anspruch prüfen & <strong>Termin vereinbaren</strong> (Unterlagen klären).</div>
+
+                        <div class="mini-grid mt-2">
+                            <div class="mini-card">
+                                <h4>Wohnbeihilfe – Kontakt</h4>
+                                <p class="badge">Wien · MA 50</p>
+                                <p><strong>Tel:</strong> 01 / 4000‑74880</p>
+                                <p><strong>Adresse:</strong> Heiligenstädter Straße 31, 1190 Wien</p>
+                                <p><a class="contact-link" target="_blank" href="https://www.wien.gv.at/amtswege/wohnbeihilfe-antrag"><span class="link-text">Antrag Wohnbeihilfe</span><span class="link-icon">↗</span></a></p>
+                            </div>
+                            <div class="mini-card">
+                                <h4>Wohnberatung Wien</h4>
+                                <p class="badge">Wohnticket/Startwohnungen</p>
+                                <p><strong>Tel:</strong> 01 / 24 111</p>
+                                <p><strong>Adresse:</strong> Guglgasse 7‑9, 1030 Wien</p>
+                                <p><a class="contact-link" target="_blank" href="https://wohnberatung-wien.at/faq-kontakt"><span class="link-text">FAQ & Kontakt</span><span class="link-icon">↗</span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- S: Einkommen -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checkbox" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Stabiles Einkommen abhaken"></div>
+                        <div class="checklist-title">Stabiles Einkommen</div>
+                    </div>
+                    <div class="checklist-content">
+                        <ul>
+                            <li>U25 (AMS & MA 40)</li>
+                            <li>Jugendcoaching (NEBA)</li>
+                            <li>AusbildungsFit/Produktionsschule</li>
+                            <li>waff‑Programme (Zukunftsberufe)</li>
+                        </ul>
+                        <div class="next-step"><strong>Nächster Schritt:</strong> Erstkontakt <strong>U25</strong> oder <strong>Jugendcoaching</strong> fixieren.</div>
+
+                        <div class="mini-grid mt-2">
+                            <div class="mini-card">
+                                <h4>U25 – Wiener Jugendunterstützung</h4>
+                                <p class="badge">Lehrbachgasse 18, 1120</p>
+                                <p><strong>AMS:</strong> 05 0904 940 · <strong>MA 40:</strong> 01 / 4000‑8040</p>
+                                <p><a class="contact-link" target="_blank" href="https://www.wien.gv.at/kontakt/ma40-u25-jugendunterstuetzung"><span class="link-text">Info & Standort</span><span class="link-icon">↗</span></a></p>
+                            </div>
+                            <div class="mini-card">
+                                <h4>Jugendcoaching & AusbildungsFit</h4>
+                                <p class="badge">NEBA</p>
+                                <p><a class="contact-link" target="_blank" href="https://www.neba.at/"><span class="link-text">neba.at</span><span class="link-icon">↗</span></a></p>
+                                <p><a class="contact-link" target="_blank" href="https://www.vhs.at/de/projekte/jugendcoaching"><span class="link-text">VHS Jugendcoaching Wien</span><span class="link-icon">↗</span></a></p>
+                            </div>
+                            <div class="mini-card">
+                                <h4>waff – Jugend & Zukunftsberufe</h4>
+                                <p class="badge">18–25 Jahre</p>
+                                <p><strong>Hotline:</strong> 0800 20 20 22</p>
+                                <p><a class="contact-link" target="_blank" href="https://www.waff.at/beruf-weiterbildung/abschluesse-nachholen/jugendliche/zukunftsberufe/"><span class="link-text">Angebot</span><span class="link-icon">↗</span></a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- S: Support-Netz -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checkbox" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Support-Netz abhaken"></div>
+                        <div class="checklist-title">Support‑Netz</div>
+                    </div>
+                    <div class="checklist-content">
+                        <ul>
+                            <li>KIJA (Ombudsstelle)</li>
+                            <li>Offene Beratungen (z. B. WienXtra)</li>
+                            <li>Selbstvertretung (Careleaver AT/DE)</li>
+                            <li>Rat auf Draht <strong>147</strong></li>
+                        </ul>
+                        <div class="next-step"><strong>Nächster Schritt:</strong> <strong>2 Kontakte</strong> ins Handy speichern (Name + Nummer).</div>
+                    </div>
+                </div>
+
+                <!-- S: Skills -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checkbox" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Skills abhaken"></div>
+                        <div class="checklist-title">Skills</div>
+                    </div>
+                    <div class="checklist-content">
+                        <ul>
+                            <li>Haushaltsplan erstellen</li>
+                            <li>Mietvertrag verstehen</li>
+                            <li>Anspruchs‑Check durchführen</li>
+                            <li>Terminvorbereitung üben</li>
+                        </ul>
+                        <div class="next-step"><strong>Nächster Schritt:</strong> Ein fehlendes Skill‑Thema als <strong>Mini‑Lernziel</strong> für die nächste Woche notieren.</div>
+                    </div>
+                </div>
+
+                <!-- S: Stigma-Schutz -->
+                <div class="checklist-item">
+                    <div class="checklist-header">
+                        <div class="checkbox" onclick="toggleCheck(this)" role="checkbox" aria-checked="false" tabindex="0" aria-label="Stigma-Schutz abhaken"></div>
+                        <div class="checklist-title">Stigma‑Schutz</div>
+                    </div>
+                    <div class="checklist-content">
+                        <ul>
+                            <li>Rechte kennen (z. B. Begleitung zu Behörden möglich)</li>
+                            <li>Begleitung zu Terminen organisieren (Buddy/Beistand)</li>
+                            <li>Beschwerdewege nutzen (Ombudsstellen)</li>
+                        </ul>
+                        <div class="next-step"><strong>Nächster Schritt:</strong> Einen <strong>Buddy</strong> für den nächsten Behörden‑ oder Beratungstermin anfragen.</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Mini‑Hinweis:</strong> Wenn heute nicht alles klappt: <strong>Plan B</strong> definieren (alternativer Kontakt/andere Frist).
+                </div>
+
+                <!-- Recht & Geld – Zusatzkarten -->
+                <div class="mini-grid">
+                    <div class="mini-card">
+                        <h4>Basiskonto – „Recht auf ein Konto“</h4>
+                        <p>Alle Verbraucher:innen haben Anspruch auf ein Basiskonto (ohne Überziehungsrahmen).</p>
+                        <p><span class="badge">Höchstentgelte (Stand 2025)</span> max. € 83,45/Jahr; begünstigt max. € 40,00/Jahr.<br><span class="small-muted">Bitte jährlich prüfen – Beträge können sich ändern.</span></p>
+                        <p><a class="contact-link" target="_blank" href="https://www.fma.gv.at/konto/basiskonto/"><span class="link-text">FMA‑Info</span><span class="link-icon">↗</span></a></p>
+                    </div>
+                    <div class="mini-card">
+                        <h4>Familienbeihilfe & Versicherung</h4>
+                        <p>Familienbeihilfe grundsätzlich bis <strong>24</strong> (Ausnahmen bis <strong>25</strong>). Mitversicherung bei Eltern oft bis <strong>27</strong> bei Ausbildung – sonst Studierenden‑Selbstversicherung.</p>
+                        <p>
+                            <a class="contact-link" target="_blank" href="https://www.oesterreich.gv.at/de/themen/familie_und_partnerschaft/familienbeihilfe/Seite.080712"><span class="link-text">Familienbeihilfe</span><span class="link-icon">↗</span></a>
+                            <a class="contact-link" target="_blank" href="https://www.gesundheitskasse.at/"><span class="link-text">ÖGK Info</span><span class="link-icon">↗</span></a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2: Timeline -->
+            <section id="timeline" aria-labelledby="h-timeline">
+                <h2 id="h-timeline"><span class="icon">🕒</span> T‑12/‑6/0‑Timeline (vor, um & nach dem 18. Geburtstag)</h2>
+                <div class="intro">Mit Vorlauf gelingt der Übergang leichter. Die Timeline zeigt, <strong>was</strong> bis <strong>wann</strong> vorbereitet sein sollte.</div>
+
+                <div class="tool-card" role="group" aria-label="Timeline-Werkzeuge">
+                    <div class="timeline-tools" style="margin:0">
+                        <label for="bday"><strong>Dein 18. Geburtstag:</strong></label>
+                        <input type="date" id="bday" aria-describedby="bdayHelp">
+                        <span id="bdayHelp" class="sr-only">Datum auswählen, um Kalendereinträge zu erzeugen.</span>
+                        <button type="button" onclick="exportICS()">📅 Termine (ICS) exportieren</button>
+                    </div>
+                    <p class="small-muted mt-2">Hinweis: Termine werden mit Startzeit 09:00 (lokale Zeit) eingetragen; bei Bedarf im Kalender anpassen.</p>
+                </div>
+
+                <div class="timeline mt-2">
+                    <div class="timeline-item">
+                        <div class="timeline-header">T‑12 Monate</div>
+                        <ul>
+                            <li>Hilfeplan klären (Ziele, Zuständigkeiten, Nachbetreuung anbahnen)</li>
+                            <li>Wohnoptionen sondieren; Finanzierung/Unterlagen sammeln</li>
+                            <li>Erste Anträge vorbereiten (Checkliste anlegen)</li>
+                            <li><strong>APflG</strong> („AusBildung bis 18“) berücksichtigen</li>
+                        </ul>
+                        <div class="tip-box"><strong>Kontakt APflG:</strong> Serviceline 0800 700 118 · Angebote: Jugendcoaching, Produktionsschule, Lehrplatzsuche.</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">T‑6 Monate</div>
+                        <ul>
+                            <li><strong>MA 50 Wohnbeihilfe</strong>: Unterlagen finalisieren, Termin reservieren</li>
+                            <li><strong>U25/AMS</strong>: Intake vereinbaren; Anspruch/Leistungen klären</li>
+                            <li><strong>Jugendcoaching/AusbildungsFit</strong>: Kontakt aufnehmen, Starttermin fixieren</li>
+                            <li><strong>Kontaktliste</strong> (Ombudsstelle/Notfälle) vervollständigen</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">T 0 (18. Geburtstag)</div>
+                        <ul>
+                            <li><strong>Nachbetreuung/Hilfen für junge Erwachsene (Wien)</strong> gemäß § 33 WKJHG <em>bis längstens 21</em> prüfen/fortschreiben</li>
+                            <li><strong>Meldezettel</strong>: Hauptwohnsitz binnen <strong>3 Tagen</strong> anmelden</li>
+                            <li><strong>ORF‑Beitrag</strong>: Befreiung/Reduktion prüfen (z. B. bei Sozialleistungen)</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-header">T +3/6 Monate</div>
+                        <ul>
+                            <li>Check‑ins: Wohnen/Einkommen/Netz stabil?</li>
+                            <li>Bei Ablehnung/Problemen: <strong>KIJA (Ombudsstelle)</strong> kontaktieren; in Akutsituationen <strong>147</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Termin‑Mappe:</strong> Ausweis, Meldezettel, Mietvertrag, Bestätigungen (Schule/AMS), Kontoauszug, Nachweise Einkommen, ggf. Vollmacht für Begleitperson.
+                </div>
+            </section>
+
+            <!-- 3: Rechte -->
+            <section id="rechte" aria-labelledby="h-rechte">
+                <h2 id="h-rechte"><span class="icon">⚖️</span> Rechte‑Kompakt – „Artikel & Umsetzung morgen“</h2>
+                <div class="intro">Unterstützung wird an mindestens einen Artikel der UN‑Kinderrechtskonvention rückgebunden. Ergänzt um eine AT‑Spezialkarte.</div>
+
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <span class="article-number">Art. 12 KRK</span>
+                        <h3>Beteiligung</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Recht, gehört zu werden; Meinung ist angemessen zu berücksichtigen.</div>
+                        <div class="article-action"><strong>Morgen:</strong> „Es ist <strong>dein Recht</strong>, mitzuentscheiden. Welche Option passt – & was brauchst du, damit sie machbar ist?“</div>
+                    </div>
+                    <div class="right-card">
+                        <span class="article-number">Art. 20 KRK</span>
+                        <h3>Schutz & alternative Betreuung</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Anspruch auf geeignete Betreuung, wenn Familie ausfällt.</div>
+                        <div class="article-action"><strong>Morgen:</strong> Prüfen, ob Wohnform <strong>sicher & stabil</strong> ist; bei Bruch <strong>Übergang</strong> aktivieren.</div>
+                    </div>
+                    <div class="right-card">
+                        <span class="article-number">Art. 28 KRK</span>
+                        <h3>Bildung</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Recht auf Bildung/Unterstützung im Bildungsweg.</div>
+                        <div class="article-action"><strong>Morgen:</strong> Jugendcoaching/AusbildungsFit <strong>heute</strong> kontaktieren; nächste Lern‑Etappe festlegen.</div>
+                    </div>
+                    <div class="right-card">
+                        <span class="article-number">Art. 39 KRK</span>
+                        <h3>Genesung & Reintegration</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Anspruch auf Unterstützung nach Belastungen/Krisen.</div>
+                        <div class="article-action"><strong>Morgen:</strong> Krisendienste + <strong>Buddy</strong> für Termine festhalten.</div>
+                    </div>
+                    <div class="right-card">
+                        <span class="article-number">AT‑Spezial</span>
+                        <h3>Nachbetreuung (Wien) – § 33 WKJHG</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Hilfen für junge Erwachsene können in Wien <strong>bis längstens 21</strong> gewährt werden.</div>
+                        <div class="article-action"><strong>Morgen:</strong> Im Hilfeplan festhalten; rechtzeitig Verlängerung/Ansuchen stellen; Zuständigkeiten & Ziele klarziehen.</div>
+                    </div>
+                    <div class="right-card">
+                        <span class="article-number">Behördenweg</span>
+                        <h3>Begleitung/Beistand (AVG)</h3>
+                        <div class="article-short"><strong>Kurz:</strong> Du kannst zu Behörden‑Terminen eine <strong>Begleitperson</strong> mitnehmen.</div>
+                        <div class="article-action"><strong>Morgen:</strong> Buddy bestimmen, ggf. <strong>Vollmacht</strong> vorbereiten; Unterlagenliste gemeinsam checken.</div>
+                    </div>
+                </div>
+
+                <div class="info-box mt-2"><strong>Sprach‑Spicker:</strong> Offen fragen, Wahlmöglichkeiten bieten, Zustimmung informierter Entscheidungen dokumentieren.</div>
+            </section>
+
+            <!-- 4: TOOLS (Anspruchs-Check, Unterlagen-Generator, Melde-Spicker, Geld & ORF) -->
+            <section id="tools" aria-labelledby="h-tools">
+                <h2 id="h-tools"><span class="icon">🛠️</span> Tools – Anspruchs‑Check · Unterlagen‑Generator · Melde‑Spicker · Geld & ORF</h2>
+
+                <!-- 4.1 Anspruchs-Check -->
+                <div class="tool-card" aria-labelledby="h-anspruch">
+                    <h3 id="h-anspruch">Anspruchs‑Check (Wohnen & Einkommen) – 2 Minuten</h3>
+                    <p class="small-muted">Ergebnis = konkrete nächste Schritte inkl. Links/Kontakte. <em>Hinweis:</em> ersetzt keine Rechtsberatung.</p>
+
+                    <div class="tool-row mt-2">
+                        <div class="form-group">
+                            <label><strong>Alter</strong></label>
+                            <div class="radio-group" role="radiogroup" aria-label="Alter">
+                                <label class="radio-pill"><input type="radio" name="age" value="u18">unter 18</label>
+                                <label class="radio-pill"><input type="radio" name="age" value="18-20">18–20</label>
+                                <label class="radio-pill"><input type="radio" name="age" value="21-24">21–24</label>
+                                <label class="radio-pill"><input type="radio" name="age" value="25plus">25+</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Situation</strong></label>
+                            <div class="radio-group" role="radiogroup" aria-label="Situation">
+                                <label class="radio-pill"><input type="radio" name="situation" value="schule">Schule/Lehre</label>
+                                <label class="radio-pill"><input type="radio" name="situation" value="suche">Jobsuche</label>
+                                <label class="radio-pill"><input type="radio" name="situation" value="arbeit">Arbeit</label>
+                                <label class="radio-pill"><input type="radio" name="situation" value="keinstabil">keine stabile Situation</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tool-row mt-2">
+                        <div class="form-group">
+                            <label><strong>Wohnen</strong></label>
+                            <div class="radio-group" role="radiogroup" aria-label="Wohnen">
+                                <label class="radio-pill"><input type="radio" name="wohnen" value="miete">eigene Miete</label>
+                                <label class="radio-pill"><input type="radio" name="wohnen" value="family">bei Familie/Freunden</label>
+                                <label class="radio-pill"><input type="radio" name="wohnen" value="unsicher">unsicher/keine Unterkunft</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Careleaver</strong></label>
+                            <div class="radio-group" role="radiogroup" aria-label="Careleaver">
+                                <label class="radio-pill"><input type="radio" name="care" value="ja">ja</label>
+                                <label class="radio-pill"><input type="radio" name="care" value="nein">nein/weiß nicht</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="button" onclick="runEligibility()" aria-label="Anspruch prüfen">🔎 Anspruch prüfen</button>
+                        <button type="button" onclick="resetEligibility()" aria-label="Eingaben zurücksetzen">↺ Zurücksetzen</button>
+                    </div>
+
+                    <div id="eligibilityResult" class="result-box" aria-live="polite" aria-atomic="true" hidden>
+                        <h4>Empfohlene nächste Schritte</h4>
+                        <ul class="result-list" id="eligibilityList"></ul>
+                        <p class="small-muted mt-2">Tipps: Unterlagenliste anlegen (siehe Unterlagen‑Generator) & bei Terminen Begleitperson mitnehmen.</p>
+                    </div>
+                </div>
+
+                <!-- 4.2 Unterlagen-Generator -->
+                <div class="tool-card" aria-labelledby="h-unterlagen">
+                    <h3 id="h-unterlagen">Unterlagen‑Generator (A4‑Liste)</h3>
+                    <p class="small-muted">Wähle Wege aus – wir bündeln die typischen Nachweise. Vor Ort können zusätzliche Unterlagen verlangt werden.</p>
+
+                    <div class="radio-group" role="group" aria-label="Wege auswählen">
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="ma50">MA 50 Wohnbeihilfe</label>
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="u25">U25 (MA 40 & AMS)</label>
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="ams">AMS Erstkontakt</label>
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="melde">Meldezettel (Hauptwohnsitz)</label>
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="konto">Basiskonto</label>
+                        <label class="radio-pill"><input type="checkbox" class="doc-source" value="orf">ORF‑Beitragsbefreiung</label>
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="button" onclick="generateDocs()">📝 Liste erzeugen</button>
+                        <button type="button" onclick="printSection('docsResult')">🖨️ Drucken</button>
+                        <button type="button" onclick="copyDocs()">📋 In Zwischenablage</button>
+                    </div>
+
+                    <div id="docsResult" class="result-box" aria-live="polite" aria-atomic="true" hidden>
+                        <h4>Unterlagenliste</h4>
+                        <ul id="docsList" class="result-list"></ul>
+                        <p class="small-muted mt-2">Tipp: Mappe mit Kopien anlegen & digitale Fotos/Scans sichern.</p>
+                    </div>
+                </div>
+
+                <!-- 4.3 Melde-Spicker -->
+                <div class="tool-card" aria-labelledby="h-melde">
+                    <h3 id="h-melde">Melde‑Spicker (3‑Tage‑Frist)</h3>
+                    <ol class="result-list">
+                        <li>Neuen <strong>Hauptwohnsitz binnen 3 Tagen</strong> nach Bezug anmelden.</li>
+                        <li>Formular „Meldezettel“ (Vermieter:in/Unterkunftgeber:in unterschreibt).</li>
+                        <li>Ausweis & ggf. Mietvertrag mitnehmen; Adresse der Meldebehörde prüfen.</li>
+                        <li>Bestätigung gut aufbewahren (z. B. für Konto, Wohnbeihilfe, U25).</li>
+                    </ol>
+                    <p class="mt-2"><a class="contact-link" target="_blank" href="https://www.oesterreich.gv.at/"><span class="link-text">oesterreich.gv.at – Meldepflicht</span><span class="link-icon">↗</span></a></p>
+                </div>
+
+                <!-- 4.4 Geld & ORF -->
+                <div class="tool-card" aria-labelledby="h-geld">
+                    <h3 id="h-geld">Geld & Beiträge – Basiskonto · ORF‑Beitrag (OBS) · Schuldenberatung</h3>
+                    <div class="mini-grid">
+                        <div class="mini-card">
+                            <h4>Basiskonto (Bank)</h4>
+                            <p>Recht auf ein Zahlungskonto mit grundlegenden Funktionen (kein Überziehungsrahmen).</p>
+                            <p><span class="badge">Höchstentgelte (2025)</span> € 83,45/Jahr · begünstigt € 40,00/Jahr <span class="small-muted">(Angaben regelmäßig prüfen)</span></p>
+                            <p><a class="contact-link" target="_blank" href="https://www.fma.gv.at/konto/basiskonto/"><span class="link-text">FMA Informationen</span><span class="link-icon">↗</span></a></p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>ORF‑Beitrag (OBS)</h4>
+                            <p>Seit 2024 ersetzt der ORF‑Beitrag die GIS‑Gebühr. Für viele gilt: <strong>Befreiung/Ermäßigung prüfen</strong> (z. B. bei Sozialleistungen).</p>
+                            <p><a class="contact-link" target="_blank" href="https://www.orf.at/"><span class="link-text">ORF Beitrag – Befreiung prüfen</span><span class="link-icon">↗</span></a></p>
+                        </div>
+                        <div class="mini-card">
+                            <h4>Schuldenberatung Wien</h4>
+                            <p>Kostenlose, staatlich anerkannte Beratung & Begleitung – auch bei Privatkonkurs.</p>
+                            <p><strong>Tel:</strong> 01 / 24 5 24 – 60 100 (Mo‑Fr 8:00–15:30)</p>
+                            <p><a class="contact-link" target="_blank" href="https://www.schuldenberatung.wien/"><span class="link-text">schuldenberatung.wien</span><span class="link-icon">↗</span></a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5: Kontakte Wien -->
+            <section id="kontakte" aria-labelledby="h-kontakte">
+                <h2 id="h-kontakte"><span class="icon">📇</span> Kontaktliste Wien</h2>
+                <div class="intro">„Wer macht was?“ + konkrete Telefonnummern/Adressen für <strong>schnelles Handeln</strong>. <em>Bitte Erreichbarkeit/Öffnungszeiten vor Nutzung prüfen.</em></div>
+
+                <div class="contact-card">
+                    <div class="contact-name">MA 11 – Kinder‑ & Jugendhilfe</div>
+                    <div class="contact-purpose">Allgemeine Auskünfte, Hilfe in Krisen, Vermittlung</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://www.wien.gv.at/kontakt/ma11"><span class="link-text">wien.gv.at/kontakt/ma11</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">KIJA Wien – Kinder‑ & Jugendanwaltschaft (Ombudsstelle)</div>
+                    <div class="contact-purpose">Rechteklärung, Beschwerden, Unterstützung bei Konflikten mit Behörden/Einrichtungen</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Telefon:</strong><span>01 70 77 000</span></div>
+                        <div class="contact-detail"><strong>Adresse:</strong><span>Modecenterstraße 14, Block C, 4. Stock, 1030 Wien</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://kija-wien.at"><span class="link-text">kija-wien.at</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">U25 Wiener Jugendunterstützung (MA 40 & AMS)</div>
+                    <div class="contact-purpose">Einkommen/Leistungen/Arbeitsmarkt für Unter‑25‑Jährige</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Adresse:</strong><span>Lehrbachgasse 18, 1120 Wien</span></div>
+                        <div class="contact-detail"><strong>Telefon:</strong><span>AMS 05 0904 940 · MA 40 01 / 4000‑8040</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://www.wien.gv.at/kontakt/ma40-u25-jugendunterstuetzung"><span class="link-text">wien.gv.at/u25</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">MA 50 – Wohnbeihilfe / Wohnservice</div>
+                    <div class="contact-purpose">Wohnbeihilfe, Infos zu Startwohnungen/Wohnticket</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Adresse:</strong><span>Heiligenstädter Straße 31, 1190 Wien</span></div>
+                        <div class="contact-detail"><strong>Telefon:</strong><span>01 / 4000‑74880</span></div>
+                        <div class="contact-detail"><strong>E‑Mail:</strong><span>wohnbeihilfe@ma50.wien.gv.at</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://www.wien.gv.at/amtswege/wohnbeihilfe-antrag"><span class="link-text">Antrag & Info</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">Wohnberatung Wien (Wohnticket/Startwohnungen)</div>
+                    <div class="contact-purpose">Gemeindewohnungen, geförderter Wohnbau, Beratung</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Telefon:</strong><span>01 / 24 111 (Mo‑Fr 7–20 Uhr)</span></div>
+                        <div class="contact-detail"><strong>Adresse:</strong><span>Guglgasse 7‑9/Ecke Paragonstraße, 1030 Wien</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://wohnberatung-wien.at/faq-kontakt"><span class="link-text">FAQ & Kontakt</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card" style="background:#fff3cd;border:2px solid #ffc107">
+                    <div class="contact-name">🆘 Rat auf Draht – 147 (24/7, kostenlos & anonym)</div>
+                    <div class="contact-purpose">Akute Beratung/Krise; Weitervermittlung</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Telefon:</strong><span style="font-size:1.2rem;font-weight:700;color:#e74c3c">147</span><span>(ohne Vorwahl)</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://www.rataufdraht.at/"><span class="link-text">rataufdraht.at</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">Psychiatrischer Notdienst / Krisendienste Stadt Wien</div>
+                    <div class="contact-purpose">Akute psychische Krisen (24/7)</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Telefon:</strong><span>01 313 30</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://psd-wien.at/information/sozialpsychiatrischer-notdienst"><span class="link-text">psd-wien.at</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">Kriseninterventionszentrum Wien</div>
+                    <div class="contact-purpose">Kurzfristige psychologische Hilfe, Krisenbegleitung</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Telefon:</strong><span>01 406 95 95</span></div>
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://kriseninterventionszentrum.at/"><span class="link-text">kriseninterventionszentrum.at</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-name">Careleaver Verein Österreich</div>
+                    <div class="contact-purpose">Netzwerk & Peer‑Unterstützung</div>
+                    <div class="contact-info">
+                        <div class="contact-detail"><strong>Web:</strong>
+                            <a class="contact-link" target="_blank" href="https://www.careleaver.at"><span class="link-text">careleaver.at/home</span><span class="link-icon">↗</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>Hinweis:</strong> Bei <strong>Ablehnung</strong> von Leistungen: Ombudsstelle (KIJA) kontaktieren; Gespräch <strong>dokumentieren</strong> (Datum, Person, Kernaussagen).
+                </div>
+            </section>
+
+            <!-- 6: Bundesländer (Skeleton) -->
+            <section id="bundeslaender" aria-labelledby="h-bundeslaender">
+                <h2 id="h-bundeslaender"><span class="icon">🗺️</span> Bundesländer – Anlaufstellen (Beta)</h2>
+                <div class="intro">Tab‑Übersicht für zentrale Stellen in den Ländern. <em>Wien ist ausgefüllt; weitere Bundesländer folgen.</em></div>
+
+                <div class="tabs" role="tablist" aria-label="Bundesländer">
+                    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-wien" id="btn-wien" onclick="openTab('wien')">Wien</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-noe" id="btn-noe" onclick="openTab('noe')">Niederösterreich</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ooe" id="btn-ooe" onclick="openTab('ooe')">Oberösterreich</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-stmk" id="btn-stmk" onclick="openTab('stmk')">Steiermark</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-sbg" id="btn-sbg" onclick="openTab('sbg')">Salzburg</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-tirol" id="btn-tirol" onclick="openTab('tirol')">Tirol</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-ktn" id="btn-ktn" onclick="openTab('ktn')">Kärnten</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-vbg" id="btn-vbg" onclick="openTab('vbg')">Vorarlberg</button>
+                    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-bl" id="btn-bl" onclick="openTab('bl')">Burgenland</button>
+                </div>
+
+                <div id="tab-wien" class="tab-panel active" role="tabpanel" aria-labelledby="btn-wien">
+                    <p class="small-muted">Siehe <a class="contact-link" href="#kontakte"><span class="link-text">Kontaktliste Wien</span><span class="link-icon">↗</span></a> für Details.</p>
+                </div>
+                <div id="tab-noe" class="tab-panel" role="tabpanel" aria-labelledby="btn-noe"><p>In Arbeit – bitte lokale KIJA/Sozial‑ & Wohnstellen recherchieren.</p></div>
+                <div id="tab-ooe" class="tab-panel" role="tabpanel" aria-labelledby="btn-ooe"><p>In Arbeit.</p></div>
+                <div id="tab-stmk" class="tab-panel" role="tabpanel" aria-labelledby="btn-stmk"><p>In Arbeit.</p></div>
+                <div id="tab-sbg" class="tab-panel" role="tabpanel" aria-labelledby="btn-sbg"><p>In Arbeit.</p></div>
+                <div id="tab-tirol" class="tab-panel" role="tabpanel" aria-labelledby="btn-tirol"><p>In Arbeit.</p></div>
+                <div id="tab-ktn" class="tab-panel" role="tabpanel" aria-labelledby="btn-ktn"><p>In Arbeit.</p></div>
+                <div id="tab-vbg" class="tab-panel" role="tabpanel" aria-labelledby="btn-vbg"><p>In Arbeit.</p></div>
+                <div id="tab-bl" class="tab-panel" role="tabpanel" aria-labelledby="btn-bl"><p>In Arbeit.</p></div>
+            </section>
+
+            <!-- 7: Maßnahmeplan -->
+            <section id="massnahmeplan" aria-labelledby="h-plan">
+                <h2 id="h-plan"><span class="icon">🗂️</span> 1‑Seiten‑Maßnahmeplan (Transfer)</h2>
+                <div class="intro">Konkreter, überprüfbarer Plan je Teilnehmer:in – <strong>druck‑ & online‑ausfüllbar</strong>.</div>
+
+                <div class="tool-card plan-form">
+                    <h3>Mein 14‑Tage‑Plan für Careleaver‑Unterstützung</h3>
+
+                    <div class="form-group">
+                        <label for="ziel">1. Ziel (SMART) – Was soll in 14 Tagen konkret anders sein?</label>
+                        <textarea id="ziel" name="ziel" placeholder="z. B.: Bis Tag 14 hat ‚Mara‘ den Wohnbeihilfe‑Termin (MA 50) & alle Unterlagen vollständig."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rechtsbasis">2. Rechtsbasis/Anspruch – Welche Rechte/§ gelten hier?</label>
+                        <input type="text" id="rechtsbasis" name="rechtsbasis" placeholder="z. B.: Art. 12, Art. 20, § 33 WKJHG">
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. Drei nächste Schritte:</label>
+                        <div class="mb-2">
+                            <label for="schritt1">Schritt 1 (heute) – wer, was, bis wann</label>
+                            <input type="text" id="schritt1" name="schritt1" placeholder="z. B.: Heute: Unterlagenliste erstellen (Mara + Buddy)">
+                        </div>
+                        <div class="mb-2">
+                            <label for="schritt2">Schritt 2 (diese Woche) – wer, was, bis wann</label>
+                            <input type="text" id="schritt2" name="schritt2" placeholder="z. B.: Diese Woche: Termin online buchen">
+                        </div>
+                        <div class="mb-2">
+                            <label for="schritt3">Schritt 3 (spätestens Tag 14) – wer, was, bis wann</label>
+                            <input type="text" id="schritt3" name="schritt3" placeholder="z. B.: Spätestens Tag 14: Mappe mit Kopien fertigstellen">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kooperationspartner">4. Kooperationspartner:innen (Name + Kontakt)</label>
+                        <textarea id="kooperationspartner" name="kooperationspartner" placeholder="Wer wird aktiv eingebunden? Namen & Kontaktdaten eintragen."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="risiko">5. Risiko‑Check & Plan B – Was, wenn Schritt X scheitert?</label>
+                        <textarea id="risiko" name="risiko" placeholder="Alternative Wege & Backup‑Optionen beschreiben."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="erfolgskriterium">6. Erfolgskriterium – Woran erkenne ich, dass es geschafft ist?</label>
+                        <input type="text" id="erfolgskriterium" name="erfolgskriterium" placeholder="z. B.: Terminbestätigung + vollständige Mappe vorhanden">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="followup">7. Follow‑ups – T+60 Tage Termin vormerken</label>
+                        <input type="date" id="followup" name="followup">
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="button" onclick="printPlan()">📄 Plan drucken</button>
+                        <button type="button" onclick="exportPlanAsText()">⬇️ Plan als TXT</button>
+                    </div>
+                </div>
+
+                <div class="tip-box mt-2">
+                    <strong>Mini‑Beispiel:</strong><br>
+                    Ziel: <em>Bis Tag 14 hat „Mara“ den Wohnbeihilfe‑Termin (MA 50) & alle Unterlagen vollständig.</em><br>
+                    Rechtsbasis: <em>Art. 20/28, § 33 WKJHG.</em><br>
+                    Schritte: <em>1) Heute: Unterlagenliste erstellen (Mara+Buddy). 2) Diese Woche: Termin online buchen. 3) Spätestens Tag 14: Mappe mit Kopien fertigstellen.</em><br>
+                    Erfolg: <em>Terminbestätigung + vollständige Mappe vorhanden.</em>
+                </div>
+            </section>
+
+            <!-- 8: Hinweise -->
+            <section id="hinweise" aria-labelledby="h-hinweise">
+                <h2 id="h-hinweise">ℹ️ Hinweise & Rechtliches</h2>
+
+                <h3>Druck & Nutzung</h3>
+                <p>Die Inhalte sind <strong>druckfreundlich</strong> aufgebaut. Der Browser‑Druck erzeugt eine übersichtliche PDF mit 1–5 Seiten pro Abschnitt. Nutzen Sie die Druckfunktion Ihres Browsers (Strg+P bzw. Cmd+P) oder den Button „Alles drucken“ im Header.</p>
+
+                <h3>Datenschutz</h3>
+                <p>Es werden <strong>keine personenbezogenen Daten</strong> an Server übertragen. Eingaben (Checkliste/Plan) werden ausschließlich lokal mittels <strong>localStorage</strong> gespeichert. Sie können diese über „🧹 Eingaben löschen“ oder in den Browser‑Einstellungen entfernen.</p>
+
+                <h3>Barrierefreiheit (WZG/WCAG)</h3>
+                <p>Wir orientieren uns an <strong>WCAG 2.x</strong> und dem österreichischen <strong>Web‑Zugänglichkeits‑Gesetz (WZG)</strong>. Feedback zur Zugänglichkeit: <em>[Kontakt‑E‑Mail eintragen]</em>. Geplante Verbesserungen: „Zum Inhalt springen“, Tastaturfokus, Alternativtexte – <em>laufend in Arbeit</em>.</p>
+
+                <h3>Haftung/Disclaimer</h3>
+                <p>Die Inhalte wurden mit Sorgfalt erstellt, stellen jedoch <strong>keine Rechtsberatung</strong> dar. Bitte prüfen Sie <strong>aktuelle Erreichbarkeiten & Regelungen</strong> (Beträge/Stichtage können sich ändern). Stand: November 2025.</p>
+
+                <h3>Impressum/Offenlegung (MedienG & ECG)</h3>
+                <div style="background:var(--light-bg);padding:16px;border-radius:8px;margin-top:10px">
+                    <p><strong>Medieninhaber/Herausgeber:</strong> Kolleg für Sozialpädagogik</p>
+                    <p><strong>Ansprechpartner:</strong> Vicky Ulrich‑von der Weth & Georg Thurnwalder</p>
+                    <p><strong>Adresse:</strong> Schloßhofer Straße 4/6/3, 1210 Wien</p>
+                    <p><strong>E‑Mail:</strong> [E‑Mail‑Adresse eintragen]</p>
+                    <p><strong>Telefon:</strong> [Telefonnummer eintragen]</p>
+                    <p class="small-muted">Angaben gem. § 25 MedienG (Offenlegung) & E‑Commerce‑Gesetz (ECG). Keine Gewinnabsicht; rein informativer Charakter.</p>
+                </div>
+
+                <div class="info-box mt-2">
+                    <strong>Wichtig:</strong> In Krisenfällen immer zuerst Sicherheit herstellen. Notfallnummern siehe Kontaktliste. Rat auf Draht: <strong>147</strong> (24/7, kostenlos & anonym).
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <p>Stand: November 2025 · Kein Anspruch auf Vollständigkeit</p>
+            <p>In Krisenfällen: 112 · Polizei 133 · Rettung 144 · PSD 01 313 30 · Rat auf Draht 147 · DEC112 App</p>
+            <p style="margin-top:12px;opacity:.8;font-size:.9rem">Optimiert für Druck & mobile Nutzung. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click',e=>{
+                const href=a.getAttribute('href');
+                if(href && href.startsWith('#')){
+                    e.preventDefault();
+                    const target=document.querySelector(href);
+                    if(target){ target.scrollIntoView({behavior:'smooth',block:'start'}); }
+                }
+            });
+        });
+
+        function scrollToSection(id){ const el=document.getElementById(id); if(el){ el.scrollIntoView({behavior:'smooth',block:'start'}); } }
+        function setActive(element){
+            document.querySelectorAll('nav a').forEach(l=>l.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Active section highlight on scroll
+        window.addEventListener('scroll',()=>{
+            const sections=document.querySelectorAll('section');
+            const navLinks=document.querySelectorAll('nav a');
+            let current='';
+            sections.forEach(section=>{
+                const sectionTop=section.offsetTop;
+                if(window.pageYOffset>=(sectionTop-120)){ current=section.getAttribute('id'); }
+            });
+            navLinks.forEach(link=>{
+                link.classList.remove('active');
+                if(link.getAttribute('href').slice(1)===current){ link.classList.add('active'); }
+            });
+        });
+
+        // Accessible announcement for nav
+        function announceChange(msg){
+            const a=document.createElement('div');
+            a.setAttribute('role','status');a.setAttribute('aria-live','polite');
+            a.className='sr-only';a.textContent=msg;document.body.appendChild(a);
+            setTimeout(()=>a.remove(),800);
+        }
+        document.querySelectorAll('nav a').forEach(link=>{
+            link.addEventListener('click',()=>{ const name=link.textContent.trim(); announceChange(`Navigiert zu ${name}`); });
+        });
+
+        // Checklist persistence
+        function toggleCheck(cb){
+            cb.classList.toggle('checked');
+            const isChecked=cb.classList.contains('checked');
+            cb.setAttribute('aria-checked', isChecked);
+            const item=cb.closest('.checklist-item');
+            if(!item) return;
+            const title=item.querySelector('.checklist-title')?.textContent?.trim()||'';
+            try{ localStorage.setItem(`checklist_${title}`, isChecked); }catch{}
+        }
+        document.addEventListener('DOMContentLoaded',()=>{
+            document.querySelectorAll('.checklist-item').forEach(item=>{
+                const title=item.querySelector('.checklist-title')?.textContent?.trim()||'';
+                const isChecked=(localStorage.getItem(`checklist_${title}`)==='true');
+                if(isChecked){ const box=item.querySelector('.checkbox'); if(box){ box.classList.add('checked'); box.setAttribute('aria-checked','true'); } }
+            });
+            loadFormData();
+        });
+        document.querySelectorAll('.checkbox').forEach(cb=>{
+            cb.addEventListener('keypress',e=>{
+                if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleCheck(cb); }
+            });
+        });
+
+        // Save as PDF hint
+        function savePDF(){
+            alert('Als PDF speichern:\n\n1) Strg+P (Windows) bzw. Cmd+P (Mac)\n2) „Als PDF speichern“ auswählen\n3) Speichern\n\nFür sauberen Druck sind spezielle Print‑Styles eingebaut.');
+        }
+
+        // ICS export for timeline (T-12/-6/T0/T+90/T+180)
+        function exportICS(){
+            const input=document.getElementById('bday').value;
+            if(!input){ alert('Bitte gib dein Datum für den 18. Geburtstag an.'); return; }
+            const t0=new Date(input);
+            if(isNaN(t0.getTime())){ alert('Ungültiges Datum.'); return; }
+
+            const pad=n=>String(n).padStart(2,'0');
+            const toICSDate=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T090000';
+            const addDays=(date,days)=>{ const d=new Date(date); d.setDate(d.getDate()+days); return d; }
+            const addMonths=(date,m)=>{ const d=new Date(date); d.setMonth(d.getMonth()+m); return d; }
+
+            const events=[
+                {summary:'T‑12: Hilfeplan/Wohnen/Anträge', dt:addMonths(t0,-12)},
+                {summary:'T‑6: MA 50/U25/Jugendcoaching vorbereiten', dt:addMonths(t0,-6)},
+                {summary:'T 0: 18. Geburtstag – § 33 WKJHG prüfen, Meldezettel', dt:t0},
+                {summary:'T +90: Check‑in Wohnen/Einkommen/Netz', dt:addDays(t0,90)},
+                {summary:'T +180: 2. Check‑in/ggf. Ombudsstelle', dt:addDays(t0,180)}
+            ];
+
+            const now=new Date();
+            let ics='BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Careleaver AT//Timeline//DE\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n';
+            events.forEach((ev,i)=>{
+                const start=toICSDate(ev.dt);
+                const end=toICSDate(addDays(ev.dt,1));
+                ics+=`BEGIN:VEVENT\nUID:${start}-${i}@careleaver.at\nDTSTAMP:${toICSDate(now)}Z\nDTSTART:${start}\nDTEND:${end}\nSUMMARY:${ev.summary}\nEND:VEVENT\n`;
+            });
+            ics+='END:VCALENDAR';
+            const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'});
+            const url=URL.createObjectURL(blob);
+            const a=document.createElement('a');
+            a.href=url;a.download='careleaver_timeline.ics';document.body.appendChild(a);a.click();
+            setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); },0);
+        }
+
+        // Eligibility logic (Anspruchs-Check)
+        function runEligibility(){
+            const v = n => (document.querySelector(`input[name="${n}"]:checked`)||{}).value || '';
+            const age=v('age'), situation=v('situation'), wohnen=v('wohnen'), care=v('care');
+
+            const out=[];
+            const link=(url,txt)=>`<a class="contact-link" target="_blank" href="${url}"><span class="link-text">${txt}</span><span class="link-icon">↗</span></a>`;
+
+            // Alter & Beschäftigung
+            if(age==='u18'){
+                out.push(`„AusBildung bis 18“ aktiv nutzen (Pflicht bis zur Vollendung des 18. LJ). Serviceline 0800 700 118 · ${link('https://www.neba.at/','NEBA Jugendcoaching')}.`);
+            }
+            if(age==='18-20' || age==='21-24'){
+                out.push(`U25: Erstkontakt vereinbaren (MA 40 & AMS). ${link('https://www.wien.gv.at/kontakt/ma40-u25-jugendunterstuetzung','Info & Standort')}.`);
+                out.push(`Jugendcoaching/Produktionsschule prüfen: ${link('https://www.neba.at/','NEBA')} · ${link('https://www.vhs.at/de/projekte/jugendcoaching','VHS Jugendcoaching Wien')}.`);
+                out.push(`waff‑Programme (Zukunftsberufe, Abschlüsse nachholen): ${link('https://www.waff.at/beruf-weiterbildung/abschluesse-nachholen/jugendliche/zukunftsberufe/','Angebot')}.`);
+            }
+            if(age==='25plus'){
+                out.push(`AMS‑Beratung & Sozialleistungen der zuständigen Stelle prüfen (in Wien: MA 40).`);
+            }
+
+            // Wohnen
+            if(wohnen==='miete'){
+                out.push(`Wohnbeihilfe prüfen & Termin vereinbaren (MA 50): ${link('https://www.wien.gv.at/amtswege/wohnbeihilfe-antrag','Antrag & Info')}.`);
+            }else if(wohnen==='unsicher'){
+                out.push(`Übergangswohnen/Notschlafstellen ansteuern; KIJA/MA 11 um Unterstützung ersuchen. Rat auf Draht 147 bei Akutbedarf.`);
+            }else{
+                out.push(`Wohnticket/Startwohnungen (Wohnberatung Wien): ${link('https://wohnberatung-wien.at/faq-kontakt','FAQ & Kontakt')}.`);
+            }
+
+            // Careleaver & Nachbetreuung
+            if(care==='ja' && (age==='18-20' || age==='21-24')){
+                out.push(`Nachbetreuung/Hilfen für junge Erwachsene (Wien) gemäß § 33 WKJHG – <strong>bis längstens 21</strong> möglich. Frühzeitig im Hilfeplan festhalten.`);
+            }
+
+            // Situation
+            if(situation==='suche'){
+                out.push(`AMS‑Erstkontakt inkl. Unterlagen (Lichtbildausweis, Meldezettel, Nachweise).`);
+            }
+            if(situation==='keinstabil'){
+                out.push(`Krisenhilfe: PSD 01 313 30 (24/7), Rat auf Draht 147, DEC112 für textbasierten Notruf.`);
+            }
+
+            // Querschnitt
+            out.push(`ORF‑Beitrag (OBS): Befreiung/Ermäßigung prüfen. ${link('https://www.orf.at/','Befreiung prüfen')}.`);
+            out.push(`Basiskonto (Recht auf Konto) – ggf. begünstigtes Entgelt. ${link('https://www.fma.gv.at/konto/basiskonto/','FMA‑Info')}.`);
+            out.push(`Buddy/Beistand zu Behörden mitnehmen (AVG). Unterlagen‑Generator nutzen.`);
+
+            const box=document.getElementById('eligibilityResult');
+            const list=document.getElementById('eligibilityList');
+            list.innerHTML='';
+            out.forEach(x=>{ const li=document.createElement('li'); li.innerHTML=x; list.appendChild(li); });
+            box.hidden=false;
+            announceChange('Ergebnis des Anspruchs‑Checks aktualisiert');
+        }
+        function resetEligibility(){
+            document.querySelectorAll('input[name="age"],input[name="situation"],input[name="wohnen"],input[name="care"]').forEach(i=>i.checked=false);
+            const box=document.getElementById('eligibilityResult'); box.hidden=true;
+            document.getElementById('eligibilityList').innerHTML='';
+        }
+
+        // Unterlagen-Generator
+        const DOCS_DB={
+            common:[
+                'Amtlicher Lichtbildausweis (Reisepass/Personalausweis)',
+                'Meldezettel (aktuell)',
+                'Bankverbindung (IBAN) / Kontoauszug',
+                'Nachweis Einkommen/Leistungen (z. B. AMS/MA 40/Lehrlingsentschädigung)',
+                'Kontakttelefon/E‑Mail'
+            ],
+            ma50:[
+                'Mietvertrag (Kopie)',
+                'Aktuelle Mietvorschreibung',
+                'Haushaltszusammensetzung (wer wohnt dort?)',
+                'Einkommensnachweise aller im Haushalt',
+                'Eventuelle Bestätigungen (Schule/AMS)'
+            ],
+            u25:[
+                'Lichtbildausweis & Meldezettel',
+                'Unterlagen zu Ausbildung/Jobsuche',
+                'Nachweis Wohnsituation (z. B. Mietvertrag/Bestätigung)',
+                'IBAN (für Auszahlungen)',
+                'Ggf. Bescheide über Leistungen'
+            ],
+            ams:[
+                'Lebenslauf (Kurzform)',
+                'Schul-/Lehrabschlussnachweise',
+                'Nachweise bisheriger Beschäftigung/Praktika',
+                'E-Card/Sozialversicherungsnummer'
+            ],
+            melde:[
+                'Formular „Meldezettel“ (vom Unterkunftgeber/von der Unterkunftgeberin unterschrieben)',
+                'Ausweis',
+                'Ggf. Mietvertrag'
+            ],
+            konto:[
+                'Lichtbildausweis',
+                'Meldezettel (ersatzweise Zustelladresse je nach Bank)',
+                'Ggf. Nachweis „begünstigt“ (für reduziertes Entgelt)'
+            ],
+            orf:[
+                'Formular/Befreiungsantrag',
+                'Nachweis der Befreiungsgründe (z. B. Sozialleistungs‑Bescheid)',
+                'Meldezettel'
+            ]
+        };
+        function generateDocs(){
+            const sel=[...document.querySelectorAll('.doc-source:checked')].map(i=>i.value);
+            if(sel.length===0){ alert('Bitte mindestens einen Weg auswählen.'); return; }
+            const items=new Set(DOCS_DB.common);
+            sel.forEach(k=> (DOCS_DB[k]||[]).forEach(x=>items.add(x)));
+            const listEl=document.getElementById('docsList');
+            listEl.innerHTML='';
+            [...items].forEach(x=>{ const li=document.createElement('li'); li.textContent=x; listEl.appendChild(li); });
+            document.getElementById('docsResult').hidden=false;
+            announceChange('Unterlagenliste erstellt');
+        }
+        function copyDocs(){
+            const items=[...document.querySelectorAll('#docsList li')].map(li=>`• ${li.textContent}`).join('\n');
+            if(!items){ alert('Bitte zuerst eine Liste erzeugen.'); return; }
+            navigator.clipboard.writeText('Unterlagenliste:\n'+items).then(()=>alert('In Zwischenablage kopiert.'));
+        }
+
+        // Plan printing/export & persistence
+        function printPlan(){
+            saveFormData();
+            const content=document.getElementById('massnahmeplan').innerHTML;
+            const w=window.open('','_blank');
+            w.document.write(`
+                <!DOCTYPE html><html><head><title>Mein 14‑Tage‑Plan</title>
+                <meta charset="utf-8">
+                <style>
+                    body{font-family:Arial,sans-serif;padding:18px}
+                    h2{color:#2c3e50}
+                    .form-group{margin-bottom:12px}
+                    label{font-weight:700;display:block;margin-bottom:5px}
+                    input, textarea{width:100%;padding:8px;border:1px solid #ddd}
+                    .tip-box{padding:10px;background:#e8f5e9;border:1px solid #4caf50;margin-top:12px}
+                    @media print{button{display:none}}
+                </style></head><body>${content}</body></html>
+            `);
+            w.document.close(); w.print();
+        }
+        function exportPlanAsText(){
+            const fields=['ziel','rechtsbasis','schritt1','schritt2','schritt3','kooperationspartner','risiko','erfolgskriterium','followup'];
+            const get=id=>document.getElementById(id)?.value?.trim()||'';
+            const txt=[
+                'Mein 14‑Tage‑Plan',
+                '',
+                `Ziel: ${get('ziel')}`,
+                `Rechtsbasis: ${get('rechtsbasis')}`,
+                `Schritt 1: ${get('schritt1')}`,
+                `Schritt 2: ${get('schritt2')}`,
+                `Schritt 3: ${get('schritt3')}`,
+                `Kooperationspartner:innen: ${get('kooperationspartner')}`,
+                `Risiko/Plan B: ${get('risiko')}`,
+                `Erfolgskriterium: ${get('erfolgskriterium')}`,
+                `Follow‑up (T+60): ${get('followup')}`
+            ].join('\n');
+            const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+            const a=document.createElement('a');
+            a.href=URL.createObjectURL(blob); a.download='careleaver_plan.txt';
+            document.body.appendChild(a); a.click();
+            setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },0);
+        }
+        function saveFormData(){
+            document.querySelectorAll('#massnahmeplan input, #massnahmeplan textarea').forEach(f=>{
+                try{ localStorage.setItem(`form_${f.id}`, f.value||''); }catch{}
+            });
+        }
+        function loadFormData(){
+            document.querySelectorAll('#massnahmeplan input, #massnahmeplan textarea').forEach(f=>{
+                try{
+                    const v=localStorage.getItem(`form_${f.id}`); if(v!==null){ f.value=v; }
+                }catch{}
+            });
+        }
+        document.querySelectorAll('#massnahmeplan input, #massnahmeplan textarea').forEach(f=>{
+            f.addEventListener('input',()=>{ try{ localStorage.setItem(`form_${f.id}`, f.value||''); }catch{} });
+        });
+
+        // Clear local data
+        function clearLocalData(){
+            if(!confirm('Alle lokal gespeicherten Eingaben (Checkliste/Plan) löschen?')) return;
+            try{
+                // remove known prefixes
+                Object.keys(localStorage).forEach(k=>{
+                    if(k.startsWith('checklist_')||k.startsWith('form_')) localStorage.removeItem(k);
+                });
+            }catch{}
+            // reset UI
+            document.querySelectorAll('.checkbox.checked').forEach(cb=>{ cb.classList.remove('checked'); cb.setAttribute('aria-checked','false'); });
+            document.querySelectorAll('#massnahmeplan input, #massnahmeplan textarea').forEach(f=>{ f.value=''; });
+            document.getElementById('eligibilityResult').hidden=true;
+            document.getElementById('docsResult').hidden=true;
+            alert('Lokale Eingaben wurden gelöscht.');
+        }
+
+        // Expand all checks on print
+        window.addEventListener('beforeprint',()=>{ document.querySelectorAll('.checkbox').forEach(cb=>cb.classList.add('checked')); });
+
+        // Tabs (Bundesländer)
+        function openTab(key){
+            document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+            const btn=document.getElementById('btn-'+key);
+            const panel=document.getElementById('tab-'+key);
+            if(btn) btn.classList.add('active');
+            if(panel) panel.classList.add('active');
+        }
+
+        // Print helper for a section
+        function printSection(id){
+            const el=document.getElementById(id);
+            if(!el || el.hidden){ alert('Nichts zum Drucken.'); return; }
+            const w=window.open('','_blank');
+            w.document.write(`
+                <!DOCTYPE html><html><head><title>Druck</title><meta charset="utf-8">
+                <style>body{font-family:Arial,sans-serif;padding:18px} h1{font-size:1.2rem}</style>
+                </head><body><h1>Ausdruck</h1>${el.outerHTML}</body></html>
+            `);
+            w.document.close(); w.print();
+        }
+    </script>
+</body>
+</html>
