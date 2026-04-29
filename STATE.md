@@ -30,6 +30,7 @@ Last updated: 2026-04-29
 - A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the custom site-check workflow was updated to `actions/checkout@v6` to address its Node.js 20 deprecation warning.
 - A rendered mobile/accessibility hardening pass was completed on 2026-04-29, adding table captions, keyboard-focusable wide table regions, breakpoint-based heading sizes instead of viewport-relative font sizing, and checker guardrails for table captions and viewport font-size regressions.
 - A safe post-MVP browser/mobile/accessibility QA pass was completed on 2026-04-29 with Playwright/Chromium against `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths. It fixed a 320 px checklist overflow, button hover contrast, and mobile keyboard-focus visibility.
+- A human factual review packet was prepared on 2026-04-29 at `research/human-review-packet-2026-04-29.md`, grouping high-risk Wien MVP claims for owner review before broad outreach. No public factual content was changed.
 
 ## Morning Review 2026-04-29
 
@@ -92,6 +93,28 @@ Last updated: 2026-04-29
 ### Next Recommended Task
 
 Run a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, focusing first on crisis, housing, money, contacts, and legal-background wording.
+
+## Human Review Packet 2026-04-29
+
+### What Changed
+
+- Added `research/human-review-packet-2026-04-29.md` as an owner-facing review checklist for high-risk Wien MVP claim groups:
+  - emergency and crisis
+  - Care Leaver Beratung / MA 11
+  - Wohnen / unsafe housing / Wohnungslosenhilfe
+  - Geld / U25 / Mindestsicherung / Wohnbeihilfe / Schulden
+  - Ausbildung / Arbeit
+  - Rechte / Beschwerde / KIJA / legal background
+  - Community / Care Leaver Österreich non-affiliation
+  - Privacy / localStorage
+  - Operator/contact/impressum/offenlegung
+- The packet records current public wording summaries, already-used sources, what each source appears to support, what it does not prove, freshness risk, review deadline, owner checkboxes, and safe action recommendations.
+- A small live web spot-check of official/operator pages was included in the packet for obvious major changes, but it was not treated as a full source refresh.
+- No public factual content, service details, benefit amounts, legal deadlines, eligibility promises, contact directory, backend, analytics, forms, or personal-data collection were changed.
+
+### Next Recommended Task
+
+Owner should review `research/human-review-packet-2026-04-29.md`, mark the checkboxes, and decide whether any claim group needs softer public wording, expert/legal/social-worker review, or link-only treatment before broad outreach. The highest-priority owner decision remains verified operator/contact/impressum/offenlegung details.
 
 ## Automation Pass 2026-04-29 10:05
 
@@ -406,7 +429,7 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Known Risks / Things To Review
 
-- The public page is safer and source-linked, and a focused Codex QA pass is complete. A human factual review is still recommended before broad outreach because crisis, housing, benefits, and child/youth welfare routing are high-stakes.
+- The public page is safer and source-linked, and a focused Codex QA pass is complete. A human review packet now exists at `research/human-review-packet-2026-04-29.md`, but owner sign-off is still needed before broad outreach because crisis, housing, benefits, and child/youth welfare routing are high-stakes.
 - Verified operator/contact/impressum details still need a user decision before being published.
 - Bundesland content outside Wien is intentionally incomplete/beta.
 - `careleaver.eu` may be confused with Care Leaver Oesterreich / `careleaver.at`. Add non-affiliation wording unless collaboration is agreed.
@@ -418,11 +441,11 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Next Recommended Action
 
-Use the "Next 3 Recommended Tasks" in the 2026-04-29 morning review section as the current priority order:
+Use this current priority order:
 
-1. Real browser/mobile accessibility pass for `index.html` and `quellen.html`.
-2. Human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`.
-3. Verified operator/contact/impressum decision and careful publication.
+1. Owner reviews `research/human-review-packet-2026-04-29.md` and marks which high-risk claim groups are safe, need softer wording, need expert/legal/social-worker review, or should stay link-only.
+2. Decide verified operator/contact/impressum/offenlegung wording before broad outreach, and publish it carefully only after the owner confirms real details.
+3. Run a dedicated axe/assistive-technology accessibility pass on `index.html` and `quellen.html`.
 
 ## Safe Editing Rule For The Next Step
 
