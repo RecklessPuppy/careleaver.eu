@@ -140,6 +140,7 @@ Goal: add practical appointment and planning tools without collecting sensitive 
 Goal: help people find and trust the site.
 
 - Improve page titles, descriptions, and headings.
+- Add safe structured data without operator/contact or partnership claims. Status: first WebSite/WebPage/BreadcrumbList pass completed 2026-04-29, with JSON-LD guardrails in `scripts/check-site.py`.
 - Add source and update dates visibly.
 - Add clear contact/impressum information only after verified.
 - Keep public source/review information easy to find. Status: first public `quellen.html` page added 2026-04-29.

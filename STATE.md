@@ -25,6 +25,7 @@ Last updated: 2026-04-29
 - A lightweight accessibility-check pass was completed on 2026-04-29, adding static HTML accessibility guardrails to `scripts/check-site.py`.
 - A source-review automation pass was completed on 2026-04-29, adding public/source-log review-date checks to `scripts/check-site.py`.
 - A homepage quick-action pass was completed on 2026-04-29, adding a low-pressure "Heute ein kleiner nächster Schritt" block near the top router.
+- A safe structured-data SEO pass was completed on 2026-04-29, adding WebSite/WebPage/BreadcrumbList JSON-LD and guardrails against premature owner/contact schema.
 
 ## What Was Added In This Setup Pass
 
@@ -254,6 +255,26 @@ Checks run in this pass:
 - `qpdf --check /private/tmp/careleaver-quick-actions-print.pdf`
 - local HTTP preview smoke check for `/` returned `HTTP 200` on port 8791 after ports 8765 and 8766 were already occupied
 
+## What Was Added In The Structured-Data SEO Pass
+
+- Expanded homepage JSON-LD from a single WebSite node to a safe WebSite/WebPage graph.
+- Added WebSite/WebPage/BreadcrumbList JSON-LD to `quellen.html`.
+- Extended `scripts/check-site.py` so JSON-LD is parsed, required schema types are checked, and risky organization/person/contact/publisher/provider schema is blocked until owner details are settled.
+- Updated `ROADMAP.md` and `research/open-questions.md` to record that the safe Schema.org metadata question is lowered.
+- No public factual advice, service details, phone numbers, benefit amounts, legal deadlines, eligibility wording, backend, analytics, or forms were changed.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external`
+- inline JavaScript syntax check with `node --check`
+- local bounded HTTP preview for `/` and `/quellen.html`, both returned `HTTP 200`
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -288,7 +309,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a browser-based accessibility audit if the test setup is stable, run/log the strict external-link check again, or improve practical templates without adding new facts. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a browser-based accessibility audit if the test setup is stable, improve practical templates without adding new facts, or add a small maintenance check for sitemap/canonical consistency. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

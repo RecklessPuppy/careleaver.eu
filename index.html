@@ -809,11 +809,28 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Care Leaver Wien",
-      "url": "https://careleaver.eu/",
-      "inLanguage": "de-AT",
-      "description": "Praktische Orientierung, Vorlagen und offizielle Quellen fuer Care Leaver in Wien."
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://careleaver.eu/#website",
+          "name": "Care Leaver Wien",
+          "url": "https://careleaver.eu/",
+          "inLanguage": "de-AT",
+          "description": "Praktische Orientierung, Vorlagen und offizielle Quellen fuer Care Leaver in Wien."
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://careleaver.eu/#webpage",
+          "url": "https://careleaver.eu/",
+          "name": "Care Leaver Wien: Hilfe nach der Jugendhilfe",
+          "isPartOf": {
+            "@id": "https://careleaver.eu/#website"
+          },
+          "inLanguage": "de-AT",
+          "description": "Praktische Schritte, Vorlagen und offizielle Links fuer Care Leaver in Wien: Wohnen, Geld, Jugendhilfe, Termine, Dokumente, Krise und Rechte.",
+          "dateModified": "2026-04-29"
+        }
+      ]
     }
     </script>
 </head>

@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import unicodedata
+from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
 from html.parser import HTMLParser
@@ -62,6 +64,35 @@ PLACEHOLDER_PATTERNS = [
     r"sollen ergänzt werden, bevor",
 ]
 
+REQUIRED_JSONLD_TYPES = {
+    Path("index.html"): {"WebSite", "WebPage"},
+    Path("quellen.html"): {"WebSite", "WebPage", "BreadcrumbList"},
+}
+
+ALLOWED_JSONLD_TYPES = {"WebSite", "WebPage", "BreadcrumbList", "ListItem"}
+FORBIDDEN_JSONLD_TYPES = {
+    "ContactPoint",
+    "GovernmentOrganization",
+    "LegalService",
+    "LocalBusiness",
+    "MedicalOrganization",
+    "NGO",
+    "Organization",
+    "Person",
+}
+FORBIDDEN_JSONLD_KEYS = {
+    "address",
+    "author",
+    "contactPoint",
+    "creator",
+    "email",
+    "founder",
+    "provider",
+    "publisher",
+    "sameAs",
+    "telephone",
+}
+
 
 @dataclass(frozen=True)
 class ReviewDate:
@@ -90,8 +121,11 @@ class LinkParser(HTMLParser):
         self.navs_missing_label: list[int] = []
         self.aria_references: list[tuple[str, list[str], int]] = []
         self.interactive_missing_name: list[tuple[str, str, int]] = []
+        self.json_ld_scripts: list[tuple[str, int]] = []
         self._label_depth = 0
         self._text_stack: list[dict[str, object]] = []
+        self._json_ld_parts: list[str] | None = None
+        self._json_ld_line = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -121,6 +155,9 @@ class LinkParser(HTMLParser):
             self.images_missing_alt.append((attr_map.get("src", ""), line))
         if tag == "th" and "scope" not in attr_map:
             self.th_missing_scope.append(line)
+        if tag == "script" and attr_map.get("type", "").lower() == "application/ld+json":
+            self._json_ld_parts = []
+            self._json_ld_line = line
 
         element_id = attr_map.get("id")
         if element_id:
@@ -145,6 +182,8 @@ class LinkParser(HTMLParser):
             self._text_stack.append({"tag": tag, "line": line, "attrs": attr_map, "text": []})
 
     def handle_data(self, data: str) -> None:
+        if self._json_ld_parts is not None:
+            self._json_ld_parts.append(data)
         for item in self._text_stack:
             text = item["text"]
             assert isinstance(text, list)
@@ -154,6 +193,10 @@ class LinkParser(HTMLParser):
         tag = tag.lower()
         if tag == "label":
             self._label_depth = max(0, self._label_depth - 1)
+        if tag == "script" and self._json_ld_parts is not None:
+            self.json_ld_scripts.append(("".join(self._json_ld_parts), self._json_ld_line))
+            self._json_ld_parts = None
+            self._json_ld_line = 0
 
         for index in range(len(self._text_stack) - 1, -1, -1):
             item = self._text_stack[index]
@@ -418,6 +461,63 @@ def check_accessibility_basics(errors: list[str]) -> None:
             errors.append(f"{path}:{line}: nav missing aria-label, aria-labelledby, or title")
 
 
+def iter_json_objects(value: object) -> Iterator[dict[str, object]]:
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from iter_json_objects(child)
+    elif isinstance(value, list):
+        for child in value:
+            yield from iter_json_objects(child)
+
+
+def jsonld_types(node: dict[str, object]) -> set[str]:
+    raw_type = node.get("@type")
+    if isinstance(raw_type, str):
+        return {raw_type}
+    if isinstance(raw_type, list):
+        return {item for item in raw_type if isinstance(item, str)}
+    return set()
+
+
+def check_structured_data(errors: list[str]) -> None:
+    parsed = parse_html_files()
+
+    for path, required_types in REQUIRED_JSONLD_TYPES.items():
+        parser = parsed.get(path)
+        if parser is None:
+            errors.append(f"{path}: unable to parse structured data")
+            continue
+        if not parser.json_ld_scripts:
+            errors.append(f"{path}: missing application/ld+json structured data")
+            continue
+
+        discovered_types: set[str] = set()
+        for json_ld, line in parser.json_ld_scripts:
+            try:
+                document = json.loads(json_ld)
+            except json.JSONDecodeError as error:
+                errors.append(f"{path}:{line}: invalid JSON-LD: {error.msg}")
+                continue
+
+            for node in iter_json_objects(document):
+                node_types = jsonld_types(node)
+                discovered_types.update(node_types)
+
+                for node_type in sorted(node_types):
+                    if node_type in FORBIDDEN_JSONLD_TYPES:
+                        errors.append(f"{path}:{line}: JSON-LD type needs owner review before use: {node_type}")
+                    elif node_type not in ALLOWED_JSONLD_TYPES:
+                        errors.append(f"{path}:{line}: unexpected JSON-LD type: {node_type}")
+
+                for key in sorted(FORBIDDEN_JSONLD_KEYS.intersection(node)):
+                    errors.append(f"{path}:{line}: JSON-LD key needs owner review before use: {key}")
+
+        missing_types = sorted(required_types - discovered_types)
+        for missing_type in missing_types:
+            errors.append(f"{path}: missing required JSON-LD type: {missing_type}")
+
+
 def collect_external_links() -> dict[str, list[str]]:
     links: dict[str, list[str]] = {}
     for path, parser in parse_html_files().items():
@@ -481,6 +581,8 @@ def check_index_guardrails(errors: list[str]) -> None:
         '<html lang="de-AT">',
         '<meta name="description"',
         '<link rel="canonical" href="https://careleaver.eu/">',
+        '"@type": "WebPage"',
+        '"@id": "https://careleaver.eu/#webpage"',
         'id="schnelle-hilfe"',
         'id="was-brauchst-du"',
         'id="h-kleiner-schritt"',
@@ -510,6 +612,9 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         '<html lang="de-AT">',
         '<meta name="description"',
         '<link rel="canonical" href="https://careleaver.eu/quellen.html">',
+        '"@type": "WebPage"',
+        '"@type": "BreadcrumbList"',
+        '"@id": "https://careleaver.eu/quellen.html#webpage"',
         'id="review"',
         'id="aenderungen"',
         "2026-04-29",
@@ -684,6 +789,7 @@ def main() -> None:
     check_public_placeholders(errors)
     check_internal_links(errors)
     check_accessibility_basics(errors)
+    check_structured_data(errors)
     check_index_guardrails(errors)
     check_sources_page_guardrails(errors)
     review_dates = check_review_dates(

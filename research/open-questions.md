@@ -39,6 +39,7 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Public source/changelog page: `quellen.html` now gives a public review table, short change notes, and maintenance cautions.
 - Lightweight accessibility QA: `scripts/check-site.py` now checks static HTML basics such as language, skip links, main/H1 structure, heading jumps, form labels, link/button names, image alt text, table header scopes, nav labels, and ARIA references. A full browser/axe audit remains useful later.
 - Source-review automation: `scripts/check-site.py` now checks public "Nächste Prüfung" dates and `research/source-log.md` `Review by` dates, warns shortly before due dates, and fails strict checks when a review date is overdue. This still does not replace actually reopening sources and reviewing the facts.
+- Schema.org metadata: public pages now use only safe WebSite/WebPage/BreadcrumbList JSON-LD, and `scripts/check-site.py` blocks organization, person, contact, publisher, and provider schema until owner details are settled.
 
 ## Product Decisions
 
@@ -53,4 +54,3 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Which provider-specific Care Leaver offers outside Wien are currently active and for whom: Pro Juventute, Diakonie de La Tour, Vorarlberger Kinderdorf, Land Tirol, KIJA OOE, others?
 - Which Bundesland pages should cite official KIJA/ombuds routes first?
 - Is `careleaver.wien` / the "Durchblick fuer Wiener Careleaver:innen" brochure current enough to use as a user-facing source, or only as secondary context?
-- Should the site include Schema.org metadata, and if yes, only WebSite/WebPage/BreadcrumbList until the operator identity is settled?
