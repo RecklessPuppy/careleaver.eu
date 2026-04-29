@@ -1,0 +1,136 @@
+name: Site checks
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check required files and CNAME
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            AGENTS.md
+            PROJECT_BRIEF.md
+            STATE.md
+            ROADMAP.md
+            SOURCE_POLICY.md
+            CONTENT_SAFETY.md
+            OPERATING_MODEL.md
+            OVERNIGHT_RUNBOOK.md
+            index.html
+            CNAME
+            robots.txt
+            sitemap.xml
+            research/source-log.md
+            research/open-questions.md
+            research/qa-report.md
+          )
+
+          for file in "${required_files[@]}"; do
+            test -f "$file" || { echo "Missing required file: $file"; exit 1; }
+          done
+
+          cname="$(tr -d '\r\n' < CNAME)"
+          test "$cname" = "careleaver.eu" || { echo "CNAME must contain exactly careleaver.eu"; exit 1; }
+
+      - name: Check obvious public placeholders
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if grep -RniE "lorem ipsum|REPLACE_ME|your@email|example\\.com|555-555|INSERT_|TBD_CONTACT" index.html robots.txt sitemap.xml; then
+            echo "Found obvious placeholder text in public files."
+            exit 1
+          fi
+
+      - name: Check internal links
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urldefrag, urlparse
+
+          root = Path(".")
+          html_files = sorted(root.glob("*.html"))
+          errors = []
+
+          class LinkParser(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.ids = set()
+                  self.links = []
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  if "id" in attrs:
+                      self.ids.add(attrs["id"])
+                  href = attrs.get("href")
+                  if href:
+                      self.links.append(href)
+
+          parsed = {}
+          for path in html_files:
+              parser = LinkParser()
+              parser.feed(path.read_text(encoding="utf-8"))
+              parsed[path] = parser
+
+          for path, parser in parsed.items():
+              for href in parser.links:
+                  parsed_url = urlparse(href)
+                  if parsed_url.scheme in {"http", "https", "mailto", "tel", "sms", "data"}:
+                      continue
+                  if href.startswith("javascript:"):
+                      continue
+
+                  link_path, fragment = urldefrag(href)
+                  if not link_path:
+                      target = path
+                  elif link_path in {"/", "./"}:
+                      target = Path("index.html")
+                  else:
+                      target = (path.parent / link_path.lstrip("/")).resolve().relative_to(root.resolve())
+
+                  target = Path(target)
+                  if target.is_dir():
+                      target = target / "index.html"
+
+                  if target.suffix == "":
+                      target = target.with_suffix(".html")
+
+                  if not target.exists():
+                      errors.append(f"{path}: missing internal target {href}")
+                      continue
+
+                  if fragment:
+                      target_parser = parsed.get(target)
+                      if target_parser is None and target.suffix == ".html":
+                          target_parser = LinkParser()
+                          target_parser.feed(target.read_text(encoding="utf-8"))
+                          parsed[target] = target_parser
+                      if target_parser and fragment not in target_parser.ids:
+                          errors.append(f"{path}: missing anchor #{fragment} for {href}")
+
+          if errors:
+              for error in errors:
+                  print(error)
+              raise SystemExit(1)
+
+          print("Internal links OK")
+          PY

@@ -17,6 +17,7 @@ Last updated: 2026-04-29
 - A content architecture pass was completed on 2026-04-29 to turn the research into reviewable page/template drafts.
 - A public Wien-first MVP pass was completed on 2026-04-29.
 - A focused safety/fact/link/mobile QA pass was completed on 2026-04-29 and logged in `research/qa-report.md`.
+- An overnight autonomous operating setup was added on 2026-04-29, including runbook, prompts, report folder, and lightweight GitHub Actions checks.
 
 ## What Was Added In This Setup Pass
 
@@ -69,6 +70,27 @@ Last updated: 2026-04-29
 - Added table column scopes and an inline favicon.
 - Updated `research/source-log.md` to record that the QA pass happened and to replace the old "still needs claim-by-claim audit" note.
 
+## What Was Added In The Overnight Setup Pass
+
+- Updated `AGENTS.md` with an overnight autonomous mode.
+- Expanded `OPERATING_MODEL.md` with autonomous-pass expectations.
+- Added `OVERNIGHT_RUNBOOK.md`.
+- Added `prompts/06-overnight-operator.md` for recurring unattended Codex runs.
+- Added `prompts/07-morning-review.md` for the owner after waking.
+- Added `research/automation-reports/` with a README and the first dated setup report.
+- Added `.github/workflows/site-check.yml` for required-file, `CNAME`, public-placeholder, and internal-link checks on push, manual dispatch, and a daily schedule.
+- No public factual content was changed in this setup pass.
+
+Checks run in this setup pass:
+
+- `git pull --ff-only origin main`
+- `git diff --check`
+- `CNAME` exact-content check
+- required-file check
+- public placeholder grep for `index.html`, `robots.txt`, and `sitemap.xml`
+- internal-link check for local HTML anchors
+- YAML parse check for `.github/workflows/site-check.yml`
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -99,12 +121,14 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Next Recommended Action
 
-Resolve verified operator/contact/impressum details and get a human factual review before broad outreach.
+Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes overnight, then run `prompts/07-morning-review.md` after waking.
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Resolve verified operator/contact/impressum details if the user provides them, then do a short human-facing pre-outreach review. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 
 Do not make factual wording stronger until the source log supports it. It is better to say "please verify with the official service" than to give a confident but unsupported answer.
+
+Operator/contact/impressum details and human factual review before broad outreach remain unresolved owner-level decisions.

@@ -17,6 +17,26 @@ This file is the first stop for any future Codex chat or automation working on `
 - Prefer simple static HTML/CSS/JS. Add build tools, dependencies, databases, forms, or servers only when there is a strong practical reason.
 - Preserve the custom domain. The `CNAME` file must keep `careleaver.eu` unless the user explicitly decides otherwise.
 
+## Overnight Autonomous Mode
+
+Use this mode when the user asks for overnight, autonomous, aggressive, or low-involvement progress.
+
+- Start by running `git pull --ff-only origin main`, then inspect `git status --short --branch`.
+- Read `STATE.md` first after pulling, then read the project safety files listed below.
+- Choose the highest-impact safe task from `STATE.md`, `ROADMAP.md`, `research/qa-report.md`, and `research/open-questions.md`.
+- Implement aggressively within safe boundaries: finish one useful improvement instead of only planning it.
+- Prefer safe progress: UX, accessibility, SEO metadata, static structure, templates, source-display improvements, link checks, internal anchors, documentation, and automation.
+- Factual/legal/health/housing/emergency/contact changes are allowed only when source-linked, dated, and logged according to `SOURCE_POLICY.md`.
+- Never invent legal rights, eligibility, benefit amounts, deadlines, phone numbers, addresses, opening hours, emergency routes, or contact details.
+- Do not expand non-Wien Bundesland content beyond "in progress" without a fresh official source set.
+- Run checks before committing. At minimum verify `CNAME`, important files, obvious placeholders, and internal links; run browser/mobile/print checks when public layout changes.
+- Commit each useful pass with a short clear message and push directly to `origin main`.
+- Write a dated report in `research/automation-reports/` for each autonomous pass.
+- Update `STATE.md` with what changed, what checks ran, and the next recommended task.
+- Do not delete or change `CNAME`.
+- Do not add secrets, analytics, tracking pixels, third-party forms, backend services, or personal-data collection without an explicit user decision.
+- If blocked by missing human facts, do not guess. Log the blocker in `research/open-questions.md` and pick the next safe task.
+
 ## Current Technical Shape
 
 - Static GitHub Pages site.
@@ -105,5 +125,6 @@ Use `SOURCE_POLICY.md` and `CONTENT_SAFETY.md` before editing factual content.
 5. `CONTENT_SAFETY.md`
 6. `ROADMAP.md`
 7. `OPERATING_MODEL.md`
+8. `OVERNIGHT_RUNBOOK.md` when running unattended or overnight work
 
 Then inspect `index.html`, `research/source-log.md`, and `research/open-questions.md` before changing public content.

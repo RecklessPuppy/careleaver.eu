@@ -6,15 +6,16 @@ This is the practical way to run the project.
 
 ## Default Workflow
 
-1. Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `SOURCE_POLICY.md`, and `CONTENT_SAFETY.md`.
-2. Check Git status and confirm the branch is `main`.
-3. Inspect the files that will be changed.
-4. Make a small, focused change.
-5. Review the diff.
-6. Run a simple local check if the public page changed.
-7. Commit with a clear message.
-8. Push to `origin main`.
-9. Update `STATE.md` if the project status or next action changed.
+1. Pull first with `git pull --ff-only origin main`.
+2. Read `STATE.md`, then `AGENTS.md`, `PROJECT_BRIEF.md`, `ROADMAP.md`, `SOURCE_POLICY.md`, and `CONTENT_SAFETY.md`.
+3. Check Git status and confirm the branch is `main`.
+4. Inspect the files that will be changed.
+5. Make a focused, useful change.
+6. Review the diff.
+7. Run the most relevant checks.
+8. Commit with a clear message.
+9. Push to `origin main`.
+10. Update `STATE.md` if the project status or next action changed.
 
 ## Recommended Work Types
 
@@ -54,6 +55,18 @@ Use for link checks, source refreshes, and stale information.
 - Review time-sensitive claims.
 - Move stale questions into `research/open-questions.md`.
 - Update source access dates only after actually checking the source.
+
+### Overnight Autonomous Pass
+
+Use when the owner wants maximum safe progress with minimum involvement.
+
+- Read `OVERNIGHT_RUNBOOK.md` and `prompts/06-overnight-operator.md`.
+- Work in one complete cycle: pull, choose task, implement, check, commit, push, report, update state.
+- Choose the highest-impact safe task that does not require missing human facts.
+- Keep public factual claims cautious. Source and log any factual change before publishing it.
+- Prefer improvements that make later work safer: CI checks, source-review scaffolding, accessibility, internal-link fixes, print/mobile improvements, templates, SEO basics, and documentation.
+- If a task needs owner facts, record the blocker and move to another safe task.
+- Each autonomous pass must write `research/automation-reports/YYYY-MM-DD-short-title.md`.
 
 ## Commit And Push Practice
 
@@ -96,5 +109,14 @@ For public site changes:
 - source-sensitive claims checked if touched
 - page still loads
 - `CNAME` unchanged
+- GitHub Actions or local equivalent checks run when available
 - committed and pushed
 - Git status clean
+
+For overnight autonomous changes:
+
+- one dated automation report written
+- `STATE.md` updated
+- `ROADMAP.md` updated if a roadmap phase changed
+- pushed to `origin main`
+- no unresolved local process left running unless explicitly needed for browser testing

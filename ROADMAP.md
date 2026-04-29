@@ -152,8 +152,22 @@ Goal: help people find and trust the site.
 
 Goal: keep information from becoming stale.
 
-- Create a regular source review routine.
-- Track time-sensitive claims and review dates.
-- Automate link checks if tooling is added.
-- Consider scheduled Codex maintenance prompts.
+- Create a regular source review routine. Status: first runbook and prompts added 2026-04-29.
+- Track time-sensitive claims and review dates. Status: source log and public review dates exist; automation should keep checking them.
+- Automate link checks if tooling is added. Status: basic GitHub Actions internal-link/placeholder/required-file check added 2026-04-29.
+- Consider scheduled Codex maintenance prompts. Status: `prompts/06-overnight-operator.md` and `prompts/07-morning-review.md` added 2026-04-29.
 - Keep a simple changelog of factual updates.
+
+## Phase 6A: Overnight Autonomous Mode
+
+Goal: let Codex make unattended safe progress while the owner sleeps.
+
+- Add an overnight runbook. Status: completed 2026-04-29.
+- Add a reusable automation prompt for unattended work. Status: completed 2026-04-29.
+- Add a morning review prompt. Status: completed 2026-04-29.
+- Add an automation report folder. Status: completed 2026-04-29.
+- Update `AGENTS.md`, `OPERATING_MODEL.md`, and `STATE.md` so future runs know the rules. Status: completed 2026-04-29.
+- Keep each run small enough to review, but complete enough to be useful.
+- Use reports in `research/automation-reports/` as the overnight audit trail.
+
+Status: setup completed 2026-04-29. Actual overnight improvement cycles can now start.
