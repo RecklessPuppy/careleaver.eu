@@ -101,6 +101,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the glossary anchor, safety wording, and source-page changelog note remain present.
 - No legal deadline, appeal instruction, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
 
+## Begleitperson Template Addendum 2026-04-29
+
+- Added a copyable "Vertrauensperson fragen" script to the public templates.
+- The script helps users ask a trusted person to sort questions, listen, write notes, or ask follow-up questions.
+- Safety wording says to ask the relevant office whether and how the person can be involved, and to share only necessary private details in messages.
+- Extended `scripts/check-site.py` so the support-person script and cautious wording remain present.
+- No legal right to accompaniment, service promise, eligibility rule, deadline, benefit amount, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

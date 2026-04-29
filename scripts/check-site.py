@@ -734,6 +734,9 @@ def check_index_guardrails(errors: list[str]) -> None:
         "Begriffe schnell erklärt",
         "Diese Begriffsliste ist keine Rechtsberatung",
         "Zuständige Stelle",
+        "Vertrauensperson fragen",
+        'id="support-person-script"',
+        "Ich frage vorher bei der Stelle, ob und wie du dabei sein kannst.",
         "Wir veröffentlichen konkrete Bundesland-Routen erst nach Quellenprüfung.",
         "Gesundheitsportal Österreich",
         "ÖGK Mitversicherung",
@@ -844,6 +847,7 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         "Bundesland-Navigation ergänzt",
         "Brief- und Fristenroute ergänzt",
         "Begriffe-Lesehilfe ergänzt",
+        "Begleitperson-Vorlage ergänzt",
         "keine Rechtsberatung",
         "kein Notruf",
     ]

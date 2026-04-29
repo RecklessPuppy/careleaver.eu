@@ -24,6 +24,8 @@ Brief/fristen route note, 2026-04-29: `index.html` added a practical "Brief, Bes
 
 Glossary note, 2026-04-29: `index.html` added a short "Begriffe schnell erklärt" section for common terms such as Bescheid, Frist, Aktenzeichen/Geschäftszahl, Meldezettel, Vertrauensperson, and zuständige Stelle. The section is framed as a reading aid only, links Meldezettel/Wohnsitz wording to the already logged Stadt Wien residence-registration source, and explicitly avoids legal advice, deadline calculation, benefit decisions, appeal instructions, eligibility rules, contact details, amounts, or new service claims.
 
+Begleitperson-template note, 2026-04-29: `index.html` added a short copyable "Vertrauensperson fragen" script. It is preparation wording only, asks the user to check with the relevant office whether and how a support person can be involved, and does not add legal rights, service promises, eligibility rules, deadlines, contact details, or new source claims.
+
 ## How To Add A Source
 
 ```md
