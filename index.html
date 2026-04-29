@@ -1675,6 +1675,7 @@
                         <div class="actions">
                             <button type="button" data-action="print-templates">Vorlagen drucken</button>
                             <button class="secondary" type="button" data-action="save-draft">Entwurf lokal speichern</button>
+                            <button class="secondary" type="button" data-action="load-draft">Gespeicherten Entwurf laden</button>
                         </div>
                     </article>
 
@@ -1766,7 +1767,7 @@
                     </article>
                 </div>
 
-                <p class="privacy-note"><strong>Lokale Speicherung:</strong> Freitext in diesem Abschnitt wird nur gespeichert, wenn du auf „Entwurf lokal speichern“ klickst. Auf gemeinsam genutzten Geräten danach „Lokale Daten löschen“ verwenden.</p>
+                <p class="privacy-note"><strong>Lokale Speicherung:</strong> Freitext in diesem Abschnitt wird nur gespeichert, wenn du auf „Entwurf lokal speichern“ klickst. Ein gespeicherter Entwurf wird erst geladen, wenn du „Gespeicherten Entwurf laden“ klickst. Auf gemeinsam genutzten Geräten danach „Lokale Daten löschen“ verwenden.</p>
             </div>
         </section>
 
@@ -1878,7 +1879,7 @@
         <div class="wrap">
             <h2>Hinweise</h2>
             <p>Diese Website ist eine unabhängige Orientierungshilfe. Sie ersetzt keine Rechtsberatung, keine medizinische oder therapeutische Hilfe und keinen Notruf. Sie entscheidet nicht, ob du eine Leistung bekommst.</p>
-            <p>Es werden keine Daten an einen Server geschickt, kein Tracking eingebaut und keine Formulare übertragen. Checklisten und freiwillig gespeicherte Entwürfe bleiben nur im Browser über localStorage und können über „Lokale Daten löschen“ entfernt werden.</p>
+            <p>Es werden keine Daten an einen Server geschickt, kein Tracking eingebaut und keine Formulare übertragen. Checklisten und freiwillig gespeicherte Entwürfe bleiben nur im Browser über localStorage. Gespeicherte Entwürfe werden erst nach Klick geladen und können über „Lokale Daten löschen“ entfernt werden.</p>
             <p>Letzte öffentliche Inhaltsprüfung dieser Version: 2026-04-29. Öffentliche Quellenübersicht: <a href="quellen.html">Quellen und Review</a>. Interne Pflege: <code>research/source-log.md</code>, <code>SOURCE_POLICY.md</code> und <code>CONTENT_SAFETY.md</code>.</p>
         </div>
     </footer>
@@ -2007,12 +2008,17 @@
         }
 
         function loadDraft() {
+            let loaded = 0;
             document.querySelectorAll("#vorlagen input, #vorlagen textarea").forEach((field) => {
                 try {
                     const value = localStorage.getItem(storagePrefix + "draft." + field.id);
-                    if (value !== null) field.value = value;
+                    if (value !== null) {
+                        field.value = value;
+                        loaded += 1;
+                    }
                 } catch (error) {}
             });
+            announce(loaded ? "Gespeicherter Entwurf geladen." : "Kein gespeicherter Entwurf gefunden.");
         }
 
         function clearLocalData() {
@@ -2224,6 +2230,9 @@
             document.querySelectorAll("[data-action='save-draft']").forEach((button) => {
                 button.addEventListener("click", saveDraft);
             });
+            document.querySelectorAll("[data-action='load-draft']").forEach((button) => {
+                button.addEventListener("click", loadDraft);
+            });
             document.querySelectorAll("[data-copy]").forEach((button) => {
                 button.addEventListener("click", () => copyElementText(button.dataset.copy));
             });
@@ -2267,7 +2276,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             bindActions();
             loadChecks();
-            loadDraft();
             updateStickyOffsets();
             highlightCurrentNav();
         });

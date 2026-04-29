@@ -135,7 +135,7 @@ Goal: add practical appointment and planning tools without collecting sensitive 
 - Keep tools browser-side where possible.
 - Avoid storing personal data on a server.
 - Avoid separately maintained PDFs until print styles are stable, so facts do not diverge.
-- Consider opt-in or session-only local storage for sensitive fields.
+- Consider opt-in or session-only local storage for sensitive fields. Status: saved free-text drafts now require an explicit save and explicit load action as of 2026-04-30.
 
 ## Phase 5: Outreach / SEO
 

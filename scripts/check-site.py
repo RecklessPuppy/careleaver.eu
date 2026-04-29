@@ -760,6 +760,10 @@ def check_index_guardrails(errors: list[str]) -> None:
         "2026-04-29",
         "2026-07-29",
         "Lokale Daten löschen",
+        "Gespeicherten Entwurf laden",
+        'data-action="load-draft"',
+        "Ein gespeicherter Entwurf wird erst geladen",
+        'button.addEventListener("click", loadDraft);',
         'href="quellen.html"',
         "copyTextWithFallback",
         "copyWithSelectionFallback",
@@ -785,6 +789,7 @@ def check_index_guardrails(errors: list[str]) -> None:
     check_accessibility_css_guardrails(Path("index.html"), index, errors, requires_pill_targets=True)
     check_appointment_cards(index, errors)
     check_template_privacy_fields(errors)
+    check_draft_loading_privacy(index, errors)
     if index.count('a[href^="http"]::after') < 2 or "attr(href)" not in index:
         errors.append("index.html: print output should expose external URLs, including section-print popups")
 
@@ -853,6 +858,20 @@ def check_template_privacy_fields(errors: list[str]) -> None:
             )
 
 
+def check_draft_loading_privacy(index: str, errors: list[str]) -> None:
+    dom_ready_match = re.search(
+        r'document\.addEventListener\("DOMContentLoaded",\s*\(\)\s*=>\s*\{(?P<body>.*?)\n\s*\}\);',
+        index,
+        flags=re.DOTALL,
+    )
+    if not dom_ready_match:
+        errors.append("index.html: unable to inspect DOMContentLoaded draft-loading behavior")
+        return
+
+    if "loadDraft();" in dom_ready_match.group("body"):
+        errors.append("index.html: saved free-text drafts should load only after an explicit user action")
+
+
 def check_sources_page_guardrails(errors: list[str]) -> None:
     page = (ROOT / "quellen.html").read_text(encoding="utf-8")
     required_snippets = [
@@ -866,6 +885,7 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         'id="aenderungen"',
         "2026-04-29",
         "2026-07-29",
+        "Entwürfe laden jetzt explizit",
         "Bundesland-Navigation ergänzt",
         "Brief- und Fristenroute ergänzt",
         "Begriffe-Lesehilfe ergänzt",

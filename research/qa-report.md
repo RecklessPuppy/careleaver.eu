@@ -153,6 +153,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Added a public changelog note on `quellen.html` and updated sitemap/JSON-LD modification dates.
 - No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
 
+## Draft Loading Privacy Addendum 2026-04-30
+
+- Changed free-text template draft handling so voluntarily saved drafts are no longer loaded automatically on page start.
+- Added a visible "Gespeicherten Entwurf laden" action for users who intentionally want to restore saved draft text.
+- Updated `scripts/check-site.py` so future edits fail if `DOMContentLoaded` auto-loads saved free-text drafts again.
+- Added a public changelog note on `quellen.html`.
+- No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

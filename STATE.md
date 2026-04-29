@@ -45,6 +45,38 @@ Last updated: 2026-04-30
 - A Termin-Nachbereitung template pass was completed on 2026-04-29, adding a cautious copyable follow-up script for getting next steps, responsible offices, missing documents, and possible date/Frist questions confirmed in writing after an appointment.
 - An Unterlagen-Nachreichung template pass was completed on 2026-04-29, adding a cautious copyable script for sending missing documents and asking for receipt, missing-item, and Zuständigkeits clarification without adding new factual claims.
 - A template copy fallback pass was completed on 2026-04-30, adding a browser fallback for copy buttons when the modern Clipboard API is unavailable and a checker guardrail to keep it.
+- A template draft privacy pass was completed on 2026-04-30, requiring an explicit user action before saved free-text template drafts are loaded back into the page.
+
+## Template Draft Privacy Pass 2026-04-30
+
+### What Changed
+
+- Added a visible "Gespeicherten Entwurf laden" button beside the existing local draft save action.
+- Removed automatic loading of saved free-text template drafts during page startup.
+- Kept checklist state loading automatically, because checklist checkmarks are lower-sensitivity and already disclosed.
+- Added checker guardrails so future edits fail if saved free-text drafts are auto-loaded again.
+- Added a public changelog note on `quellen.html`.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-30 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- Inline JavaScript syntax check with `node --check`
+- `python3 scripts/check-site.py --today 2026-04-30 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` on port 4176, and the new draft-load button/privacy text appeared in the served homepage HTML.
+
+### Current Risks
+
+- Users can still voluntarily store sensitive free-text drafts in `localStorage`; the site discloses this and provides "Lokale Daten löschen".
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then decide verified operator/contact/impressum wording before broad outreach.
 
 ## Template Copy Fallback Pass 2026-04-30
 

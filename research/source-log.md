@@ -34,6 +34,8 @@ Arbeits-/Ausbildungsroute note, 2026-04-29: `index.html` added a dedicated "Schu
 
 Kopier-Fallback note, 2026-04-30: `index.html` now falls back to a temporary text selection copy method when the browser Clipboard API is unavailable or blocked. `quellen.html` records the public maintenance note. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
 
+Entwurf-Laden note, 2026-04-30: `index.html` no longer auto-loads voluntarily saved free-text template drafts on page load. Users must click "Gespeicherten Entwurf laden" before saved draft text is shown again, which reduces accidental disclosure on shared devices. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
+
 ## How To Add A Source
 
 ```md
