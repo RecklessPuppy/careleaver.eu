@@ -33,6 +33,7 @@ Last updated: 2026-04-29
 - A human factual review packet was prepared on 2026-04-29 at `research/human-review-packet-2026-04-29.md`, grouping high-risk Wien MVP claims for owner review before broad outreach. No public factual content was changed.
 - A Wien appointment-prep card pass was completed on 2026-04-29, adding five provider-specific static cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA using existing official links and cautious preparation wording.
 - A touch-target and reduced-motion accessibility pass was completed on 2026-04-29, increasing mobile nav/crisis tap targets, adding reduced-motion CSS, and extending `scripts/check-site.py` with guardrails for these basics.
+- A homepage health/E-Card routing pass was completed on 2026-04-29, adding a cautious health and insurance route using already logged Gesundheitsportal Österreich and ÖGK sources, plus matching checker guardrails.
 
 ## Morning Review 2026-04-29
 
@@ -147,6 +148,42 @@ Include the new appointment-prep cards in the next human factual review before b
 ### Next Recommended Task
 
 Run the dedicated axe/assistive-technology review when the browser tooling is stable; owner factual review and verified operator/impressum details remain higher-priority human decisions before broad outreach.
+
+## Health / E-Card Routing Pass 2026-04-29
+
+### What Changed
+
+- Added a cautious homepage route for health, E-Card, and insurance questions.
+- Linked the route to the already logged Gesundheitsportal Österreich Care Leaver context source and ÖGK mitversicherung source.
+- Added the health route to the top navigation, topic router, no-JavaScript fallback, next-step finder, Wien starter section, and public source/review table.
+- Updated `quellen.html` with a short public changelog note.
+- Updated `research/source-log.md` to record that the public health route uses existing source anchors and avoids diagnosis, therapy, insurance decisions, amounts, deadlines, and eligibility promises.
+- Extended `scripts/check-site.py` so future public checks require the health route and its safety wording.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- inline JavaScript syntax check for `index.html` and `quellen.html`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- local HTTP preview smoke checks for `/` and `/quellen.html`
+- `wkhtmltoimage --width 390` for `/` and `/quellen.html`
+- `wkhtmltoimage --width 1280` for `/`
+- `wkhtmltopdf --print-media-type` for `/`
+- `qpdf --check /private/tmp/careleaver-health-route-index-print.pdf`
+- visual smoke-check of rendered 390 px screenshots
+
+### Current Risks
+
+- Health and insurance wording remains high-risk if expanded. Do not add insurance eligibility details, deadlines, amounts, or medical guidance without a fresh source pass.
+- Owner factual review and verified operator/impressum details remain unresolved before broad outreach.
+- Dedicated axe/assistive-technology testing is still recommended when browser tooling is available.
+
+### Next Recommended Task
+
+Run a human factual review of the Wien MVP, including the new health/insurance route, against `research/source-log.md` and `research/human-review-packet-2026-04-29.md`. After that, run a dedicated axe/assistive-technology review when browser tooling is available.
 
 ## Human Review Packet 2026-04-29
 

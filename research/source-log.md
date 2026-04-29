@@ -16,6 +16,8 @@ Public source page note, 2026-04-29: `quellen.html` was added as a public source
 
 Wien appointment-card note, 2026-04-29: `index.html` added five provider-specific appointment-prep cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA. The cards reuse existing official source-log links, focus on preparation questions and written next-step requests, and avoid copied phone numbers, emails, addresses, opening hours, benefit amounts, thresholds, legal deadlines, eligibility promises, appointment promises, housing promises, or service promises.
 
+Homepage health route note, 2026-04-29: `index.html` added a cautious health/E-Card/insurance route using the already logged Gesundheitsportal Österreich and ÖGK source anchors. The route points users to official information and explicitly avoids diagnosis, therapy recommendations, and insurance decisions.
+
 ## How To Add A Source
 
 ```md
@@ -41,6 +43,7 @@ Wien appointment-card note, 2026-04-29: `index.html` added five provider-specifi
 - Wien aftercare / `§ 33 WKJHG`: public page links to RIS only as legal background and does not summarize eligibility; next legal review 2026-10-29.
 - Meldezettel: public page links to the exact Stadt Wien residence-registration page and avoids unsourced detail beyond "Frist prüfen"; next review 2026-07-29.
 - Basiskonto, family allowance, health insurance, ORF/OBS and other money/benefit topics: public page links to official pages and avoids amounts/thresholds; next review 2026-07-29 if any claim is strengthened.
+- Health/E-Card/insurance routing: public page links to Gesundheitsportal Österreich for general Care Leaver health context and ÖGK for mitversicherung information after 18; no diagnosis, therapy recommendation, insurance decision, amount, deadline, or eligibility promise is published; next review for insurance questions 2026-07-29.
 - Wohnbeihilfe / MA 50, U25 / AMS / MA 40, KIJA, Wohnberatung, FSW, NEBA, Ausbildung bis 18 and waff: public page uses official links and cautious routing language; next review per table in `index.html`.
 - Wien appointment-prep cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA: public page uses official links and cautious preparation language only; reviewed 2026-04-29; next review 2026-07-29.
 - Contact directory risk: current public page avoids copied non-emergency phone/address/opening-hour blocks. Keep this default unless contact details are freshly checked and logged.
