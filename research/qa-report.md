@@ -26,7 +26,7 @@ Safe fixes shipped in this QA pass:
 7. Privacy concerns: PASS WITH CAUTION. No backend, tracking, analytics, or form submission. Checklist state and explicitly saved drafts use `localStorage`; shared-device risk and deletion are disclosed.
 8. Tone: PASS. Tone is practical and respectful. It avoids savior language and avoids blaming the young person.
 9. Official sources linked where needed: PASS WITH CAUTION. High-risk sections link mainly to official or operator pages. The page should keep preferring official pages over copied contact blocks.
-10. Last-reviewed dates: PASS. Public source/review dates are visible by claim group. Crisis, money, housing, contacts, and time-sensitive routes remain on 2026-07-29 review cycles.
+10. Last-reviewed dates: IMPROVED. Public source/review dates are visible by claim group. A later automation pass added review-date checks to `scripts/check-site.py`, so public/source-log review dates now warn before they are due and fail strict checks when overdue. Crisis, money, housing, contacts, and time-sensitive routes remain on 2026-07-29 review cycles.
 
 ## Fact-Check Notes
 
@@ -45,7 +45,7 @@ TODO - Operator/impressum/contact details: do not invent these. The site needs v
 
 TODO - Human factual review before outreach: a second human review is still recommended because the site covers crisis, housing, benefits, and youth-welfare routing.
 
-TODO - Automated recurring link/source checks: add monthly link checking and quarterly source review for crisis, money, housing, and contacts.
+TODO - Automated recurring source checks: link checks and review-date guardrails now exist, but they only flag reachability and due dates. A human or careful source-refresh pass still has to reopen crisis, money, housing, and contact sources by the review date.
 
 TODO - Browser accessibility audit: static guardrails now run locally and in CI, but a full axe/browser audit is still useful once the browser test setup is stable.
 

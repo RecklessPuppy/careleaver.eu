@@ -5,6 +5,9 @@ from __future__ import annotations
 
 import argparse
 import re
+import unicodedata
+from dataclasses import dataclass
+from datetime import date, timedelta
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -40,6 +43,12 @@ SITE_HOSTS = {"careleaver.eu", "www.careleaver.eu"}
 
 FORM_CONTROL_TAGS = {"input", "select", "textarea"}
 INTERACTIVE_TEXT_TAGS = {"a", "button"}
+DATE_PATTERN = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
+NEXT_REVIEW_CONTEXT_PATTERN = re.compile(
+    r"n(?:\u00e4|ae)chste.*?pr(?:\u00fc|ue)fung[^0-9]*(.*)$",
+    re.IGNORECASE,
+)
+DEFAULT_REVIEW_WARNING_DAYS = 14
 
 PLACEHOLDER_PATTERNS = [
     r"lorem ipsum",
@@ -52,6 +61,14 @@ PLACEHOLDER_PATTERNS = [
     r"Die alten Platzhalter",
     r"sollen ergänzt werden, bevor",
 ]
+
+
+@dataclass(frozen=True)
+class ReviewDate:
+    path: Path
+    label: str
+    due: date
+    line: int
 
 
 class LinkParser(HTMLParser):
@@ -157,6 +174,49 @@ class LinkParser(HTMLParser):
             break
 
 
+class ReviewTableParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.tables: list[list[list[tuple[str, str, int]]]] = []
+        self._table_rows: list[list[tuple[str, str, int]]] | None = None
+        self._current_row: list[tuple[str, str, int]] | None = None
+        self._current_cell_parts: list[str] | None = None
+        self._current_cell_tag = ""
+        self._current_cell_line = 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        del attrs
+        tag = tag.lower()
+        if tag == "table":
+            self._table_rows = []
+        elif tag == "tr" and self._table_rows is not None:
+            self._current_row = []
+        elif tag in {"th", "td"} and self._current_row is not None:
+            self._current_cell_parts = []
+            self._current_cell_tag = tag
+            self._current_cell_line = self.getpos()[0]
+
+    def handle_data(self, data: str) -> None:
+        if self._current_cell_parts is not None:
+            self._current_cell_parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag in {"th", "td"} and self._current_cell_parts is not None and self._current_row is not None:
+            text = " ".join("".join(self._current_cell_parts).split())
+            self._current_row.append((text, self._current_cell_tag, self._current_cell_line))
+            self._current_cell_parts = None
+            self._current_cell_tag = ""
+            self._current_cell_line = 0
+        elif tag == "tr" and self._current_row is not None and self._table_rows is not None:
+            if any(cell[0] for cell in self._current_row):
+                self._table_rows.append(self._current_row)
+            self._current_row = None
+        elif tag == "table" and self._table_rows is not None:
+            self.tables.append(self._table_rows)
+            self._table_rows = None
+
+
 def fail(errors: list[str]) -> None:
     if errors:
         for error in errors:
@@ -166,6 +226,28 @@ def fail(errors: list[str]) -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run static checks for careleaver.eu.")
+    parser.add_argument(
+        "--today",
+        type=parse_iso_date,
+        default=date.today(),
+        help="Date to use for review-date checks, in YYYY-MM-DD format.",
+    )
+    parser.add_argument(
+        "--review-warning-days",
+        type=int,
+        default=DEFAULT_REVIEW_WARNING_DAYS,
+        help="Warn when a source review date is due within this many days.",
+    )
+    parser.add_argument(
+        "--soft-review-dates",
+        action="store_true",
+        help="Report overdue source reviews as warnings instead of failing the command.",
+    )
+    parser.add_argument(
+        "--report-review-dates",
+        action="store_true",
+        help="Print a short source-review date report.",
+    )
     parser.add_argument(
         "--external",
         action="store_true",
@@ -183,6 +265,13 @@ def parse_args() -> argparse.Namespace:
         help="Timeout in seconds per external-link request.",
     )
     return parser.parse_args()
+
+
+def parse_iso_date(value: str) -> date:
+    try:
+        return date.fromisoformat(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError(f"Expected YYYY-MM-DD date, got {value}") from error
 
 
 def check_required_files(errors: list[str]) -> None:
@@ -441,16 +530,175 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
             errors.append(f"quellen.html: forbidden risky wording found: {snippet}")
 
 
+def fold_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value.lower())
+    return "".join(character for character in normalized if not unicodedata.combining(character))
+
+
+def review_dates_from_text(path: Path, label: str, text: str, line: int, errors: list[str]) -> list[ReviewDate]:
+    dates: list[ReviewDate] = []
+    for match in DATE_PATTERN.finditer(text):
+        raw_date = match.group(0)
+        try:
+            due = date.fromisoformat(raw_date)
+        except ValueError:
+            errors.append(f"{path}:{line}: invalid review date {raw_date} for {label}")
+            continue
+        dates.append(ReviewDate(path=path, label=label, due=due, line=line))
+    return dates
+
+
+def review_dates_from_html(path: Path, errors: list[str]) -> list[ReviewDate]:
+    text = path.read_text(encoding="utf-8")
+    items: list[ReviewDate] = []
+
+    parser = ReviewTableParser()
+    parser.feed(text)
+    for table in parser.tables:
+        header_index = -1
+        review_index = -1
+        label_index = 0
+
+        for row_index, row in enumerate(table):
+            folded_cells = [fold_text(cell[0]) for cell in row]
+            matching_indexes = [
+                cell_index for cell_index, cell_text in enumerate(folded_cells) if "nachste prufung" in cell_text
+            ]
+            if matching_indexes:
+                header_index = row_index
+                review_index = matching_indexes[0]
+                for cell_index, cell_text in enumerate(folded_cells):
+                    if "bereich" in cell_text:
+                        label_index = cell_index
+                        break
+                break
+
+        if header_index < 0 or review_index < 0:
+            continue
+
+        for row in table[header_index + 1 :]:
+            if len(row) <= review_index:
+                continue
+            label = row[label_index][0] if len(row) > label_index and row[label_index][0] else "review row"
+            review_cell = row[review_index]
+            row_dates = review_dates_from_text(path, label, review_cell[0], review_cell[2], errors)
+            if not row_dates:
+                errors.append(f"{path}:{review_cell[2]}: review row has no YYYY-MM-DD date: {label}")
+            items.extend(row_dates)
+
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        next_review_match = NEXT_REVIEW_CONTEXT_PATTERN.search(line)
+        if not next_review_match:
+            continue
+        items.extend(
+            review_dates_from_text(path, "inline next-review note", next_review_match.group(1), line_number, errors)
+        )
+
+    return items
+
+
+def review_dates_from_source_log(path: Path, errors: list[str]) -> list[ReviewDate]:
+    items: list[ReviewDate] = []
+    current_heading = "source log"
+    in_code_block = False
+
+    for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+        if in_code_block:
+            continue
+        if stripped.startswith("## "):
+            current_heading = stripped.removeprefix("## ").strip()
+            continue
+        if not fold_text(stripped).startswith("- review by:"):
+            continue
+        row_dates = review_dates_from_text(path, current_heading, stripped, line_number, errors)
+        if not row_dates:
+            errors.append(f"{path}:{line_number}: source entry has Review by but no YYYY-MM-DD date: {current_heading}")
+        items.extend(row_dates)
+
+    return items
+
+
+def collect_review_dates(errors: list[str]) -> list[ReviewDate]:
+    items: list[ReviewDate] = []
+    for path in sorted(ROOT.glob("*.html")):
+        items.extend(review_dates_from_html(path, errors))
+
+    source_log = ROOT / "research/source-log.md"
+    if source_log.exists():
+        items.extend(review_dates_from_source_log(source_log, errors))
+
+    return items
+
+
+def check_review_dates(
+    errors: list[str],
+    warnings: list[str],
+    today: date,
+    warning_days: int,
+    soft_review_dates: bool,
+) -> list[ReviewDate]:
+    items = collect_review_dates(errors)
+    if not items:
+        errors.append("No source review dates found in public HTML or source log")
+        return items
+
+    warning_window = today + timedelta(days=warning_days)
+    for item in sorted(items, key=lambda review: (review.due, str(review.path), review.line, review.label)):
+        location = f"{item.path}:{item.line}"
+        if item.due < today:
+            message = f"{location}: source review overdue since {item.due.isoformat()}: {item.label}"
+            if soft_review_dates:
+                warnings.append(message)
+            else:
+                errors.append(message)
+        elif item.due <= warning_window:
+            days_left = (item.due - today).days
+            warnings.append(f"{location}: source review due in {days_left} day(s) on {item.due.isoformat()}: {item.label}")
+
+    return items
+
+
+def print_review_date_report(items: list[ReviewDate], today: date) -> None:
+    print(f"Source review dates as of {today.isoformat()}:")
+    for item in sorted(items, key=lambda review: (review.due, str(review.path), review.line, review.label))[:20]:
+        days_left = (item.due - today).days
+        if days_left < 0:
+            status = f"overdue by {-days_left} day(s)"
+        elif days_left == 0:
+            status = "due today"
+        else:
+            status = f"due in {days_left} day(s)"
+        print(f"- {item.due.isoformat()} ({status}) {item.path}:{item.line} {item.label}")
+
+
 def main() -> None:
     args = parse_args()
     errors: list[str] = []
+    warnings: list[str] = []
     check_required_files(errors)
     check_public_placeholders(errors)
     check_internal_links(errors)
     check_accessibility_basics(errors)
     check_index_guardrails(errors)
     check_sources_page_guardrails(errors)
+    review_dates = check_review_dates(
+        errors,
+        warnings,
+        args.today,
+        args.review_warning_days,
+        args.soft_review_dates,
+    )
     fail(errors)
+
+    for warning in warnings:
+        print(f"WARNING: {warning}")
+
+    if args.report_review_dates:
+        print_review_date_report(review_dates, args.today)
 
     if args.external or args.soft_external:
         external_errors = check_external_links(args.external_timeout)

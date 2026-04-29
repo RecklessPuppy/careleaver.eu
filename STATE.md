@@ -23,6 +23,7 @@ Last updated: 2026-04-29
 - A no-JavaScript and print resilience pass was completed on 2026-04-29, focused on the public router and templates.
 - A public source/review page pass was completed on 2026-04-29, adding `quellen.html`, sitemap coverage, and local same-domain URL validation.
 - A lightweight accessibility-check pass was completed on 2026-04-29, adding static HTML accessibility guardrails to `scripts/check-site.py`.
+- A source-review automation pass was completed on 2026-04-29, adding public/source-log review-date checks to `scripts/check-site.py`.
 
 ## What Was Added In This Setup Pass
 
@@ -206,6 +207,29 @@ Checks run in this pass:
 - inline JavaScript syntax check with `node --check`
 - local HTTP preview smoke checks for `/` and `/quellen.html`, both returned `HTTP 200`
 
+## What Was Added In The Source Review Automation Pass
+
+- Extended `scripts/check-site.py` with source-review due-date checks.
+- The checker now parses public "Nächste Prüfung" dates in HTML notes and review tables, plus `Review by` dates in `research/source-log.md`.
+- The default check warns when a source review is due soon and fails strict checks once a review date is overdue.
+- Added `--today`, `--review-warning-days`, `--soft-review-dates`, and `--report-review-dates` options for local testing and reporting.
+- Updated `ROADMAP.md`, `research/qa-report.md`, and `research/open-questions.md` so future runs know this guardrail exists.
+- No public factual claims, contact details, benefit amounts, legal deadlines, eligibility wording, backend, analytics, or forms were changed.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 scripts/check-site.py --today 2026-07-30 --soft-review-dates --review-warning-days 0`
+- `python3 scripts/check-site.py --today 2026-07-30 --review-warning-days 0` failed as expected on overdue source reviews
+- `python3 -m py_compile scripts/check-site.py`
+- `python3 scripts/check-site.py`
+- `python3 scripts/check-site.py --external`
+- `git diff --check`
+- `cat CNAME`
+- local bounded HTTP preview for `/` and `/quellen.html`, both returned `HTTP 200`
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -232,7 +256,7 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 - The public page links to OBS for ORF-related exemption/support checks and the exact City of Vienna residence-registration page.
 - The old waff 18-25 wording was removed; current page links to waff and warns to verify waff age ranges directly there.
 - localStorage still exists for checklist state and opt-in template drafts; shared-device risk is disclosed and deletion is available.
-- Public review dates are present, but crisis, money, housing, and contact routes must be reviewed again by 2026-07-29.
+- Public review dates are present, and the local/CI checker now flags overdue review dates, but crisis, money, housing, and contact routes still must actually be reviewed again by 2026-07-29.
 
 ## Next Recommended Action
 
@@ -240,7 +264,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: improve source-review automation/reporting, add a browser-based accessibility audit if the test setup is stable, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a browser-based accessibility audit if the test setup is stable, run/log the strict external-link check again, or improve practical templates without adding new facts. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 
