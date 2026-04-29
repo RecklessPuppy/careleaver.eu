@@ -94,23 +94,23 @@ Deliverables:
 - updated `research/source-log.md` for any public factual edits
 - updated `research/open-questions.md` for unresolved claims
 
-Status: next recommended build step.
+Status: completed as a first public MVP pass on 2026-04-29. A second QA/fact-check pass is still recommended before broad outreach.
 
 ## Phase 2: Austria / Wien MVP
 
 Goal: publish a reliable, useful Wien-first version.
 
-- Use the draft architecture in `content/` as the source for the build.
-- Make emergency and crisis information clear and source-linked.
-- Verify Wien contacts, phone numbers, addresses, and links.
-- Verify key Wien child/youth welfare and aftercare claims.
-- Verify benefits, housing, appointment, and document guidance.
-- Improve wording for plain German and low-stress reading.
-- Keep the site static, mobile-friendly, and printable.
-- Add a top "Ich brauche Hilfe mit ..." router.
-- Add Wien appointment-prep kits for MA 11/Care Leaver counselling, U25, MA 50/Wohnbeihilfe, KIJA, and housing crisis.
-- Add short German scripts for calls, emails, written decisions, and bringing a trusted person.
-- Prefer official contact pages over copied contact details where possible.
+- Use the draft architecture in `content/` as the source for the build. Status: first pass done 2026-04-29.
+- Make emergency and crisis information clear and source-linked. Status: first pass done; recheck quarterly.
+- Verify Wien contacts, phone numbers, addresses, and links. Status: official-link-first approach used; second QA still needed.
+- Verify key Wien child/youth welfare and aftercare claims. Status: source-linked first pass done; legal wording should stay cautious.
+- Verify benefits, housing, appointment, and document guidance. Status: source-linked first pass done; no benefit amounts published.
+- Improve wording for plain German and low-stress reading. Status: first pass done.
+- Keep the site static, mobile-friendly, and printable. Status: first pass done; browser QA still needed.
+- Add a top "Ich brauche Hilfe mit ..." router. Status: done.
+- Add Wien appointment-prep kits for MA 11/Care Leaver counselling, U25, MA 50/Wohnbeihilfe, KIJA, and housing crisis. Status: generic practical templates added; provider-specific templates can be expanded after QA.
+- Add short German scripts for calls, emails, written decisions, and bringing a trusted person. Status: first pass done.
+- Prefer official contact pages over copied contact details where possible. Status: done in the public MVP.
 
 ## Phase 3: Bundesland Expansion
 

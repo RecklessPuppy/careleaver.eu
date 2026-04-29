@@ -10,12 +10,12 @@ Last updated: 2026-04-29
 - Site is a static GitHub Pages site.
 - Public live site: `https://careleaver.eu`.
 - Custom domain is preserved through `CNAME`, which contains `careleaver.eu`.
-- Current public site is mainly one file: `index.html`.
-- The site is German-language and already Austria/Wien-focused.
-- The site includes source-sensitive material: emergency numbers, Wien contacts, rights, deadlines, benefit/housing notes, and health/crisis routes.
+- Current public site is one static page: `index.html`, plus `robots.txt` and `sitemap.xml`.
+- The site is German-language and now explicitly Wien-first.
+- The site includes source-sensitive material: emergency numbers, Wien routes, rights/background, deadlines, benefit/housing notes, and health/crisis routes.
 - A research swarm was completed on 2026-04-29 to decide the product direction before public content changes.
 - A content architecture pass was completed on 2026-04-29 to turn the research into reviewable page/template drafts.
-- The public site was not changed in the research-swarm or content-architecture passes.
+- A public Wien-first MVP pass was completed on 2026-04-29.
 
 ## What Was Added In This Setup Pass
 
@@ -43,6 +43,21 @@ Last updated: 2026-04-29
 - Updated `ROADMAP.md` to record the content architecture deliverables.
 - The public `index.html` was intentionally not rebuilt in this pass.
 
+## What Was Added In The Public MVP Pass
+
+- Rebuilt `index.html` as the first useful public Wien-first version.
+- Kept the implementation static and simple: no framework, backend, package manager, analytics, or form submission.
+- Added top "Was brauchst du gerade?" routing.
+- Added a safer 18-24 checklist.
+- Added Wien starter routes for crisis, Care Leaver Beratung/MA 11, housing, money/U25, Ausbildung/Arbeit, rights/complaints, and community/self-representation.
+- Added templates/scripts for appointments, email, phone calls, and "bitte schriftlich".
+- Added a Bundeslaender beta section that keeps non-Wien regions "in Arbeit" until source checks exist.
+- Added a visible source/review table with reviewed and next-review dates.
+- Replaced the old "Anspruchs-Check" decision framing with a "Naechste-Schritte-Finder".
+- Removed old public placeholder contact/impressum fields; public footer now says verified operator/contact details still need to be added before broad outreach.
+- Improved privacy wording and localStorage behavior: checkboxes save locally; free-text template drafts save only after an explicit user action.
+- Added `robots.txt` and `sitemap.xml`.
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -61,24 +76,22 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Known Risks / Things To Review
 
-- The existing public page contains many factual/contact claims that should be audited source-by-source before major outreach.
-- The public page currently has placeholder contact fields in the legal/accessibility area, such as placeholder email/phone text. These should be resolved before wider publication.
-- The header says information status is November 2025. Time-sensitive claims should be reviewed and updated before the site is treated as current.
-- Bundesland content outside Wien is currently incomplete/beta.
-- The current "Anspruchs-Check" wording can sound like a legal/benefit decision tool. Rename and soften before wider use.
+- The public page is safer and source-linked, but still needs a second human/agent factual QA before broad outreach.
+- Verified operator/contact/impressum details still need a user decision before being published.
+- Bundesland content outside Wien is intentionally incomplete/beta.
 - `careleaver.eu` may be confused with Care Leaver Oesterreich / `careleaver.at`. Add non-affiliation wording unless collaboration is agreed.
-- The current ORF link should likely point to OBS for exemption claims.
-- The current Meldezettel link should likely point to the exact City of Vienna residence-registration page.
-- The waff age range in the current page may be wrong or stale; source research suggests rechecking `18-25` against current `18-24` wording.
-- localStorage may preserve sensitive appointment details on shared devices. Improve warning or storage behavior if tools are edited.
+- The public page includes non-affiliation wording, but outreach wording should still be reviewed before contacting Care Leaver Oesterreich or partners.
+- The public page links to OBS for ORF-related exemption/support checks and the exact City of Vienna residence-registration page.
+- The old waff 18-25 wording was removed; current page links to waff and warns to verify waff age ranges directly there.
+- localStorage still exists for checklist state and opt-in template drafts; shared-device risk is disclosed and deletion is available.
 
 ## Next Recommended Action
 
-Run Phase 1B: Wien safety and source audit, using the new `content/` drafts as the content direction.
+Run a focused fact-check and UX QA pass on the new public MVP before broad outreach.
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `ROADMAP.md`, `content/architecture.md`, `content/page-drafts/home.md`, `content/page-drafts/wien.md`, `content/templates/appointment-prep.md`, `content/templates/email-jugendhilfe.md`, `research/research-synthesis.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Make a small Wien MVP safety pass: add a top "Schnelle Hilfe in Wien" / "Ich brauche Hilfe mit ..." router, rename "Anspruchs-Check" to a safer next-steps/prep tool, add visible source/last-checked notes for the highest-risk sections, replace weak ORF/Meldezettel links, and soften any unsupported entitlement wording. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `ROADMAP.md`, `content/architecture.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Do a factual QA pass on the new Wien-first public MVP: check each source note and external link, verify crisis/contact wording, review accessibility/mobile/print behavior, and decide whether verified operator/contact/impressum details can be published. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

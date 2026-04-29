@@ -6,6 +6,8 @@ This file tracks factual sources for `careleaver.eu`.
 
 Important: the 2026-04-29 research swarm identified strong source anchors, but the current public page still needs a claim-by-claim audit before it is treated as fully verified.
 
+Public MVP note, 2026-04-29: `index.html` was rebuilt using the source anchors already listed below. The public page now prefers official contact pages over copied contact blocks and shows source/review dates by claim group. A second QA pass is still recommended before broad outreach.
+
 ## How To Add A Source
 
 ```md

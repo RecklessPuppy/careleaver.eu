@@ -6,7 +6,7 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 
 ## High Priority
 
-- What exact email, phone number, and operator details may appear in the accessibility/impressum/contact area? The current public page contains placeholders.
+- What exact email, phone number, and operator details may appear in the accessibility/impressum/contact area? The old public placeholders were removed on 2026-04-29, but verified public operator/contact details still need a user decision.
 - Should the public site state clearly that `careleaver.eu` is independent and not Care Leaver Oesterreich / `careleaver.at` unless collaboration is agreed?
 - Should Care Leaver Oesterreich be asked to review or approve any referral wording before outreach?
 - Which crisis routes belong in the top sticky bar, and which belong in a fuller crisis/help section?
@@ -18,15 +18,14 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Are Basiskonto fee amounts current for the displayed information date?
 - Is the family allowance / health-insurance age wording accurate enough, or should it be split into separate, softer claims?
 - Is the ORF contribution exemption wording current, and should the public link change from generic ORF to OBS?
-- Does the current waff card need to change from `18-25 Jahre` to `18-24 Jahre`, based on the current waff source?
+- Should the waff route stay link-only, or should public text mention the current 18-24 Joboffensive wording? The 2026-04-29 MVP removed the old `18-25 Jahre` public claim and links to waff instead.
 - Should the Meldezettel section link to the exact City of Vienna residence-registration page instead of generic oesterreich.gv.at?
 
 ## Medium Priority
 
-- Which parts of the current "Anspruchs-Check" could be misunderstood as a legal/benefit decision rather than a preparation tool?
+- After the 2026-04-29 rewrite, does any part of the new "Naechste-Schritte-Finder" still sound like a legal/benefit decision rather than preparation and routing?
 - Should each section show a visible "last checked" date after the source audit?
-- Should "Anspruchs-Check" be renamed to "Naechste-Schritte-Finder" or "Vorbereitungs-Check"?
-- Should localStorage autosave be opt-in, session-only, or removed for sensitive fields?
+- Should localStorage autosave be further reduced, for example checklist-only with no saved drafts, before broad outreach?
 - What exact shared-device privacy warning should appear before tools that store appointment/legal details locally?
 - Should the site include a short "So nutzt du diese Seite sicher" note near the top?
 - Which Bundesland should be expanded after Wien, and only after which official source set exists?
