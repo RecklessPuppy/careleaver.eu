@@ -27,6 +27,39 @@ Last updated: 2026-04-29
 - A homepage quick-action pass was completed on 2026-04-29, adding a low-pressure "Heute ein kleiner nächster Schritt" block near the top router.
 - A safe structured-data SEO pass was completed on 2026-04-29, adding WebSite/WebPage/BreadcrumbList JSON-LD and guardrails against premature owner/contact schema.
 - A sitemap/canonical consistency pass was completed on 2026-04-29, extending `scripts/check-site.py` so page canonicals, `sitemap.xml`, and `robots.txt` stay aligned.
+- A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the workflow checkout action was updated to `actions/checkout@v6` to address the Node.js 20 deprecation warning.
+
+## Morning Review 2026-04-29
+
+### Current Status
+
+- Local branch: `main`, aligned with `origin/main` before the morning fix.
+- Public site: `https://careleaver.eu` served HTTP 200 for `/`, `/quellen.html`, and `/sitemap.xml` during the morning check.
+- Live files matched local `main` by SHA-256 hash for `index.html`, `quellen.html`, and `sitemap.xml`.
+- GitHub Actions: the latest checked runs were successful. The latest site-check run had a warning because `actions/checkout@v4` uses the deprecated Node.js 20 runtime; the workflow now uses `actions/checkout@v6`.
+- `CNAME` still contains exactly `careleaver.eu`.
+
+### What Changed Overnight
+
+- The project moved from initial setup into a Wien-first public MVP.
+- `index.html` was rebuilt around practical routing, crisis-first help, Wien routes, appointment/email/phone templates, print/no-JavaScript resilience, and cautious source-linked wording.
+- `quellen.html` was added as a public source/review and changelog page.
+- `robots.txt`, `sitemap.xml`, `.github/workflows/site-check.yml`, `scripts/check-site.py`, runbooks, prompts, research logs, and automation reports were added or expanded.
+- The shared checker now covers required files, `CNAME`, placeholders, internal links, optional external links, static accessibility basics, source-review dates, safe JSON-LD, sitemap/canonical consistency, and robots sitemap consistency.
+
+### Needs Human Review
+
+- Operator/contact/impressum details are still unresolved and should not be invented by automation.
+- A human factual review is still recommended before broad outreach because the public site covers crisis, housing, benefits, health, and child/youth welfare routing.
+- Non-Wien Bundesland content remains intentionally incomplete until official source sets are reviewed.
+- Care Leaver Österreich / `careleaver.at` referral and outreach wording should be reviewed before implying any collaboration.
+- Browser-based accessibility testing is still missing; static checks are useful guardrails but do not replace a real browser/assistive-technology pass.
+
+### Next 3 Recommended Tasks
+
+1. Run a real browser/mobile accessibility pass on `index.html` and `quellen.html`, then fix only layout or accessibility issues that do not change facts.
+2. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, and legal-background wording.
+3. Decide verified operator/contact/impressum wording, then add it carefully to the public site and structured data only after the details are confirmed.
 
 ## What Was Added In This Setup Pass
 
@@ -324,11 +357,11 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Next Recommended Action
 
-Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes overnight, then run `prompts/07-morning-review.md` after waking.
+Use the "Next 3 Recommended Tasks" in the 2026-04-29 morning review section as the current priority order:
 
-Recommended first task for the next Codex chat:
-
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a browser-based accessibility audit if the test setup is stable, or improve practical templates without adding new facts. Do not expand Bundeslaender yet.
+1. Real browser/mobile accessibility pass for `index.html` and `quellen.html`.
+2. Human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`.
+3. Verified operator/contact/impressum decision and careful publication.
 
 ## Safe Editing Rule For The Next Step
 
