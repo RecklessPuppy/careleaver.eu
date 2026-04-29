@@ -1076,6 +1076,12 @@
                         <p><a href="#gesundheit">Zu Gesundheit und Versicherung</a></p>
                     </article>
                     <article class="router-card">
+                        <span class="status beta">anderes Bundesland</span>
+                        <h3>Nicht in Wien</h3>
+                        <p>Wenn du nicht in Wien bist, nutze diese Seite nur als Vorbereitung. Konkrete Stellen unterscheiden sich je Bundesland und werden erst nach Quellenprüfung ergänzt.</p>
+                        <p><a href="#bundeslaender">Zum Bundesländer-Status</a></p>
+                    </article>
+                    <article class="router-card">
                         <span class="status">ruhig vorbereiten</span>
                         <h3>Termin oder E-Mail</h3>
                         <p>Schreibe vorher auf: Was ist passiert? Was brauchst du? Welche Unterlagen hast du? Was soll am Ende schriftlich feststehen?</p>
@@ -1099,6 +1105,7 @@
                             <option value="care">Ich brauche Care-Leaver- oder MA-11-Hilfe</option>
                             <option value="money">Ich brauche Hilfe mit Geld, AMS, U25 oder Schulden</option>
                             <option value="health">Ich brauche Hilfe mit Gesundheit, E-Card oder Versicherung</option>
+                            <option value="otherState">Ich bin nicht in Wien / anderes Bundesland</option>
                             <option value="docs">Ich muss Unterlagen für einen Termin sammeln</option>
                             <option value="rights">Ich will etwas schriftlich bekommen oder mich beschweren</option>
                         </select>
@@ -1112,6 +1119,7 @@
                             <li><a href="#jugendhilfe">Jugendhilfe, Nachbetreuung oder MA 11</a></li>
                             <li><a href="#geld">Geld, AMS, U25 oder Schulden</a></li>
                             <li><a href="#gesundheit">Gesundheit, E-Card oder Versicherung</a></li>
+                            <li><a href="#bundeslaender">Nicht in Wien / anderes Bundesland</a></li>
                             <li><a href="#dokumente">Dokumente und Termine</a></li>
                             <li><a href="#rechte">Beschwerde, Rechte oder Vertrauensperson</a></li>
                         </ul>
@@ -1643,7 +1651,7 @@
         <section class="band" id="bundeslaender" aria-labelledby="h-bundeslaender">
             <div class="wrap">
                 <h2 id="h-bundeslaender">Bundesländer Beta</h2>
-                <p class="section-intro">Wien ist derzeit die erste vollständigere Version. Andere Bundesländer werden nicht mit ungeprüften Kontaktlisten gefüllt. Bis dahin nutze offizielle Stellen deines Bundeslandes und Ombudsstellen direkt.</p>
+                <p class="section-intro">Wien ist derzeit die erste vollständigere Version. Wenn du nicht in Wien bist, lies die Wien-Beispiele nicht als Kontakt- oder Zuständigkeitsinformation für dein Bundesland. Andere Bundesländer werden nicht mit ungeprüften Kontaktlisten gefüllt. Bis dahin nutze offizielle Stellen deines Bundeslandes und Ombudsstellen direkt.</p>
 
                 <div class="bundesland-list">
                     <div class="bundesland-row"><strong>Wien</strong><span class="status">Starter verfügbar</span></div>
@@ -1785,6 +1793,16 @@
                     <li>Schreibe vor einem Termin auf: Was ist unklar? Welche Karte, Briefe oder Versicherungsnachweise hast du?</li>
                 </ul>
                 <p><a href="https://www.gesundheitskasse.at/cdscontent/?contentid=10007.870502" target="_blank" rel="noopener noreferrer">ÖGK Mitversicherung öffnen</a></p>
+            `,
+            otherState: `
+                <strong>Erster Schritt:</strong>
+                <ul>
+                    <li>Diese Seite ist Wien-first. Nutze Wien-Beispiele außerhalb Wiens nur zum Fragen vorbereiten.</li>
+                    <li>Konkrete Stellen, Zuständigkeiten und Kontaktwege können je Bundesland anders sein.</li>
+                    <li>Suche die offizielle Kinder- und Jugendhilfe, KIJA oder Ombudsstelle deines Bundeslandes und prüfe aktuelle Informationen dort.</li>
+                    <li>Wir veröffentlichen konkrete Bundesland-Routen erst nach Quellenprüfung.</li>
+                </ul>
+                <p><a href="#bundeslaender">Zum Bundesländer-Status</a></p>
             `,
             docs: `
                 <strong>Erster Schritt:</strong>

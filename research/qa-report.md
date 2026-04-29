@@ -79,6 +79,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - This reduces accidental reuse of sensitive appointment text on shared devices, but it does not replace the visible shared-device warning or the "Lokale Daten löschen" action.
 - No factual public claims, contact details, legal/benefit/housing wording, emergency instructions, backend, analytics, forms, or server-side data collection were added.
 
+## Bundesland Router Addendum 2026-04-29
+
+- Added an explicit "not in Wien / anderes Bundesland" route to the public topic router, no-JavaScript fallback, and Next-Step Finder.
+- The route warns that Wien examples should not be read as contact or jurisdiction information for other Bundeslaender.
+- Extended `scripts/check-site.py` so the non-Wien route and cautious Bundesland wording stay present.
+- No Bundesland contacts, eligibility rules, deadlines, benefit amounts, service promises, emergency routes, backend, analytics, forms, or server-side data collection were added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

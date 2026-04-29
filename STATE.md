@@ -35,6 +35,37 @@ Last updated: 2026-04-29
 - A touch-target and reduced-motion accessibility pass was completed on 2026-04-29, increasing mobile nav/crisis tap targets, adding reduced-motion CSS, and extending `scripts/check-site.py` with guardrails for these basics.
 - A homepage health/E-Card routing pass was completed on 2026-04-29, adding a cautious health and insurance route using already logged Gesundheitsportal Österreich and ÖGK sources, plus matching checker guardrails.
 - A template privacy hardening pass was completed on 2026-04-29, disabling browser autocomplete on sensitive template free-text fields and adding a checker guardrail.
+- A Bundesland router safety pass was completed on 2026-04-29, adding an explicit non-Wien route to the homepage need-finder and checker guardrails against unchecked Bundesland expansion.
+
+## Bundesland Router Safety Pass 2026-04-29
+
+### What Changed
+
+- Added a "Nicht in Wien" card to the homepage "Was brauchst du gerade?" router.
+- Added a non-Wien option to the Next-Step Finder and no-JavaScript fallback.
+- Strengthened the Bundeslaender beta note so Wien examples are not read as contact or jurisdiction information for other Bundeslaender.
+- Added a short public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the non-Wien route and cautious Bundesland wording remain present.
+- Updated `research/qa-report.md` with a safety addendum.
+- No Bundesland contacts, eligibility rules, deadlines, benefit amounts, service promises, emergency routes, backend, analytics, forms, or server-side data collection were added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- Non-Wien Bundesland content remains intentionally incomplete until each Bundesland has its own official source set.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Template Privacy Hardening Pass 2026-04-29
 

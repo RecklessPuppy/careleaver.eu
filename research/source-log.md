@@ -18,6 +18,8 @@ Wien appointment-card note, 2026-04-29: `index.html` added five provider-specifi
 
 Homepage health route note, 2026-04-29: `index.html` added a cautious health/E-Card/insurance route using the already logged Gesundheitsportal Österreich and ÖGK source anchors. The route points users to official information and explicitly avoids diagnosis, therapy recommendations, and insurance decisions.
 
+Bundesland router note, 2026-04-29: `index.html` added an explicit "not in Wien / anderes Bundesland" route to prevent Wien examples from being read as verified contact or jurisdiction information for other Bundeslaender. No Bundesland contacts, eligibility rules, deadlines, benefit amounts, service promises, emergency routes, or new factual source claims were added.
+
 ## How To Add A Source
 
 ```md
