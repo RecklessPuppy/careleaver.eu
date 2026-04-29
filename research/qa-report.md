@@ -123,6 +123,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Added a short public changelog note on `quellen.html`.
 - No public factual claims, contact details, legal/benefit/housing/health/emergency instructions, backend, analytics, forms, or personal-data collection were added.
 
+## Broad Outreach Readiness Addendum 2026-04-29
+
+- Added an optional `scripts/check-site.py --readiness` gate for pre-outreach checks.
+- The normal site check still passes and remains suitable for routine pushes.
+- The readiness gate intentionally fails while owner-level blockers remain: unchecked human review packet items, unresolved operator/contact/impressum questions, Care Leaver Österreich referral/outreach review, and the public note that broad-outreach blockers remain.
+- Added a manual GitHub Actions input so the owner can run the readiness gate from workflow dispatch without changing the default push/scheduled checks.
+- No public factual claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

@@ -143,6 +143,7 @@ Goal: help people find and trust the site.
 - Add safe structured data without operator/contact or partnership claims. Status: first WebSite/WebPage/BreadcrumbList pass completed 2026-04-29, with JSON-LD guardrails in `scripts/check-site.py`.
 - Add source and update dates visibly.
 - Add clear contact/impressum information only after verified.
+- Keep broad outreach gated until owner-level review is done. Status: optional `scripts/check-site.py --readiness` gate and manual GitHub Actions input added 2026-04-29.
 - Keep public source/review information easy to find. Status: first public `quellen.html` page added 2026-04-29.
 - Consider outreach to care leaver organizations, youth workers, and relevant Wien/Austria support services.
 - Add analytics only if the privacy tradeoff is explicitly accepted.
@@ -159,6 +160,7 @@ Goal: keep information from becoming stale.
 - Automate link checks if tooling is added. Status: basic GitHub Actions internal-link/placeholder/required-file check added 2026-04-29; optional external HTTP link smoke check added 2026-04-29 for manual/local runs and scheduled CI warnings.
 - Keep same-domain public URLs checked locally before deployment. Status: `scripts/check-site.py` now validates `careleaver.eu` links against local files and checks sitemap/canonical/robots consistency.
 - Add lightweight accessibility checks to the repeatable QA path. Status: static HTML accessibility guardrails added to `scripts/check-site.py` on 2026-04-29.
+- Add a pre-outreach readiness check that fails on unresolved human review and operator/impressum blockers. Status: optional local/manual CI gate added 2026-04-29.
 - Consider scheduled Codex maintenance prompts. Status: `prompts/06-overnight-operator.md` and `prompts/07-morning-review.md` added 2026-04-29.
 - Keep a simple changelog of factual updates.
 

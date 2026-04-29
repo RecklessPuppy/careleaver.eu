@@ -41,6 +41,37 @@ Last updated: 2026-04-29
 - A support-person template pass was completed on 2026-04-29, adding a cautious copyable "Vertrauensperson fragen" script and checker guardrails.
 - An education/work navigation pass was completed on 2026-04-29, adding a cautious "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, Next-Step Finder, and checker guardrails.
 - A print link visibility pass was completed on 2026-04-29, making printed public pages and printed template popups include external official URLs on paper.
+- A broad-outreach readiness guardrail pass was completed on 2026-04-29, adding an optional `scripts/check-site.py --readiness` gate and manual GitHub Actions input that fail clearly until owner-level review and operator/impressum blockers are resolved.
+
+## Broad Outreach Readiness Guardrail Pass 2026-04-29
+
+### What Changed
+
+- Added an optional `--readiness` flag to `scripts/check-site.py`.
+- The default site checks still pass for normal pushes and scheduled maintenance.
+- The optional readiness gate intentionally fails while broad-outreach blockers remain: unchecked owner review items in `research/human-review-packet-2026-04-29.md`, unresolved operator/contact/impressum questions, unresolved Care Leaver Österreich referral/outreach review, and the public note that broad outreach still has blockers.
+- Added a manual GitHub Actions workflow input so the owner can run the readiness gate from workflow dispatch without making it part of every push.
+- Updated `ROADMAP.md` and `research/qa-report.md` with the new maintenance guardrail.
+- No public factual claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+- `python3 scripts/check-site.py --today 2026-04-29 --readiness` failed as expected on known broad-outreach blockers.
+
+### Current Risks
+
+- The readiness gate is only a guardrail. It does not complete the owner factual review, decide operator/impressum details, or verify Care Leaver Österreich referral wording.
+- Dedicated axe/assistive-technology testing remains recommended; the previous `@axe-core/cli` local attempt still failed because local Chrome/ChromeDriver could not start.
+
+### Next Recommended Task
+
+Owner should complete `research/human-review-packet-2026-04-29.md` and decide verified operator/contact/impressum/offenlegung wording before broad outreach. After that, run `python3 scripts/check-site.py --readiness` or the manual GitHub Actions readiness input.
 
 ## Print Link Visibility Pass 2026-04-29
 

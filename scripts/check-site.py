@@ -341,6 +341,11 @@ def parse_args() -> argparse.Namespace:
         default=15.0,
         help="Timeout in seconds per external-link request.",
     )
+    parser.add_argument(
+        "--readiness",
+        action="store_true",
+        help="Also run the optional broad-outreach readiness gate.",
+    )
     return parser.parse_args()
 
 
@@ -880,6 +885,87 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         errors.append("quellen.html: print output should expose external URLs")
 
 
+def markdown_section(text: str, heading: str) -> str:
+    lines = text.splitlines()
+    section_lines: list[str] = []
+    in_section = False
+    target = f"## {heading}"
+
+    for line in lines:
+        if line.strip() == target:
+            in_section = True
+            continue
+        if in_section and line.startswith("## "):
+            break
+        if in_section:
+            section_lines.append(line)
+
+    return "\n".join(section_lines)
+
+
+def check_broad_outreach_readiness(errors: list[str]) -> None:
+    """Fail on owner-level blockers that should stay unresolved during automation."""
+
+    packet_path = ROOT / "research/human-review-packet-2026-04-29.md"
+    if not packet_path.exists():
+        errors.append("Broad outreach readiness: missing human review packet")
+    else:
+        packet_lines = packet_path.read_text(encoding="utf-8").splitlines()
+        unchecked_owner_lines = [
+            line_number
+            for line_number, line in enumerate(packet_lines, start=1)
+            if re.fullmatch(r"\s*-\s*\[\s*\]\s*Owner reviewed\s*", line)
+        ]
+        if unchecked_owner_lines:
+            preview = ", ".join(str(line) for line in unchecked_owner_lines[:8])
+            if len(unchecked_owner_lines) > 8:
+                preview += f", +{len(unchecked_owner_lines) - 8} more"
+            errors.append(
+                "Broad outreach readiness: "
+                f"{packet_path} still has {len(unchecked_owner_lines)} unchecked owner-review item(s) "
+                f"(lines {preview})"
+            )
+
+    open_questions_path = ROOT / "research/open-questions.md"
+    if not open_questions_path.exists():
+        errors.append("Broad outreach readiness: missing research/open-questions.md")
+    else:
+        high_priority = fold_text(
+            markdown_section(open_questions_path.read_text(encoding="utf-8"), "High Priority")
+        )
+        blockers = [
+            (
+                "verified operator/contact/impressum details",
+                ("operator", "impressum"),
+            ),
+            (
+                "human factual review before broad outreach",
+                ("human fact", "broad outreach"),
+            ),
+            (
+                "Care Leaver Oesterreich referral/outreach wording review",
+                ("care leaver oesterreich", "review", "outreach"),
+            ),
+        ]
+        for label, required_terms in blockers:
+            if all(term in high_priority for term in required_terms):
+                errors.append(f"Broad outreach readiness: unresolved high-priority blocker: {label}")
+
+    public_blocker_notes = {
+        Path("quellen.html"): "vor breiter offentlichkeitsarbeit",
+    }
+    for path, folded_snippet in public_blocker_notes.items():
+        if not path.exists():
+            errors.append(f"Broad outreach readiness: missing public page {path}")
+            continue
+        page = fold_text(path.read_text(encoding="utf-8"))
+        if folded_snippet in page:
+            errors.append(
+                "Broad outreach readiness: "
+                f"{path} still tells readers that broad-outreach blockers remain"
+            )
+
+
 def fold_text(value: str) -> str:
     normalized = unicodedata.normalize("NFKD", value.lower())
     return "".join(character for character in normalized if not unicodedata.combining(character))
@@ -1037,6 +1123,8 @@ def main() -> None:
     check_sitemap_and_canonical_consistency(errors)
     check_index_guardrails(errors)
     check_sources_page_guardrails(errors)
+    if args.readiness:
+        check_broad_outreach_readiness(errors)
     review_dates = check_review_dates(
         errors,
         warnings,

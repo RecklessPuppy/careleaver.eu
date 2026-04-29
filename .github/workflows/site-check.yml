@@ -3,6 +3,15 @@ name: Site checks
 on:
   push:
   workflow_dispatch:
+    inputs:
+      broad_outreach_readiness:
+        description: "Run the optional gate for broad outreach readiness"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
   schedule:
     - cron: "17 3 * * *"
 
@@ -20,6 +29,11 @@ jobs:
       - name: Run static site checks
         shell: bash
         run: python3 scripts/check-site.py
+
+      - name: Run broad outreach readiness gate
+        if: github.event_name == 'workflow_dispatch' && inputs.broad_outreach_readiness == 'true'
+        shell: bash
+        run: python3 scripts/check-site.py --readiness
 
       - name: Run external link smoke check
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
