@@ -44,8 +44,35 @@ Deliverables:
 - updated `research/research-synthesis.md`
 - updated `research/open-questions.md`
 - a clear Wien MVP content outline
+- draft content architecture in `content/architecture.md`
+- draft page structures in `content/page-drafts/`
+- draft practical templates in `content/templates/`
 
-Status: research swarm completed 2026-04-29; claim-by-claim public-page audit still pending.
+Status: research swarm and content architecture pass completed 2026-04-29; claim-by-claim public-page audit still pending.
+
+## Phase 1A: Content Architecture Drafts
+
+Goal: turn research into a low-maintenance information architecture before rebuilding the public site.
+
+- Define the first useful site map.
+- Draft the first homepage structure.
+- Draft the Wien page structure.
+- Draft a generic Bundesland page template.
+- Draft appointment-prep and Jugendhilfe email templates.
+- Define source/review-date display patterns.
+- List content that should not be published until verified.
+- Identify the lowest effort, highest impact build plan.
+
+Deliverables:
+
+- `content/architecture.md`
+- `content/page-drafts/home.md`
+- `content/page-drafts/wien.md`
+- `content/page-drafts/bundesland-template.md`
+- `content/templates/appointment-prep.md`
+- `content/templates/email-jugendhilfe.md`
+
+Status: completed 2026-04-29.
 
 ## Phase 1B: Wien Safety And Source Audit
 
@@ -73,6 +100,7 @@ Status: next recommended build step.
 
 Goal: publish a reliable, useful Wien-first version.
 
+- Use the draft architecture in `content/` as the source for the build.
 - Make emergency and crisis information clear and source-linked.
 - Verify Wien contacts, phone numbers, addresses, and links.
 - Verify key Wien child/youth welfare and aftercare claims.

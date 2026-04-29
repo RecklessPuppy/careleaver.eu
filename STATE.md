@@ -14,7 +14,8 @@ Last updated: 2026-04-29
 - The site is German-language and already Austria/Wien-focused.
 - The site includes source-sensitive material: emergency numbers, Wien contacts, rights, deadlines, benefit/housing notes, and health/crisis routes.
 - A research swarm was completed on 2026-04-29 to decide the product direction before public content changes.
-- The public site was not changed in the research-swarm pass.
+- A content architecture pass was completed on 2026-04-29 to turn the research into reviewable page/template drafts.
+- The public site was not changed in the research-swarm or content-architecture passes.
 
 ## What Was Added In This Setup Pass
 
@@ -28,6 +29,19 @@ Last updated: 2026-04-29
 - Updated `research/source-log.md` with official and trustworthy source anchors for Wien Care Leaver support, crisis, housing, money, education/work, documents, organizations, and safety-sensitive claims.
 - Updated `research/open-questions.md` with remaining high-risk factual and product decisions.
 - Updated `ROADMAP.md` with Phase 1B as the next build step.
+
+## What Was Added In The Content Architecture Pass
+
+- Added `content/architecture.md` with the proposed site map, homepage/Wien/Bundesland structures, template structure, source/review-date pattern, unsafe-to-publish list, and low-effort build plan.
+- Added page drafts:
+  - `content/page-drafts/home.md`
+  - `content/page-drafts/wien.md`
+  - `content/page-drafts/bundesland-template.md`
+- Added template drafts:
+  - `content/templates/appointment-prep.md`
+  - `content/templates/email-jugendhilfe.md`
+- Updated `ROADMAP.md` to record the content architecture deliverables.
+- The public `index.html` was intentionally not rebuilt in this pass.
 
 ## Current Product Decision
 
@@ -60,11 +74,11 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Next Recommended Action
 
-Run Phase 1B: Wien safety and source audit.
+Run Phase 1B: Wien safety and source audit, using the new `content/` drafts as the content direction.
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `ROADMAP.md`, `research/research-synthesis.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Make a small Wien MVP safety pass: add a top "Schnelle Hilfe in Wien" / "Ich brauche Hilfe mit ..." router, rename "Anspruchs-Check" to a safer next-steps/prep tool, add visible source/last-checked notes for the highest-risk sections, replace weak ORF/Meldezettel links, and soften any unsupported entitlement wording. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `ROADMAP.md`, `content/architecture.md`, `content/page-drafts/home.md`, `content/page-drafts/wien.md`, `content/templates/appointment-prep.md`, `content/templates/email-jugendhilfe.md`, `research/research-synthesis.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Make a small Wien MVP safety pass: add a top "Schnelle Hilfe in Wien" / "Ich brauche Hilfe mit ..." router, rename "Anspruchs-Check" to a safer next-steps/prep tool, add visible source/last-checked notes for the highest-risk sections, replace weak ORF/Meldezettel links, and soften any unsupported entitlement wording. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 
