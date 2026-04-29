@@ -1,6 +1,6 @@
 # QA Report
 
-Last updated: 2026-04-29
+Last updated: 2026-04-30
 
 Scope: strict safety, quality, and fact-check review of the current public `index.html` for `careleaver.eu`.
 
@@ -144,6 +144,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Linked the existing "Nach dem Termin" document card to the new document-submission script.
 - Extended `scripts/check-site.py` so the document-submission script, cautious copy/scan/original wording, and public changelog note remain present.
 - No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+## Copy Fallback Addendum 2026-04-30
+
+- Added a copy fallback for public template buttons when `navigator.clipboard` is unavailable or blocked.
+- The fallback uses a temporary readonly textarea selection, restores focus afterward, and reports success through the existing screen-reader status message.
+- Updated `scripts/check-site.py` so the Clipboard API guard and fallback remain present.
+- Added a public changelog note on `quellen.html` and updated sitemap/JSON-LD modification dates.
+- No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
 
 ## Sources Checked
 

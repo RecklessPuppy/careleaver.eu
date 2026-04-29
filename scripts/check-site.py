@@ -761,6 +761,10 @@ def check_index_guardrails(errors: list[str]) -> None:
         "2026-07-29",
         "Lokale Daten löschen",
         'href="quellen.html"',
+        "copyTextWithFallback",
+        "copyWithSelectionFallback",
+        "navigator.clipboard && window.isSecureContext",
+        'document.execCommand("copy")',
     ]
     for snippet in required_snippets:
         if snippet not in index:
@@ -870,6 +874,7 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         "Unterlagen-Nachreichung ergänzt",
         "Arbeits- und Ausbildungsroute ergänzt",
         "Druck-URLs ergänzt",
+        "Kopier-Fallback ergänzt",
         "keine Rechtsberatung",
         "kein Notruf",
     ]

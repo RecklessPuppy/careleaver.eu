@@ -1,6 +1,6 @@
 # State
 
-Last updated: 2026-04-29
+Last updated: 2026-04-30
 
 ## Current Status
 
@@ -44,6 +44,38 @@ Last updated: 2026-04-29
 - A broad-outreach readiness guardrail pass was completed on 2026-04-29, adding an optional `scripts/check-site.py --readiness` gate and manual GitHub Actions input that fail clearly until owner-level review and operator/impressum blockers are resolved.
 - A Termin-Nachbereitung template pass was completed on 2026-04-29, adding a cautious copyable follow-up script for getting next steps, responsible offices, missing documents, and possible date/Frist questions confirmed in writing after an appointment.
 - An Unterlagen-Nachreichung template pass was completed on 2026-04-29, adding a cautious copyable script for sending missing documents and asking for receipt, missing-item, and Zuständigkeits clarification without adding new factual claims.
+- A template copy fallback pass was completed on 2026-04-30, adding a browser fallback for copy buttons when the modern Clipboard API is unavailable and a checker guardrail to keep it.
+
+## Template Copy Fallback Pass 2026-04-30
+
+### What Changed
+
+- Added a JavaScript fallback for public template copy buttons when `navigator.clipboard` is unavailable or blocked.
+- The fallback uses a temporary readonly textarea selection, restores focus afterward, and uses the existing screen-reader status message for success feedback.
+- Added checker guardrails so future edits keep the Clipboard API guard and fallback functions.
+- Added a public changelog note on `quellen.html`.
+- Updated sitemap and JSON-LD modification dates for the changed public pages.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-30 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- Inline JavaScript syntax check with `node --check`
+- `python3 scripts/check-site.py --today 2026-04-30 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` on port 4175.
+
+### Current Risks
+
+- Copy support still depends on browser permissions and the user's environment; if both Clipboard API and fallback selection copying fail, the page tells the user to select the text manually.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Unterlagen-Nachreichung Template Pass 2026-04-29
 

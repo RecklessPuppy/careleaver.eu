@@ -1,6 +1,6 @@
 # Source Log
 
-Last updated: 2026-04-29
+Last updated: 2026-04-30
 
 This file tracks factual sources for `careleaver.eu`.
 
@@ -31,6 +31,8 @@ Termin-Nachbereitung note, 2026-04-29: `index.html` added a short copyable follo
 Unterlagen-Nachreichung note, 2026-04-29: `index.html` added a short copyable script for sending missing documents after a contact or appointment. It asks for receipt confirmation, missing-document clarity, and a jurisdiction hint if the office is not responsible. It tells users to check directly whether copy, scan, or original is needed and does not add legal advice, deadline calculation, eligibility claims, service promises, contact details, or new source claims.
 
 Arbeits-/Ausbildungsroute note, 2026-04-29: `index.html` added a dedicated "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, and Nächste-Schritte-Finder. It uses the already logged NEBA, AusBildung bis 18, waff, and U25 source anchors, asks users to check official pages and prepare questions, and does not add eligibility rules, age ranges, benefit promises, job promises, deadlines, contact details, or new source claims.
+
+Kopier-Fallback note, 2026-04-30: `index.html` now falls back to a temporary text selection copy method when the browser Clipboard API is unavailable or blocked. `quellen.html` records the public maintenance note. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
 
 ## How To Add A Source
 

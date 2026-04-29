@@ -1,6 +1,6 @@
 # Roadmap
 
-Last updated: 2026-04-29
+Last updated: 2026-04-30
 
 This roadmap keeps the project moving in phases. The safer default is to finish each phase well before expanding the scope.
 
@@ -110,6 +110,7 @@ Goal: publish a reliable, useful Wien-first version.
 - Add a top "Ich brauche Hilfe mit ..." router. Status: done.
 - Add Wien appointment-prep kits for MA 11/Care Leaver counselling, U25, MA 50/Wohnbeihilfe, KIJA, and housing crisis. Status: generic practical templates added; provider-specific templates can be expanded after QA.
 - Add short German scripts for calls, emails, written decisions, missing-document follow-up, and bringing a trusted person. Status: first pass done; Unterlagen-Nachreichung script added 2026-04-29.
+- Keep template controls resilient across browsers. Status: copy-button fallback added 2026-04-30.
 - Prefer official contact pages over copied contact details where possible. Status: done in the public MVP.
 
 ## Phase 3: Bundesland Expansion
@@ -128,6 +129,7 @@ Goal: add practical appointment and planning tools without collecting sensitive 
 
 - Improve document checklists.
 - Add appointment preparation templates. Status: after-appointment follow-up script added 2026-04-29.
+- Improve template interaction resilience. Status: Clipboard API fallback added 2026-04-30.
 - Add printable one-page plans.
 - Add source-linked explainers for common processes.
 - Keep tools browser-side where possible.

@@ -914,7 +914,7 @@
           },
           "inLanguage": "de-AT",
           "description": "Praktische Schritte, Vorlagen und offizielle Links fuer Care Leaver in Wien: Wohnen, Geld, Jugendhilfe, Termine, Dokumente, Krise, Gesundheit und Rechte.",
-          "dateModified": "2026-04-29"
+          "dateModified": "2026-04-30"
         }
       ]
     }
@@ -2030,11 +2030,67 @@
         function copyElementText(id) {
             const element = document.getElementById(id);
             if (!element) return;
-            navigator.clipboard.writeText(element.innerText.trim()).then(() => {
-                announce("Text kopiert.");
-            }).catch(() => {
-                alert("Kopieren war nicht möglich. Du kannst den Text markieren und manuell kopieren.");
+            copyTextWithFallback(element.innerText.trim()).then((copied) => {
+                if (copied) {
+                    announce("Text kopiert.");
+                } else {
+                    alert("Kopieren war nicht möglich. Du kannst den Text markieren und manuell kopieren.");
+                }
             });
+        }
+
+        function copyTextWithFallback(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text)
+                    .then(() => true)
+                    .catch(() => copyWithSelectionFallback(text));
+            }
+
+            return Promise.resolve(copyWithSelectionFallback(text));
+        }
+
+        function copyWithSelectionFallback(text) {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.top = "-1000px";
+            textarea.style.left = "-1000px";
+            document.body.appendChild(textarea);
+
+            const activeElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+            const selection = document.getSelection();
+            const previousRange = selection && selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+            textarea.focus();
+            textarea.select();
+            textarea.setSelectionRange(0, textarea.value.length);
+
+            let copied = false;
+            try {
+                copied = document.execCommand("copy");
+            } catch (error) {
+                copied = false;
+            }
+
+            document.body.removeChild(textarea);
+
+            if (selection) {
+                selection.removeAllRanges();
+                if (previousRange) {
+                    selection.addRange(previousRange);
+                }
+            }
+
+            if (activeElement) {
+                try {
+                    activeElement.focus({ preventScroll: true });
+                } catch (error) {
+                    activeElement.focus();
+                }
+            }
+
+            return copied;
         }
 
         function cloneForPrint(element) {
