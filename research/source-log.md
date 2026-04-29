@@ -14,6 +14,8 @@ Immediate sprint note, 2026-04-29: `index.html` added a fuller public "Schnelle 
 
 Public source page note, 2026-04-29: `quellen.html` was added as a public source/review overview and short changelog using the already logged source groups below. No new service detail, benefit amount, legal deadline, eligibility promise, or contact directory was added. Existing review cycles remain unchanged.
 
+Wien appointment-card note, 2026-04-29: `index.html` added five provider-specific appointment-prep cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA. The cards reuse existing official source-log links, focus on preparation questions and written next-step requests, and avoid copied phone numbers, emails, addresses, opening hours, benefit amounts, thresholds, legal deadlines, eligibility promises, appointment promises, housing promises, or service promises.
+
 ## How To Add A Source
 
 ```md
@@ -40,6 +42,7 @@ Public source page note, 2026-04-29: `quellen.html` was added as a public source
 - Meldezettel: public page links to the exact Stadt Wien residence-registration page and avoids unsourced detail beyond "Frist prüfen"; next review 2026-07-29.
 - Basiskonto, family allowance, health insurance, ORF/OBS and other money/benefit topics: public page links to official pages and avoids amounts/thresholds; next review 2026-07-29 if any claim is strengthened.
 - Wohnbeihilfe / MA 50, U25 / AMS / MA 40, KIJA, Wohnberatung, FSW, NEBA, Ausbildung bis 18 and waff: public page uses official links and cautious routing language; next review per table in `index.html`.
+- Wien appointment-prep cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA: public page uses official links and cautious preparation language only; reviewed 2026-04-29; next review 2026-07-29.
 - Contact directory risk: current public page avoids copied non-emergency phone/address/opening-hour blocks. Keep this default unless contact details are freshly checked and logged.
 - waff age range: public page does not state `18-25`; source log notes waff's visible youth job-offensive wording is `18-24`.
 

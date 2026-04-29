@@ -31,6 +31,7 @@ Last updated: 2026-04-29
 - A rendered mobile/accessibility hardening pass was completed on 2026-04-29, adding table captions, keyboard-focusable wide table regions, breakpoint-based heading sizes instead of viewport-relative font sizing, and checker guardrails for table captions and viewport font-size regressions.
 - A safe post-MVP browser/mobile/accessibility QA pass was completed on 2026-04-29 with Playwright/Chromium against `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths. It fixed a 320 px checklist overflow, button hover contrast, and mobile keyboard-focus visibility.
 - A human factual review packet was prepared on 2026-04-29 at `research/human-review-packet-2026-04-29.md`, grouping high-risk Wien MVP claims for owner review before broad outreach. No public factual content was changed.
+- A Wien appointment-prep card pass was completed on 2026-04-29, adding five provider-specific static cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA using existing official links and cautious preparation wording.
 
 ## Morning Review 2026-04-29
 
@@ -62,7 +63,7 @@ Last updated: 2026-04-29
 
 ### Next 3 Recommended Tasks
 
-1. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, and legal-background wording.
+1. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, the new Wien appointment-prep cards, and legal-background wording.
 2. Run a dedicated axe/assistive-technology accessibility pass on `index.html` and `quellen.html`; Playwright/Chromium browser/mobile QA now passes, but automated axe and human assistive-tech checks are still stronger for accessibility confidence.
 3. Decide verified operator/contact/impressum wording, then add it carefully to the public site and structured data only after the details are confirmed.
 
@@ -93,6 +94,31 @@ Last updated: 2026-04-29
 ### Next Recommended Task
 
 Run a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, focusing first on crisis, housing, money, contacts, and legal-background wording.
+
+## Wien Appointment Cards 2026-04-29
+
+### What Changed
+
+- Added a new public `Wien Termin-Karten` section to `index.html`.
+- Added five provider-specific appointment-prep cards:
+  - Care Leaver Beratung / MA 11
+  - U25 / Geld / soziale Unterstützung
+  - Wohnbeihilfe / MA 50
+  - Wohnkrise / FSW Wohnungslosenhilfe
+  - KIJA / Beschwerde / Vertrauensperson
+- Each card uses existing official source-log links and includes only preparation fields: official page to open, what to prepare, questions to ask, what to ask for in writing, the official-page decision warning, reviewed date, and next review date.
+- Updated `quellen.html` with a public review-table row and changelog note for the new cards.
+- Updated `research/source-log.md` to log the public factual wording change without adding new source entries.
+- Extended `scripts/check-site.py` so future checks require the five appointment cards, required labels, official-page warning, and review dates.
+
+### Content Safety
+
+- No phone numbers, emails, addresses, opening hours, benefit amounts, thresholds, legal deadlines, eligibility promises, appointment promises, housing promises, or service promises were added.
+- The cards do not summarize legal rights or decide benefits/housing/service access; they route readers back to the official page and responsible office.
+
+### Next Recommended Task
+
+Include the new appointment-prep cards in the next human factual review before broad outreach.
 
 ## Human Review Packet 2026-04-29
 

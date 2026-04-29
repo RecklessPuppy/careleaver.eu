@@ -94,6 +94,24 @@ FORBIDDEN_JSONLD_KEYS = {
     "telephone",
 }
 
+EXPECTED_APPOINTMENT_CARD_IDS = [
+    "termin-care-ma11",
+    "termin-u25",
+    "termin-wohnbeihilfe",
+    "termin-fsw-wohnungslosenhilfe",
+    "termin-kija",
+]
+
+REQUIRED_APPOINTMENT_CARD_LABELS = [
+    "Offizielle Seite öffnen",
+    "Was vorbereiten",
+    "Fragen stellen",
+    "Das schriftlich erbitten",
+    "Nicht für Entscheidungen auf diese Website verlassen",
+    "Geprüft",
+    "Nächste Prüfung",
+]
+
 
 @dataclass(frozen=True)
 class ReviewDate:
@@ -702,6 +720,7 @@ def check_index_guardrails(errors: list[str]) -> None:
         'id="schnelle-hilfe"',
         'id="was-brauchst-du"',
         'id="h-kleiner-schritt"',
+        'id="termin-karten"',
         'id="quellen"',
         "2026-04-29",
         "2026-07-29",
@@ -723,6 +742,36 @@ def check_index_guardrails(errors: list[str]) -> None:
 
     if re.search(r"font-size\s*:[^;]*(?:vw|vh|vmin|vmax)", index, flags=re.IGNORECASE):
         errors.append("index.html: font-size should not use viewport-relative units")
+
+    check_appointment_cards(index, errors)
+
+
+def check_appointment_cards(index: str, errors: list[str]) -> None:
+    card_count = index.count('class="card appointment-card"')
+    if card_count != len(EXPECTED_APPOINTMENT_CARD_IDS):
+        errors.append(
+            "index.html: expected "
+            f"{len(EXPECTED_APPOINTMENT_CARD_IDS)} appointment cards, found {card_count}"
+        )
+
+    for card_id in EXPECTED_APPOINTMENT_CARD_IDS:
+        pattern = re.compile(
+            r'<article class="card appointment-card" id="' + re.escape(card_id) + r'">(.*?)</article>',
+            flags=re.DOTALL,
+        )
+        match = pattern.search(index)
+        if not match:
+            errors.append(f"index.html: missing appointment card #{card_id}")
+            continue
+
+        card = match.group(1)
+        for label in REQUIRED_APPOINTMENT_CARD_LABELS:
+            if label not in card:
+                errors.append(f"index.html: appointment card #{card_id} missing label: {label}")
+        if "Prüfe die offizielle Seite und frage die zuständige Stelle." not in card:
+            errors.append(f"index.html: appointment card #{card_id} missing official-page decision warning")
+        if "2026-04-29" not in card or "2026-07-29" not in card:
+            errors.append(f"index.html: appointment card #{card_id} missing review dates")
 
 
 def check_sources_page_guardrails(errors: list[str]) -> None:
