@@ -7,6 +7,7 @@
     <meta name="description" content="Praktische Schritte, Vorlagen und offizielle Links fuer Care Leaver in Wien: Wohnen, Geld, Jugendhilfe, Termine, Dokumente, Krise und Rechte.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://careleaver.eu/">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23114b5f'/%3E%3Cpath d='M18 35c0-9 6-16 14-16s14 7 14 16v8H18z' fill='%23ffffff'/%3E%3Ccircle cx='32' cy='24' r='8' fill='%23e8f5ef'/%3E%3C/svg%3E">
     <meta property="og:title" content="Care Leaver Wien: Hilfe nach der Jugendhilfe">
     <meta property="og:description" content="Wien-first Orientierungshilfe mit Checklisten, Vorlagen und offiziellen Quellen fuer junge Menschen nach der Kinder- und Jugendhilfe.">
     <meta property="og:type" content="website">
@@ -37,6 +38,7 @@
             --soft-red: #fff0f0;
             --soft-gold: #fff7df;
             --shadow: 0 8px 24px rgba(24, 33, 43, .08);
+            --crisis-bar-height: 84px;
         }
 
         * {
@@ -248,7 +250,7 @@
 
         nav {
             position: sticky;
-            top: 84px;
+            top: var(--crisis-bar-height);
             z-index: 15;
             background: rgba(255,255,255,.96);
             border-bottom: 1px solid var(--line);
@@ -612,7 +614,7 @@
 
         @media (max-width: 720px) {
             nav {
-                top: 132px;
+                position: static;
             }
         }
 
@@ -703,6 +705,7 @@
                 <a class="pill" href="tel:144">144 <small>Rettung</small></a>
                 <a class="pill" href="tel:147">147 <small>Rat auf Draht</small></a>
                 <a class="pill" href="tel:+43131330">01 31330 <small>PSD Wien</small></a>
+                <a class="pill" href="https://www.bmi.gv.at/notrufnummern/" target="_blank" rel="noopener noreferrer">DEC112/SMS <small>BMI</small></a>
             </div>
         </div>
     </aside>
@@ -1050,11 +1053,11 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Bereich</th>
-                                <th>Hauptquellen</th>
-                                <th>Geprüft</th>
-                                <th>Nächste Prüfung</th>
-                                <th>Hinweis</th>
+                                <th scope="col">Bereich</th>
+                                <th scope="col">Hauptquellen</th>
+                                <th scope="col">Geprüft</th>
+                                <th scope="col">Nächste Prüfung</th>
+                                <th scope="col">Hinweis</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1284,6 +1287,12 @@
             });
         }
 
+        function updateStickyOffsets() {
+            const crisisBar = document.querySelector(".crisis-bar");
+            if (!crisisBar) return;
+            document.documentElement.style.setProperty("--crisis-bar-height", `${Math.ceil(crisisBar.getBoundingClientRect().height)}px`);
+        }
+
         function bindActions() {
             document.querySelectorAll("[data-action='print-page']").forEach((button) => {
                 button.addEventListener("click", () => window.print());
@@ -1309,8 +1318,10 @@
             bindActions();
             loadChecks();
             loadDraft();
+            updateStickyOffsets();
             highlightCurrentNav();
         });
+        window.addEventListener("resize", updateStickyOffsets);
         window.addEventListener("scroll", highlightCurrentNav, { passive: true });
     </script>
 </body>

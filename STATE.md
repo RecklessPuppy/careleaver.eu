@@ -16,6 +16,7 @@ Last updated: 2026-04-29
 - A research swarm was completed on 2026-04-29 to decide the product direction before public content changes.
 - A content architecture pass was completed on 2026-04-29 to turn the research into reviewable page/template drafts.
 - A public Wien-first MVP pass was completed on 2026-04-29.
+- A focused safety/fact/link/mobile QA pass was completed on 2026-04-29 and logged in `research/qa-report.md`.
 
 ## What Was Added In This Setup Pass
 
@@ -58,6 +59,16 @@ Last updated: 2026-04-29
 - Improved privacy wording and localStorage behavior: checkboxes save locally; free-text template drafts save only after an explicit user action.
 - Added `robots.txt` and `sitemap.xml`.
 
+## What Was Added In The QA Pass
+
+- Added `research/qa-report.md` with the safety, link, fact, mobile, accessibility, privacy, tone, source, and review-date findings.
+- Rechecked all unique external links in `index.html`; all returned HTTP 200 on 2026-04-29.
+- Rechecked key official sources for crisis, Wien Care Leaver counselling, MA 11, U25, housing, money, education/work, KIJA, and WKJHG legal background.
+- Added a visible BMI source pill for DEC112/SMS emergency information in the public crisis area.
+- Fixed sticky navigation behavior so desktop offset follows the real crisis-bar height and mobile navigation stays static instead of covering content.
+- Added table column scopes and an inline favicon.
+- Updated `research/source-log.md` to record that the QA pass happened and to replace the old "still needs claim-by-claim audit" note.
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -76,7 +87,7 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 
 ## Known Risks / Things To Review
 
-- The public page is safer and source-linked, but still needs a second human/agent factual QA before broad outreach.
+- The public page is safer and source-linked, and a focused Codex QA pass is complete. A human factual review is still recommended before broad outreach because crisis, housing, benefits, and child/youth welfare routing are high-stakes.
 - Verified operator/contact/impressum details still need a user decision before being published.
 - Bundesland content outside Wien is intentionally incomplete/beta.
 - `careleaver.eu` may be confused with Care Leaver Oesterreich / `careleaver.at`. Add non-affiliation wording unless collaboration is agreed.
@@ -84,14 +95,15 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 - The public page links to OBS for ORF-related exemption/support checks and the exact City of Vienna residence-registration page.
 - The old waff 18-25 wording was removed; current page links to waff and warns to verify waff age ranges directly there.
 - localStorage still exists for checklist state and opt-in template drafts; shared-device risk is disclosed and deletion is available.
+- Public review dates are present, but crisis, money, housing, and contact routes must be reviewed again by 2026-07-29.
 
 ## Next Recommended Action
 
-Run a focused fact-check and UX QA pass on the new public MVP before broad outreach.
+Resolve verified operator/contact/impressum details and get a human factual review before broad outreach.
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `ROADMAP.md`, `content/architecture.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Do a factual QA pass on the new Wien-first public MVP: check each source note and external link, verify crisis/contact wording, review accessibility/mobile/print behavior, and decide whether verified operator/contact/impressum details can be published. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `STATE.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Resolve verified operator/contact/impressum details if the user provides them, then do a short human-facing pre-outreach review. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

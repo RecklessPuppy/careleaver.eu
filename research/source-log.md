@@ -4,9 +4,11 @@ Last updated: 2026-04-29
 
 This file tracks factual sources for `careleaver.eu`.
 
-Important: the 2026-04-29 research swarm identified strong source anchors, but the current public page still needs a claim-by-claim audit before it is treated as fully verified.
+Important: the 2026-04-29 research swarm identified strong source anchors. The public page received a focused safety/fact/link QA pass on 2026-04-29; high-risk claims are still maintained on short review cycles and unresolved operator/impressum questions remain open.
 
-Public MVP note, 2026-04-29: `index.html` was rebuilt using the source anchors already listed below. The public page now prefers official contact pages over copied contact blocks and shows source/review dates by claim group. A second QA pass is still recommended before broad outreach.
+Public MVP note, 2026-04-29: `index.html` was rebuilt using the source anchors already listed below. The public page now prefers official contact pages over copied contact blocks and shows source/review dates by claim group.
+
+QA note, 2026-04-29: External links in `index.html` returned HTTP 200 during the QA pass. Public wording stayed cautious: no benefit amounts, no legal deadline advice, no copied opening-hour/contact directory beyond crisis phone routes. A visible BMI source pill was added for DEC112/SMS emergency information.
 
 ## How To Add A Source
 
@@ -23,23 +25,19 @@ Public MVP note, 2026-04-29: `index.html` was rebuilt using the source anchors a
 - Notes:
 ```
 
-## Priority Claims To Source First
+## High-Risk Claims To Keep Reviewing
 
-- Emergency and crisis numbers in the sticky crisis bar.
-- PSD Wien 24/7 crisis claim.
-- Rat auf Draht 147 description.
-- DEC112 app and 0800 133 133 text/fax emergency information.
-- Wien Care Leaver counselling: eligibility, age, hours, providers, and contact route.
-- Wien aftercare / `§ 33 WKJHG` claim and age limit.
-- Meldezettel 3-day registration deadline.
-- Basiskonto annual maximum fee amounts.
-- Family allowance and health-insurance age statements.
-- Wohnbeihilfe / MA 50 contact and process links.
-- U25 / AMS / MA 40 contact and eligibility framing.
-- ORF contribution exemption/reduction description.
-- KIJA Wien contact details.
-- All phone numbers, addresses, opening hours, and emails in the Wien contact list.
-- waff age range: current public page says `18-25`, but researched waff source appears to say `18-24`.
+- Emergency and crisis numbers in the sticky crisis bar: reviewed 2026-04-29; next review 2026-07-29.
+- PSD Wien 24/7 crisis claim: reviewed 2026-04-29; next review 2026-07-29.
+- Rat auf Draht 147 description: reviewed 2026-04-29; next review 2026-07-29.
+- DEC112 app and 0800 133 133 text/SMS emergency information: reviewed 2026-04-29; next review 2026-07-29.
+- Wien Care Leaver counselling: public page links to the official Stadt Wien page and states only the sourced age/cost framing; next review 2026-07-29.
+- Wien aftercare / `§ 33 WKJHG`: public page links to RIS only as legal background and does not summarize eligibility; next legal review 2026-10-29.
+- Meldezettel: public page links to the exact Stadt Wien residence-registration page and avoids unsourced detail beyond "Frist prüfen"; next review 2026-07-29.
+- Basiskonto, family allowance, health insurance, ORF/OBS and other money/benefit topics: public page links to official pages and avoids amounts/thresholds; next review 2026-07-29 if any claim is strengthened.
+- Wohnbeihilfe / MA 50, U25 / AMS / MA 40, KIJA, Wohnberatung, FSW, NEBA, Ausbildung bis 18 and waff: public page uses official links and cautious routing language; next review per table in `index.html`.
+- Contact directory risk: current public page avoids copied non-emergency phone/address/opening-hour blocks. Keep this default unless contact details are freshly checked and logged.
+- waff age range: public page does not state `18-25`; source log notes waff's visible youth job-offensive wording is `18-24`.
 
 ## Source Entries
 
