@@ -39,6 +39,37 @@ Last updated: 2026-04-29
 - A brief/deadline preparation route pass was completed on 2026-04-29, adding a safe "Brief, Bescheid oder mögliche Frist" path to the homepage router, no-JavaScript fallback, Next-Step Finder, and documents section.
 - A glossary reading-aid pass was completed on 2026-04-29, adding cautious explanations for common Amtswörter and checker guardrails against removing the safety framing.
 - A support-person template pass was completed on 2026-04-29, adding a cautious copyable "Vertrauensperson fragen" script and checker guardrails.
+- An education/work navigation pass was completed on 2026-04-29, adding a cautious "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, Next-Step Finder, and checker guardrails.
+
+## Education / Work Navigation Pass 2026-04-29
+
+### What Changed
+
+- Added a dedicated "Schule, Lehre oder Arbeit" card to the public "Was brauchst du gerade?" router.
+- Added the same route to the Next-Step Finder and no-JavaScript fallback.
+- Added an `#arbeit` anchor to the existing Wien education/work card so users can jump directly from the router.
+- Added a short public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the route, finder option, anchor, and source-page changelog note remain present.
+- Updated `research/source-log.md` and `research/qa-report.md` with safety notes for the change.
+- No eligibility rule, age range, benefit amount, job/training promise, deadline, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- The route is intentionally preparation-only. Users still need the official education/work routes to decide whether a service fits their situation.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Support-Person Template Pass 2026-04-29
 

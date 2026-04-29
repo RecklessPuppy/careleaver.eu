@@ -109,6 +109,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the support-person script and cautious wording remain present.
 - No legal right to accompaniment, service promise, eligibility rule, deadline, benefit amount, contact detail, backend, analytics, form submission, or server-side data collection was added.
 
+## Arbeits-/Ausbildungsroute Addendum 2026-04-29
+
+- Added a dedicated "Schule, Lehre oder Arbeit" route to the public topic router, no-JavaScript fallback, and Next-Step Finder.
+- The route points users toward the existing official education/work source group and asks them to prepare questions and documents for the next realistic step.
+- Extended `scripts/check-site.py` so the route, finder option, anchor, and source-page changelog note remain present.
+- No eligibility rule, age range, benefit amount, job/training promise, deadline, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/
