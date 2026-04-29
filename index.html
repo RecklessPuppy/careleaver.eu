@@ -12,6 +12,8 @@
     <meta property="og:description" content="Wien-first Orientierungshilfe mit Checklisten, Vorlagen und offiziellen Quellen fuer junge Menschen nach der Kinder- und Jugendhilfe.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://careleaver.eu/">
+    <meta property="og:locale" content="de_AT">
+    <meta name="twitter:card" content="summary">
     <meta name="theme-color" content="#114b5f">
 
     <!--
@@ -51,7 +53,9 @@
 
         body {
             margin: 0;
+            color: #18212b;
             color: var(--ink);
+            background: #f6f8fb;
             background: var(--bg);
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             font-size: 16px;
@@ -59,11 +63,13 @@
         }
 
         a {
+            color: #114b5f;
             color: var(--blue);
             text-underline-offset: .18em;
         }
 
         a:hover {
+            color: #9b2c2c;
             color: var(--red);
         }
 
@@ -88,6 +94,7 @@
             border: 0;
             border-radius: 8px;
             padding: .72rem 1rem;
+            background: #114b5f;
             background: var(--blue);
             color: #fff;
             font-weight: 700;
@@ -98,10 +105,13 @@
         button.secondary,
         .button.secondary {
             background: #e7edf3;
+            color: #18212b;
             color: var(--ink);
         }
 
-        button.danger {
+        button.danger,
+        .button.danger {
+            background: #9b2c2c;
             background: var(--red);
         }
 
@@ -120,7 +130,9 @@
             left: 1rem;
             z-index: 100;
             background: #fff;
+            color: #18212b;
             color: var(--ink);
+            border: 2px solid #114b5f;
             border: 2px solid var(--blue);
             border-radius: 8px;
             padding: .6rem .8rem;
@@ -136,12 +148,15 @@
         }
 
         header {
+            background: #ffffff;
             background: var(--paper);
+            border-bottom: 1px solid #d8e0e8;
             border-bottom: 1px solid var(--line);
         }
 
         .topline {
             padding: .7rem 0;
+            background: #114b5f;
             background: var(--blue);
             color: #fff;
             font-size: .94rem;
@@ -161,6 +176,7 @@
 
         .eyebrow {
             margin: 0 0 .5rem;
+            color: #0b6b57;
             color: var(--green);
             font-weight: 800;
             text-transform: uppercase;
@@ -198,6 +214,7 @@
         .scope-note {
             margin-top: 1rem;
             max-width: 850px;
+            color: #586575;
             color: var(--muted);
             font-size: .96rem;
         }
@@ -206,6 +223,7 @@
             position: sticky;
             top: 0;
             z-index: 20;
+            background: #fff0f0;
             background: var(--soft-red);
             border-top: 1px solid #f0c0c0;
             border-bottom: 1px solid #e4a7a7;
@@ -219,6 +237,7 @@
 
         .crisis-title {
             margin: 0;
+            color: #9b2c2c;
             color: var(--red);
             font-weight: 800;
         }
@@ -233,10 +252,12 @@
             display: inline-flex;
             align-items: center;
             min-height: 36px;
+            border: 1px solid #d8e0e8;
             border: 1px solid var(--line);
             border-radius: 999px;
             padding: .3rem .65rem;
             background: #fff;
+            color: #18212b;
             color: var(--ink);
             text-decoration: none;
             font-weight: 700;
@@ -244,6 +265,7 @@
 
         .pill small {
             margin-left: .35rem;
+            color: #586575;
             color: var(--muted);
             font-weight: 600;
         }
@@ -252,7 +274,9 @@
             position: sticky;
             top: var(--crisis-bar-height);
             z-index: 15;
+            background: #ffffff;
             background: rgba(255,255,255,.96);
+            border-bottom: 1px solid #d8e0e8;
             border-bottom: 1px solid var(--line);
             backdrop-filter: blur(10px);
         }
@@ -271,6 +295,7 @@
             white-space: nowrap;
             border-radius: 999px;
             padding: .45rem .72rem;
+            color: #18212b;
             color: var(--ink);
             text-decoration: none;
             font-weight: 700;
@@ -278,12 +303,16 @@
         }
 
         nav a:hover,
-        nav a.active {
+        nav a.active,
+        nav a[aria-current="location"] {
+            background: #e9f3f7;
             background: var(--soft-blue);
+            color: #114b5f;
             color: var(--blue);
         }
 
         main {
+            background: #f6f8fb;
             background: var(--bg);
         }
 
@@ -318,6 +347,7 @@
         }
 
         .router-grid,
+        .urgent-grid,
         .card-grid,
         .source-grid {
             display: grid;
@@ -338,10 +368,42 @@
             min-height: 150px;
         }
 
+        .urgent-card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--red);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+
         .router-card p,
+        .urgent-card p,
         .card p,
         .source-card p {
             margin: .45rem 0 0;
+        }
+
+        .safe-use {
+            margin: 1rem 0 1.2rem;
+            padding: 1rem;
+            border: 1px solid #c6d7e2;
+            border-left: 4px solid var(--blue);
+            border-radius: 8px;
+            background: #f8fbfd;
+        }
+
+        .safe-use h3 {
+            margin-bottom: .35rem;
+        }
+
+        .safe-use ul {
+            margin: .5rem 0 0;
+            padding-left: 1.15rem;
+        }
+
+        .safe-use li {
+            margin: .3rem 0;
         }
 
         .status {
@@ -588,6 +650,7 @@
                 align-items: center;
             }
 
+            .urgent-grid,
             .router-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -603,6 +666,10 @@
         }
 
         @media (min-width: 1020px) {
+            .urgent-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
             .router-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -688,6 +755,7 @@
             <h1>Hilfe nach der Jugendhilfe</h1>
             <p class="lead">Praktische Schritte, Vorlagen und offizielle Links für junge Menschen, die in Wien aus der Kinder- und Jugendhilfe kommen oder schon ausgezogen sind.</p>
             <div class="hero-actions" aria-label="Schnellaktionen">
+                <a class="button danger" href="#schnelle-hilfe">Schnelle Hilfe</a>
                 <a class="button" href="#was-brauchst-du">Was brauchst du gerade?</a>
                 <a class="button secondary" href="#checkliste">18-24 Checkliste</a>
                 <button class="secondary" type="button" data-action="print-page">Drucken / PDF</button>
@@ -714,6 +782,7 @@
         <div class="wrap">
             <ul>
                 <li><a href="#was-brauchst-du">Start</a></li>
+                <li><a href="#schnelle-hilfe">Schnelle Hilfe</a></li>
                 <li><a href="#checkliste">18-24</a></li>
                 <li><a href="#wien">Wien</a></li>
                 <li><a href="#vorlagen">Vorlagen</a></li>
@@ -724,11 +793,59 @@
         </div>
     </nav>
 
+    <noscript>
+        <div class="wrap">
+            <p class="source-note">Die Inhalte und Links funktionieren auch ohne JavaScript. Nur Häkchen speichern, Kopieren per Knopf und Druckhilfen sind dann eingeschränkt.</p>
+        </div>
+    </noscript>
+
     <main id="main">
+        <section class="band" id="schnelle-hilfe" aria-labelledby="h-schnelle-hilfe">
+            <div class="wrap">
+                <h2 id="h-schnelle-hilfe">Schnelle Hilfe in Wien</h2>
+                <p class="section-intro">Wenn etwas heute gefährlich oder nicht sicher ist, warte nicht auf perfekte Unterlagen. Nutze eine direkte Hilferoute und bitte eine vertraute Person, mit dir mitzulesen oder mitzutelefonieren.</p>
+
+                <div class="urgent-grid">
+                    <article class="urgent-card">
+                        <h3>Unmittelbare Gefahr</h3>
+                        <p>Wenn eine Person jetzt gefährdet ist: Notruf nutzen. Diese Website ist kein Notruf.</p>
+                        <p><a href="tel:112">112</a> · <a href="tel:133">133 Polizei</a> · <a href="tel:144">144 Rettung</a></p>
+                    </article>
+                    <article class="urgent-card">
+                        <h3>Akute Krise oder Reden jetzt</h3>
+                        <p>In Wien ist der PSD Wien für akute psychische Krisen eine direkte Route. Für Kinder und Jugendliche gibt es Rat auf Draht.</p>
+                        <p><a href="tel:+43131330">PSD Wien 01 31330</a> · <a href="tel:147">147</a></p>
+                    </article>
+                    <article class="urgent-card">
+                        <h3>Heute keine sichere Unterkunft</h3>
+                        <p>Wenn du heute nicht sicher schlafen kannst oder deine Unterkunft verlierst: als dringend behandeln und offizielle Wohnungslosenhilfe prüfen. Keine Stelle kann hier über diese Website einen Platz zusagen.</p>
+                        <p><a href="https://www.fsw.at/p/wohnungslosigkeit" target="_blank" rel="noopener noreferrer">FSW Wohnungslosenhilfe öffnen</a></p>
+                    </article>
+                    <article class="urgent-card">
+                        <h3>Textbasierter Notruf</h3>
+                        <p>Das BMI beschreibt DEC112 und SMS-Notruf für Menschen, die nicht gut telefonieren können. Aktuelle Nutzung direkt dort prüfen.</p>
+                        <p><a href="https://www.bmi.gv.at/notrufnummern/" target="_blank" rel="noopener noreferrer">BMI Notrufnummern öffnen</a></p>
+                    </article>
+                </div>
+
+                <p class="source-note"><strong>Quellen:</strong> <a href="https://www.bmi.gv.at/notrufnummern/" target="_blank" rel="noopener noreferrer">BMI Notrufnummern</a>, <a href="https://www.rataufdraht.at/telefonberatung" target="_blank" rel="noopener noreferrer">Rat auf Draht</a>, <a href="https://psd-wien.at/einrichtung/sozialpsychiatrischer-notdienst" target="_blank" rel="noopener noreferrer">PSD Wien</a>, <a href="https://www.fsw.at/p/wohnungslosigkeit" target="_blank" rel="noopener noreferrer">FSW Wohnungslosenhilfe</a>. Geprüft am 2026-04-29. Nächste Prüfung: 2026-07-29.</p>
+            </div>
+        </section>
+
         <section class="band" id="was-brauchst-du" aria-labelledby="h-was-brauchst-du">
             <div class="wrap">
                 <h2 id="h-was-brauchst-du">Was brauchst du gerade?</h2>
                 <p class="section-intro">Wähle ein Thema. Du bekommst keine Entscheidung über Ansprüche, sondern sichere nächste Schritte und offizielle Seiten, auf denen du aktuelle Kontaktwege, Voraussetzungen und Unterlagen prüfen kannst.</p>
+
+                <aside class="safe-use" aria-labelledby="h-sicher-nutzen">
+                    <h3 id="h-sicher-nutzen">So nutzt du diese Seite sicher</h3>
+                    <ul>
+                        <li>Bei Gefahr oder akuter Krise zuerst die Hilferouten oben nutzen.</li>
+                        <li>Bei Geld, Wohnen, Jugendhilfe und Recht entscheidet immer die zuständige Stelle, nicht diese Website.</li>
+                        <li>Telefonnummern, Öffnungszeiten, Voraussetzungen, Beträge und Fristen direkt auf den verlinkten offiziellen Seiten prüfen.</li>
+                        <li>Auf gemeinsam genutzten Geräten lokale Daten löschen, wenn du Häkchen oder Entwürfe speicherst.</li>
+                    </ul>
+                </aside>
 
                 <div class="router-grid">
                     <article class="router-card">
@@ -790,7 +907,7 @@
         <section class="band" id="checkliste" aria-labelledby="h-checkliste">
             <div class="wrap">
                 <h2 id="h-checkliste">18-24 Checkliste</h2>
-                <p class="section-intro">Diese Liste ist keine Pflichtliste und kein Anspruchs-Check. Sie hilft dir, nichts Wichtiges zu vergessen und bei Terminen bessere Fragen zu stellen.</p>
+                <p class="section-intro">Diese Liste ist keine Pflichtliste und entscheidet nichts über Ansprüche. Sie hilft dir, nichts Wichtiges zu vergessen und bei Terminen bessere Fragen zu stellen.</p>
 
                 <div class="privacy-note">
                     <strong>Privat auf gemeinsam genutzten Geräten:</strong> Abgehakte Punkte werden nur in diesem Browser gespeichert. Freitext wird nicht automatisch gespeichert. Mit „Lokale Daten löschen“ entfernst du gespeicherte Häkchen und freiwillig gespeicherte Entwürfe.
@@ -958,6 +1075,38 @@
                 <p class="section-intro">Diese Texte helfen beim Vorbereiten. Schreibe in normale E-Mails nur so viele private Details wie nötig. Wenn es akut gefährlich ist, warte nicht auf eine E-Mail-Antwort.</p>
 
                 <div class="template-grid">
+                    <article class="card" id="one-page-plan">
+                        <h3>Ein-Seiten-Plan für den nächsten Termin</h3>
+                        <p>Fülle nur aus, was du wirklich brauchst. Der Plan ist zum Mitnehmen, Vorlesen oder gemeinsamen Sortieren gedacht und ersetzt keine Beratung.</p>
+                        <div class="template-field">
+                            <label for="plan-topic">Mein wichtigstes Thema heute</label>
+                            <input id="plan-topic" autocomplete="off">
+                        </div>
+                        <div class="template-field">
+                            <label for="plan-contact">Welche Stelle oder Person kontaktiere ich als Nächstes?</label>
+                            <input id="plan-contact" autocomplete="off">
+                        </div>
+                        <div class="template-field">
+                            <label for="plan-need">Was brauche ich konkret?</label>
+                            <textarea id="plan-need"></textarea>
+                        </div>
+                        <div class="template-field">
+                            <label for="plan-docs">Welche Unterlagen habe ich schon, welche fehlen?</label>
+                            <textarea id="plan-docs"></textarea>
+                        </div>
+                        <div class="template-field">
+                            <label for="plan-support">Wer kann mitkommen, mitlesen oder nachfragen?</label>
+                            <input id="plan-support" autocomplete="off">
+                        </div>
+                        <div class="template-field">
+                            <label for="plan-written">Was möchte ich am Ende schriftlich festhalten lassen?</label>
+                            <textarea id="plan-written"></textarea>
+                        </div>
+                        <div class="actions">
+                            <button type="button" data-action="print-plan">Plan drucken</button>
+                        </div>
+                    </article>
+
                     <article class="card">
                         <h3>Termin vorbereiten</h3>
                         <div class="template-field">
@@ -1117,7 +1266,6 @@
             <h2>Hinweise</h2>
             <p>Diese Website ist eine unabhängige Orientierungshilfe. Sie ersetzt keine Rechtsberatung, keine medizinische oder therapeutische Hilfe und keinen Notruf. Sie entscheidet nicht, ob du eine Leistung bekommst.</p>
             <p>Es werden keine Daten an einen Server geschickt, kein Tracking eingebaut und keine Formulare übertragen. Checklisten und freiwillig gespeicherte Entwürfe bleiben nur im Browser über localStorage und können über „Lokale Daten löschen“ entfernt werden.</p>
-            <p>Kontakt und Impressum: Die alten Platzhalter wurden entfernt. Verifizierte Betreiber- und Kontaktangaben sollen ergänzt werden, bevor die Seite breit beworben wird.</p>
             <p>Letzte öffentliche Inhaltsprüfung dieser Version: 2026-04-29. Quelle für die Projektpflege: <code>research/source-log.md</code>, <code>SOURCE_POLICY.md</code> und <code>CONTENT_SAFETY.md</code>.</p>
         </div>
     </footer>
@@ -1243,6 +1391,10 @@
             const element = document.getElementById(id);
             if (!element) return;
             const printWindow = window.open("", "_blank");
+            if (!printWindow) {
+                alert("Das Druckfenster wurde blockiert. Du kannst die Seite auch über den Browser drucken.");
+                return;
+            }
             printWindow.document.write(`
                 <!doctype html>
                 <html lang="de-AT">
@@ -1283,7 +1435,13 @@
                 if (window.scrollY >= section.offsetTop - 170) activeId = section.id;
             });
             links.forEach((link) => {
-                link.classList.toggle("active", link.getAttribute("href") === "#" + activeId);
+                const isActive = link.getAttribute("href") === "#" + activeId;
+                link.classList.toggle("active", isActive);
+                if (isActive) {
+                    link.setAttribute("aria-current", "location");
+                } else {
+                    link.removeAttribute("aria-current");
+                }
             });
         }
 
@@ -1305,6 +1463,9 @@
             });
             document.querySelectorAll("[data-action='print-templates']").forEach((button) => {
                 button.addEventListener("click", () => printSection("vorlagen"));
+            });
+            document.querySelectorAll("[data-action='print-plan']").forEach((button) => {
+                button.addEventListener("click", () => printSection("one-page-plan"));
             });
             document.querySelectorAll("[data-action='save-draft']").forEach((button) => {
                 button.addEventListener("click", saveDraft);

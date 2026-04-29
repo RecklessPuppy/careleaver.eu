@@ -10,7 +10,6 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Should Care Leaver Oesterreich be asked to review or approve any referral wording before outreach?
 - Before broad outreach, should a human fact reviewer sign off on the 2026-04-29 QA findings in `research/qa-report.md`?
 - Should public operator/impressum resolution happen before search indexing is encouraged or partner outreach starts?
-- Should the current crisis strip stay compact, or should a separate fuller "Schnelle Hilfe" page/section be created for violence, homelessness, mental-health crisis, and text-based emergency routes?
 - Should any benefit/legal topics remain link-only permanently, even after source checks, to avoid accidental advice?
 
 ## Medium Priority
@@ -19,7 +18,6 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Should each section show a visible "last checked" date after the source audit?
 - Should localStorage autosave be further reduced, for example checklist-only with no saved drafts, before broad outreach?
 - What exact shared-device privacy warning should appear before tools that store appointment/legal details locally?
-- Should the site include a short "So nutzt du diese Seite sicher" note near the top?
 - Which Bundesland should be expanded after Wien, and only after which official source set exists?
 - Should Wien source sections show review dates per claim group: crisis, housing, money, documents, contacts?
 - Should the site include a public changelog for factual updates?
@@ -29,6 +27,8 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 
 - Independence/non-affiliation: public page now says the site is independent and does not claim partnership with Care Leaver Österreich.
 - Crisis-bar contacts: 112, 133, 144, 147, PSD Wien, DEC112 and SMS 0800 133 133 were checked against BMI/Rat auf Draht/PSD sources on 2026-04-29; next review 2026-07-29.
+- Crisis section depth: a fuller "Schnelle Hilfe in Wien" section was added to the public page on 2026-04-29 using already logged BMI/Rat auf Draht/PSD/FSW sources.
+- Safe-use note: the public page now includes a short "So nutzt du diese Seite sicher" note near the top router.
 - PSD Wien 24/7 wording: sourced from PSD Wien on 2026-04-29; next review 2026-07-29.
 - `§ 33 WKJHG`: public page links RIS as legal background and does not summarize eligibility as an entitlement.
 - Wien contact details: public page avoids copied non-emergency phone/address/opening-hour blocks and uses official contact pages instead.

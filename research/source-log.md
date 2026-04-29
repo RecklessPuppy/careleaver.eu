@@ -10,6 +10,8 @@ Public MVP note, 2026-04-29: `index.html` was rebuilt using the source anchors a
 
 QA note, 2026-04-29: External links in `index.html` returned HTTP 200 during the QA pass. Public wording stayed cautious: no benefit amounts, no legal deadline advice, no copied opening-hour/contact directory beyond crisis phone routes. A visible BMI source pill was added for DEC112/SMS emergency information.
 
+Immediate sprint note, 2026-04-29: `index.html` added a fuller public "Schnelle Hilfe in Wien" section using already logged BMI, Rat auf Draht, PSD Wien, and FSW source anchors. No new source, benefit amount, legal deadline, copied opening-hour block, or unsourced contact directory was added.
+
 ## How To Add A Source
 
 ```md

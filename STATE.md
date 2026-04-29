@@ -18,6 +18,7 @@ Last updated: 2026-04-29
 - A public Wien-first MVP pass was completed on 2026-04-29.
 - A focused safety/fact/link/mobile QA pass was completed on 2026-04-29 and logged in `research/qa-report.md`.
 - An overnight autonomous operating setup was added on 2026-04-29, including runbook, prompts, report folder, and lightweight GitHub Actions checks.
+- An immediate overnight implementation sprint was completed on 2026-04-29 before scheduled automation, focused on public usefulness, safe routing, and repeatable QA.
 
 ## What Was Added In This Setup Pass
 
@@ -56,7 +57,7 @@ Last updated: 2026-04-29
 - Added a Bundeslaender beta section that keeps non-Wien regions "in Arbeit" until source checks exist.
 - Added a visible source/review table with reviewed and next-review dates.
 - Replaced the old "Anspruchs-Check" decision framing with a "Naechste-Schritte-Finder".
-- Removed old public placeholder contact/impressum fields; public footer now says verified operator/contact details still need to be added before broad outreach.
+- Removed old public placeholder contact/impressum fields; verified operator/contact details remain an owner decision before broad outreach.
 - Improved privacy wording and localStorage behavior: checkboxes save locally; free-text template drafts save only after an explicit user action.
 - Added `robots.txt` and `sitemap.xml`.
 
@@ -90,6 +91,32 @@ Checks run in this setup pass:
 - public placeholder grep for `index.html`, `robots.txt`, and `sitemap.xml`
 - internal-link check for local HTML anchors
 - YAML parse check for `.github/workflows/site-check.yml`
+
+## What Was Added In The Immediate Overnight Sprint
+
+- Added a fuller public "Schnelle Hilfe in Wien" section before the main router, using already logged BMI, Rat auf Draht, PSD Wien, and FSW source anchors.
+- Added a short "So nutzt du diese Seite sicher" note near "Was brauchst du gerade?" so users see the limits before relying on money, housing, youth-welfare, or rights content.
+- Added a printable "Ein-Seiten-Plan fuer den naechsten Termin" in the templates section.
+- Removed the remaining public footer paragraph that described missing contact/impressum placeholders; the unresolved owner decision stays in `research/open-questions.md` instead of public user content.
+- Added `scripts/check-site.py` and simplified `.github/workflows/site-check.yml` so local and CI checks share the same required-file, `CNAME`, placeholder, internal-link, external-link-safety, and public wording guardrails.
+- Added small SEO/social metadata and critical CSS color fallbacks.
+- Improved navigation state with `aria-current="location"` and added a print-popup fallback message.
+- Updated `research/source-log.md` and `research/open-questions.md` to log the sprint and mark the fuller crisis/safe-use questions as lowered.
+
+Checks run in this sprint:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `wkhtmltoimage` desktop and mobile render smoke checks to `/private/tmp`
+- `sips` image dimension checks for rendered desktop/mobile images
+- `wkhtmltopdf --print-media-type` print smoke check to `/private/tmp`
+- `qpdf --check /private/tmp/careleaver-print.pdf`
+- `pdftotext /private/tmp/careleaver-print.pdf -`
+
+Browser note: the Playwright CLI wrapper hung before output and no local Playwright package was available, so this sprint used static checks plus wkhtml image/PDF smoke checks rather than a modern Chromium interaction test.
 
 ## Current Product Decision
 
@@ -125,7 +152,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a lightweight external-link check script that can run when network is available, improve no-JavaScript/print polish for the templates, or add a public changelog/source-review page. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

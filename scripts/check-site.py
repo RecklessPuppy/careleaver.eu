@@ -1,0 +1,191 @@
+#!/usr/bin/env python3
+"""Static checks for the careleaver.eu GitHub Pages site."""
+
+from __future__ import annotations
+
+import re
+from html.parser import HTMLParser
+from pathlib import Path
+from urllib.parse import urldefrag, urlparse
+
+
+ROOT = Path(".")
+
+REQUIRED_FILES = [
+    "AGENTS.md",
+    "PROJECT_BRIEF.md",
+    "STATE.md",
+    "ROADMAP.md",
+    "SOURCE_POLICY.md",
+    "CONTENT_SAFETY.md",
+    "OPERATING_MODEL.md",
+    "OVERNIGHT_RUNBOOK.md",
+    "index.html",
+    "CNAME",
+    "robots.txt",
+    "sitemap.xml",
+    "research/source-log.md",
+    "research/open-questions.md",
+    "research/qa-report.md",
+]
+
+PUBLIC_FILES = ["index.html", "robots.txt", "sitemap.xml"]
+
+PLACEHOLDER_PATTERNS = [
+    r"lorem ipsum",
+    r"REPLACE_ME",
+    r"your@email",
+    r"example\.com",
+    r"555-555",
+    r"INSERT_",
+    r"TBD_CONTACT",
+    r"Die alten Platzhalter",
+    r"sollen ergänzt werden, bevor",
+]
+
+
+class LinkParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.ids: set[str] = set()
+        self.id_counts: dict[str, int] = {}
+        self.links: list[tuple[str, str, int]] = []
+        self.blank_links_missing_rel: list[tuple[str, int]] = []
+        self._line = 1
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attr_map = {key: value or "" for key, value in attrs}
+        line = self.getpos()[0]
+        element_id = attr_map.get("id")
+        if element_id:
+            self.ids.add(element_id)
+            self.id_counts[element_id] = self.id_counts.get(element_id, 0) + 1
+        href = attr_map.get("href")
+        if href:
+            self.links.append((href, tag, line))
+        if attr_map.get("target") == "_blank":
+            rel = set(attr_map.get("rel", "").split())
+            if not {"noopener", "noreferrer"}.issubset(rel):
+                self.blank_links_missing_rel.append((href or tag, line))
+
+
+def fail(errors: list[str]) -> None:
+    if errors:
+        for error in errors:
+            print(error)
+        raise SystemExit(1)
+
+
+def check_required_files(errors: list[str]) -> None:
+    for name in REQUIRED_FILES:
+        if not (ROOT / name).is_file():
+            errors.append(f"Missing required file: {name}")
+
+    cname = ROOT / "CNAME"
+    if cname.exists() and cname.read_text(encoding="utf-8").strip() != "careleaver.eu":
+        errors.append("CNAME must contain exactly careleaver.eu")
+
+
+def check_public_placeholders(errors: list[str]) -> None:
+    compiled = [re.compile(pattern, re.IGNORECASE) for pattern in PLACEHOLDER_PATTERNS]
+    for name in PUBLIC_FILES:
+        text = (ROOT / name).read_text(encoding="utf-8")
+        for pattern in compiled:
+            if pattern.search(text):
+                errors.append(f"{name}: public placeholder pattern found: {pattern.pattern}")
+
+
+def parse_html_files() -> dict[Path, LinkParser]:
+    parsed: dict[Path, LinkParser] = {}
+    for path in sorted(ROOT.glob("*.html")):
+        parser = LinkParser()
+        parser.feed(path.read_text(encoding="utf-8"))
+        parsed[path] = parser
+    return parsed
+
+
+def check_internal_links(errors: list[str]) -> None:
+    parsed = parse_html_files()
+
+    for path, parser in parsed.items():
+        duplicates = sorted(element_id for element_id, count in parser.id_counts.items() if count > 1)
+        for element_id in duplicates:
+            errors.append(f"{path}: duplicate HTML id found: {element_id}")
+
+        for href, _tag, line in parser.links:
+            parsed_url = urlparse(href)
+            if parsed_url.scheme in {"http", "https", "mailto", "tel", "sms", "data"}:
+                continue
+            if href.startswith("javascript:"):
+                continue
+
+            link_path, fragment = urldefrag(href)
+            if not link_path:
+                target = path
+            elif link_path in {"/", "./"}:
+                target = Path("index.html")
+            else:
+                target = (path.parent / link_path.lstrip("/")).resolve().relative_to(ROOT.resolve())
+
+            target = Path(target)
+            if target.is_dir():
+                target = target / "index.html"
+            if target.suffix == "":
+                target = target.with_suffix(".html")
+
+            if not target.exists():
+                errors.append(f"{path}:{line}: missing internal target {href}")
+                continue
+
+            if fragment:
+                target_parser = parsed.get(target)
+                if target_parser is None and target.suffix == ".html":
+                    target_parser = LinkParser()
+                    target_parser.feed(target.read_text(encoding="utf-8"))
+                    parsed[target] = target_parser
+                if target_parser and fragment not in target_parser.ids:
+                    errors.append(f"{path}:{line}: missing anchor #{fragment} for {href}")
+
+        for href, line in parser.blank_links_missing_rel:
+            errors.append(f"{path}:{line}: target=_blank link missing rel noopener noreferrer: {href}")
+
+
+def check_index_guardrails(errors: list[str]) -> None:
+    index = (ROOT / "index.html").read_text(encoding="utf-8")
+    required_snippets = [
+        '<html lang="de-AT">',
+        '<meta name="description"',
+        '<link rel="canonical" href="https://careleaver.eu/">',
+        'id="schnelle-hilfe"',
+        'id="was-brauchst-du"',
+        'id="quellen"',
+        "2026-04-29",
+        "2026-07-29",
+        "Lokale Daten löschen",
+    ]
+    for snippet in required_snippets:
+        if snippet not in index:
+            errors.append(f"index.html: missing required snippet: {snippet}")
+
+    forbidden_snippets = [
+        "Anspruchs-Check",
+        "18-25",
+        "Diese Seite entscheidet, ob",
+    ]
+    for snippet in forbidden_snippets:
+        if snippet in index:
+            errors.append(f"index.html: forbidden risky wording found: {snippet}")
+
+
+def main() -> None:
+    errors: list[str] = []
+    check_required_files(errors)
+    check_public_placeholders(errors)
+    check_internal_links(errors)
+    check_index_guardrails(errors)
+    fail(errors)
+    print("Site checks OK")
+
+
+if __name__ == "__main__":
+    main()
