@@ -29,6 +29,7 @@ Last updated: 2026-04-29
 - A sitemap/canonical consistency pass was completed on 2026-04-29, extending `scripts/check-site.py` so page canonicals, `sitemap.xml`, and `robots.txt` stay aligned.
 - A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the custom site-check workflow was updated to `actions/checkout@v6` to address its Node.js 20 deprecation warning.
 - A rendered mobile/accessibility hardening pass was completed on 2026-04-29, adding table captions, keyboard-focusable wide table regions, breakpoint-based heading sizes instead of viewport-relative font sizing, and checker guardrails for table captions and viewport font-size regressions.
+- A safe post-MVP browser/mobile/accessibility QA pass was completed on 2026-04-29 with Playwright/Chromium against `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths. It fixed a 320 px checklist overflow, button hover contrast, and mobile keyboard-focus visibility.
 
 ## Morning Review 2026-04-29
 
@@ -55,14 +56,42 @@ Last updated: 2026-04-29
 - A human factual review is still recommended before broad outreach because the public site covers crisis, housing, benefits, health, and child/youth welfare routing.
 - Non-Wien Bundesland content remains intentionally incomplete until official source sets are reviewed.
 - Care Leaver Österreich / `careleaver.at` referral and outreach wording should be reviewed before implying any collaboration.
-- Browser-based accessibility testing is still missing; static checks are useful guardrails but do not replace a real browser/assistive-technology pass.
+- Dedicated axe/assistive-technology testing is still missing; static checks and the 2026-04-29 Playwright browser/mobile pass are useful guardrails but do not replace that final accessibility review.
 - The generated GitHub Pages deployment workflow still shows a Node.js 20 deprecation warning even though the custom site-check workflow was updated. If GitHub does not update the generated workflow automatically, a future task may need an explicit Pages deployment workflow.
 
 ### Next 3 Recommended Tasks
 
-1. Run a full modern-browser/axe accessibility pass on `index.html` and `quellen.html` after Playwright/Chrome launch permissions are working; static and wkhtml rendered smoke checks passed in the meantime.
-2. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, and legal-background wording.
+1. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, and legal-background wording.
+2. Run a dedicated axe/assistive-technology accessibility pass on `index.html` and `quellen.html`; Playwright/Chromium browser/mobile QA now passes, but automated axe and human assistive-tech checks are still stronger for accessibility confidence.
 3. Decide verified operator/contact/impressum wording, then add it carefully to the public site and structured data only after the details are confirmed.
+
+## Browser/Mobile Accessibility Pass 2026-04-29
+
+### What Changed
+
+- Fixed 320 px homepage overflow by allowing checklist copy to shrink and wrap inside its grid column.
+- Fixed link-button hover contrast on `index.html` and `quellen.html`, keeping text readable on primary and secondary button backgrounds.
+- Added a small keyboard focus visibility helper to both public pages so focused links, controls, and horizontally scrollable navigation items are brought into view.
+- No factual public claims, service facts, phone numbers, addresses, opening hours, benefit amounts, eligibility rules, legal deadlines, emergency instructions, organization details, backend, analytics, forms, or data collection were added.
+
+### Checks Run
+
+- Baseline: `git pull --ff-only origin main`, `git status --short --branch`, `python3 scripts/check-site.py`, `python3 -m py_compile scripts/check-site.py`, `git diff --check`, and exact `CNAME` display.
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` from a local static server.
+- Playwright/Chromium browser QA for `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths.
+- Playwright checks covered horizontal overflow, sticky/anchor coverage, skip-link visibility, keyboard focus visibility, router behavior, checklist local storage, template draft save/reload/clear, print-clone behavior, no-JavaScript fallback, and computed contrast.
+- Playwright print media generated PDFs for both public pages; `qpdf --check` found no syntax or stream errors.
+- 390 px mobile screenshots were visually smoke-checked for obvious top-viewport overlap.
+
+### Current Risks
+
+- A dedicated axe/assistive-technology review is still recommended before broad outreach.
+- Human factual review remains important because the site covers crisis, housing, benefits, health, contacts, and child/youth welfare routes.
+- Operator/contact/impressum details remain unresolved and must not be invented by automation.
+
+### Next Recommended Task
+
+Run a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, focusing first on crisis, housing, money, contacts, and legal-background wording.
 
 ## Automation Pass 2026-04-29 10:05
 

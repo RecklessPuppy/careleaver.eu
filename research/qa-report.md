@@ -48,7 +48,7 @@ TODO - Human factual review before outreach: a second human review is still reco
 
 TODO - Automated recurring source checks: link checks and review-date guardrails now exist, but they only flag reachability and due dates. A human or careful source-refresh pass still has to reopen crisis, money, housing, and contact sources by the review date.
 
-TODO - Browser accessibility audit: static guardrails now run locally and in CI, but a full axe/browser audit is still useful once the browser test setup is stable.
+TODO - Dedicated axe/assistive-technology audit: static guardrails now run locally and in CI, and a Playwright browser/mobile pass was completed on 2026-04-29. A focused axe and assistive-technology review is still useful before broad outreach.
 
 TODO - Benefits/legal expansion: do not add amounts, thresholds, appeal deadlines, or entitlement wording without fresh official sources and source-log entries.
 
@@ -61,6 +61,16 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` to fail future public tables without captions and future public `font-size` rules that use viewport units.
 - Rendered mobile/desktop image and print PDF smoke checks passed after the changes.
 - Playwright CLI still could not complete because of local npm cache and Chrome launch/cleanup permissions; a full modern-browser/axe audit remains useful when that environment is fixed.
+
+## Browser/Mobile/Accessibility Addendum 2026-04-29
+
+- Used Playwright/Chromium against a local static server for `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths.
+- Initial findings: the homepage had a small 320 px horizontal overflow caused by checklist text/grid sizing; mobile keyboard focus could move partly below or outside the viewport in the homepage/source-page navigation; primary link-buttons could inherit the global red hover color and fail contrast on dark button backgrounds.
+- Safe fixes shipped: checklist copy now shrinks and wraps inside the 320 px viewport; button-link hover colors now keep adequate contrast; both public pages now keep focused elements scrolled into view for keyboard users.
+- Post-fix Playwright findings: no horizontal overflow at tested widths, no sticky crisis/nav coverage after anchor jumps, skip links visible with a 3 px focus outline, router/checklist/template interactions passed, homepage no-JavaScript fallback passed, no computed contrast failures found at 390 and 1024 px, and print media hid interactive/sticky chrome.
+- Print check: Playwright print media generated PDFs for `/` and `/quellen.html`; `qpdf --check` found no syntax or stream errors.
+- Visual mobile screenshot smoke check at 390 px found no obvious top-viewport overlap on `/` or `/quellen.html`.
+- No factual public claims, links, contact details, legal/benefit/housing/health/emergency instructions, backend, analytics, forms, or personal-data collection were added.
 
 ## Sources Checked
 

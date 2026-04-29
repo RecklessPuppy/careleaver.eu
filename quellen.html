@@ -176,6 +176,14 @@
             color: var(--ink);
         }
 
+        a.button:hover {
+            color: #fff;
+        }
+
+        a.button.secondary:hover {
+            color: var(--ink);
+        }
+
         nav {
             background: rgba(255,255,255,.96);
             border-bottom: 1px solid var(--line);
@@ -636,5 +644,44 @@
             <p><a href="index.html">Zurück zur Startseite</a></p>
         </div>
     </footer>
+
+    <script>
+        function keepFocusedElementVisible(event) {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) return;
+
+            window.requestAnimationFrame(() => {
+                const rect = target.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
+
+                if (rect.height >= window.innerHeight) {
+                    window.scrollBy({
+                        top: rect.top - 16,
+                        behavior: "auto"
+                    });
+                } else if (rect.bottom > window.innerHeight) {
+                    window.scrollBy({
+                        top: rect.bottom - window.innerHeight + 16,
+                        behavior: "auto"
+                    });
+                } else if (rect.top < 0) {
+                    window.scrollBy({
+                        top: rect.top - 16,
+                        behavior: "auto"
+                    });
+                }
+
+                const updatedRect = target.getBoundingClientRect();
+                if (updatedRect.left < 0 || updatedRect.right > window.innerWidth) {
+                    target.scrollIntoView({
+                        block: "nearest",
+                        inline: "nearest"
+                    });
+                }
+            });
+        }
+
+        document.addEventListener("focusin", keepFocusedElementVisible);
+    </script>
 </body>
 </html>

@@ -112,6 +112,15 @@
             color: var(--ink);
         }
 
+        a.button:hover {
+            color: #fff;
+        }
+
+        a.button.secondary:hover {
+            color: #18212b;
+            color: var(--ink);
+        }
+
         button.danger,
         .button.danger {
             background: #9b2c2c;
@@ -493,6 +502,7 @@
             grid-template-columns: auto 1fr;
             gap: .75rem;
             align-items: start;
+            min-width: 0;
             padding: .9rem;
             background: var(--paper);
             border: 1px solid var(--line);
@@ -508,6 +518,11 @@
 
         .check-copy strong {
             display: block;
+        }
+
+        .check-copy {
+            min-width: 0;
+            overflow-wrap: anywhere;
         }
 
         .check-copy span {
@@ -1672,6 +1687,41 @@
             });
         }
 
+        function keepFocusedElementVisible(event) {
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) return;
+
+            window.requestAnimationFrame(() => {
+                const rect = target.getBoundingClientRect();
+                if (rect.width === 0 || rect.height === 0) return;
+
+                if (rect.height >= window.innerHeight) {
+                    window.scrollBy({
+                        top: rect.top - 16,
+                        behavior: "auto"
+                    });
+                } else if (rect.bottom > window.innerHeight) {
+                    window.scrollBy({
+                        top: rect.bottom - window.innerHeight + 16,
+                        behavior: "auto"
+                    });
+                } else if (rect.top < 0) {
+                    window.scrollBy({
+                        top: rect.top - 16,
+                        behavior: "auto"
+                    });
+                }
+
+                const updatedRect = target.getBoundingClientRect();
+                if (updatedRect.left < 0 || updatedRect.right > window.innerWidth) {
+                    target.scrollIntoView({
+                        block: "nearest",
+                        inline: "nearest"
+                    });
+                }
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             bindActions();
             loadChecks();
@@ -1679,6 +1729,7 @@
             updateStickyOffsets();
             highlightCurrentNav();
         });
+        document.addEventListener("focusin", keepFocusedElementVisible);
         window.addEventListener("resize", updateStickyOffsets);
         window.addEventListener("scroll", highlightCurrentNav, { passive: true });
     </script>
