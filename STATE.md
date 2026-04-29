@@ -27,7 +27,7 @@ Last updated: 2026-04-29
 - A homepage quick-action pass was completed on 2026-04-29, adding a low-pressure "Heute ein kleiner nächster Schritt" block near the top router.
 - A safe structured-data SEO pass was completed on 2026-04-29, adding WebSite/WebPage/BreadcrumbList JSON-LD and guardrails against premature owner/contact schema.
 - A sitemap/canonical consistency pass was completed on 2026-04-29, extending `scripts/check-site.py` so page canonicals, `sitemap.xml`, and `robots.txt` stay aligned.
-- A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the workflow checkout action was updated to `actions/checkout@v6` to address the Node.js 20 deprecation warning.
+- A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the custom site-check workflow was updated to `actions/checkout@v6` to address its Node.js 20 deprecation warning.
 
 ## Morning Review 2026-04-29
 
@@ -36,7 +36,8 @@ Last updated: 2026-04-29
 - Local branch: `main`, aligned with `origin/main` before the morning fix.
 - Public site: `https://careleaver.eu` served HTTP 200 for `/`, `/quellen.html`, and `/sitemap.xml` during the morning check.
 - Live files matched local `main` by SHA-256 hash for `index.html`, `quellen.html`, and `sitemap.xml`.
-- GitHub Actions: the latest checked runs were successful. The latest site-check run had a warning because `actions/checkout@v4` uses the deprecated Node.js 20 runtime; the workflow now uses `actions/checkout@v6`.
+- GitHub Actions: the latest checked runs were successful. The custom `Site checks` workflow now uses `actions/checkout@v6` and passed without its previous checkout warning.
+- GitHub Pages deployment: the deployment passed, but GitHub's generated `pages-build-deployment` workflow still reported a Node.js 20 warning from its generated build steps (`actions/checkout@v4` and `actions/upload-artifact@v4`). This is a maintenance warning to monitor; the deployment still succeeded.
 - `CNAME` still contains exactly `careleaver.eu`.
 
 ### What Changed Overnight
@@ -54,6 +55,7 @@ Last updated: 2026-04-29
 - Non-Wien Bundesland content remains intentionally incomplete until official source sets are reviewed.
 - Care Leaver Österreich / `careleaver.at` referral and outreach wording should be reviewed before implying any collaboration.
 - Browser-based accessibility testing is still missing; static checks are useful guardrails but do not replace a real browser/assistive-technology pass.
+- The generated GitHub Pages deployment workflow still shows a Node.js 20 deprecation warning even though the custom site-check workflow was updated. If GitHub does not update the generated workflow automatically, a future task may need an explicit Pages deployment workflow.
 
 ### Next 3 Recommended Tasks
 
