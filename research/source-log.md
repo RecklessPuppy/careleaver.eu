@@ -20,6 +20,8 @@ Homepage health route note, 2026-04-29: `index.html` added a cautious health/E-C
 
 Bundesland router note, 2026-04-29: `index.html` added an explicit "not in Wien / anderes Bundesland" route to prevent Wien examples from being read as verified contact or jurisdiction information for other Bundeslaender. No Bundesland contacts, eligibility rules, deadlines, benefit amounts, service promises, emergency routes, or new factual source claims were added.
 
+Brief/fristen route note, 2026-04-29: `index.html` added a practical "Brief, Bescheid oder mögliche Frist" route. The public wording says the site does not calculate deadlines or replace legal advice, and it only suggests sorting steps such as marking dates, sender, and reference numbers and asking the responsible office or advice route for clarification. No deadline, appeal period, eligibility rule, legal advice, benefit amount, contact detail, or new factual source claim was added.
+
 ## How To Add A Source
 
 ```md

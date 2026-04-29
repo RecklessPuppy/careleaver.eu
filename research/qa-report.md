@@ -86,6 +86,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the non-Wien route and cautious Bundesland wording stay present.
 - No Bundesland contacts, eligibility rules, deadlines, benefit amounts, service promises, emergency routes, backend, analytics, forms, or server-side data collection were added.
 
+## Brief / Fristen Route Addendum 2026-04-29
+
+- Added a dedicated public route for "Brief, Bescheid oder mögliche Frist" in the homepage router, no-JavaScript fallback, and Next-Step Finder.
+- Added a practical card in the documents section for sorting official letters: mark dates, sender, reference numbers, keep a copy, ask for a written explanation, and get help quickly if a deadline may exist.
+- Extended `scripts/check-site.py` so the route, finder option, anchor, and "Diese Website berechnet keine Fristen" safety wording remain present.
+- No legal deadline, appeal period, legal advice, eligibility rule, benefit amount, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

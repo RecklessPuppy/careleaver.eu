@@ -36,6 +36,37 @@ Last updated: 2026-04-29
 - A homepage health/E-Card routing pass was completed on 2026-04-29, adding a cautious health and insurance route using already logged Gesundheitsportal Österreich and ÖGK sources, plus matching checker guardrails.
 - A template privacy hardening pass was completed on 2026-04-29, disabling browser autocomplete on sensitive template free-text fields and adding a checker guardrail.
 - A Bundesland router safety pass was completed on 2026-04-29, adding an explicit non-Wien route to the homepage need-finder and checker guardrails against unchecked Bundesland expansion.
+- A brief/deadline preparation route pass was completed on 2026-04-29, adding a safe "Brief, Bescheid oder mögliche Frist" path to the homepage router, no-JavaScript fallback, Next-Step Finder, and documents section.
+
+## Brief / Fristen Route Pass 2026-04-29
+
+### What Changed
+
+- Added a dedicated "Brief, Bescheid oder mögliche Frist" route to the homepage topic router.
+- Added the same route to the Next-Step Finder and no-JavaScript fallback.
+- Added a practical documents-section card for sorting official letters: mark dates, sender, reference numbers, keep a copy, ask for a written explanation, and get help quickly if a deadline may exist.
+- Added a short public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the route, finder option, anchor, and deadline-safety wording remain present.
+- Updated `research/qa-report.md` with a safety addendum.
+- No legal deadline, appeal period, legal advice, eligibility rule, benefit amount, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- The new route is intentionally preparation-only and does not calculate deadlines. Users still need official advice or the responsible office when a real deadline may exist.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Bundesland Router Safety Pass 2026-04-29
 
