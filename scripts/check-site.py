@@ -24,6 +24,7 @@ REQUIRED_FILES = [
     "OPERATING_MODEL.md",
     "OVERNIGHT_RUNBOOK.md",
     "index.html",
+    "quellen.html",
     "CNAME",
     "robots.txt",
     "sitemap.xml",
@@ -32,9 +33,10 @@ REQUIRED_FILES = [
     "research/qa-report.md",
 ]
 
-PUBLIC_FILES = ["index.html", "robots.txt", "sitemap.xml"]
+PUBLIC_FILES = ["index.html", "quellen.html", "robots.txt", "sitemap.xml"]
 
 EXTERNAL_LINK_SCHEMES = {"http", "https"}
+SITE_HOSTS = {"careleaver.eu", "www.careleaver.eu"}
 
 PLACEHOLDER_PATTERNS = [
     r"lorem ipsum",
@@ -140,12 +142,18 @@ def check_internal_links(errors: list[str]) -> None:
 
         for href, _tag, line in parser.links:
             parsed_url = urlparse(href)
-            if parsed_url.scheme in {"http", "https", "mailto", "tel", "sms", "data"}:
+            if parsed_url.scheme in {"http", "https"} and parsed_url.netloc not in SITE_HOSTS:
+                continue
+            if parsed_url.scheme in {"mailto", "tel", "sms", "data"}:
                 continue
             if href.startswith("javascript:"):
                 continue
 
-            link_path, fragment = urldefrag(href)
+            if parsed_url.scheme in {"http", "https"}:
+                link_path = parsed_url.path or "/"
+                fragment = parsed_url.fragment
+            else:
+                link_path, fragment = urldefrag(href)
             if not link_path:
                 target = path
             elif link_path in {"/", "./"}:
@@ -182,6 +190,8 @@ def collect_external_links() -> dict[str, list[str]]:
         for href, _tag, line in parser.links:
             parsed_url = urlparse(href)
             if parsed_url.scheme not in EXTERNAL_LINK_SCHEMES:
+                continue
+            if parsed_url.netloc in SITE_HOSTS:
                 continue
             url, _fragment = urldefrag(href)
             links.setdefault(url, []).append(f"{path}:{line}")
@@ -243,6 +253,7 @@ def check_index_guardrails(errors: list[str]) -> None:
         "2026-04-29",
         "2026-07-29",
         "Lokale Daten löschen",
+        'href="quellen.html"',
     ]
     for snippet in required_snippets:
         if snippet not in index:
@@ -258,6 +269,33 @@ def check_index_guardrails(errors: list[str]) -> None:
             errors.append(f"index.html: forbidden risky wording found: {snippet}")
 
 
+def check_sources_page_guardrails(errors: list[str]) -> None:
+    page = (ROOT / "quellen.html").read_text(encoding="utf-8")
+    required_snippets = [
+        '<html lang="de-AT">',
+        '<meta name="description"',
+        '<link rel="canonical" href="https://careleaver.eu/quellen.html">',
+        'id="review"',
+        'id="aenderungen"',
+        "2026-04-29",
+        "2026-07-29",
+        "keine Rechtsberatung",
+        "kein Notruf",
+    ]
+    for snippet in required_snippets:
+        if snippet not in page:
+            errors.append(f"quellen.html: missing required snippet: {snippet}")
+
+    forbidden_snippets = [
+        "Anspruchs-Check",
+        "18-25",
+        "Diese Seite entscheidet, ob",
+    ]
+    for snippet in forbidden_snippets:
+        if snippet in page:
+            errors.append(f"quellen.html: forbidden risky wording found: {snippet}")
+
+
 def main() -> None:
     args = parse_args()
     errors: list[str] = []
@@ -265,6 +303,7 @@ def main() -> None:
     check_public_placeholders(errors)
     check_internal_links(errors)
     check_index_guardrails(errors)
+    check_sources_page_guardrails(errors)
     fail(errors)
 
     if args.external or args.soft_external:

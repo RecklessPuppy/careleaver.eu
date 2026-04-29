@@ -12,6 +12,8 @@ QA note, 2026-04-29: External links in `index.html` returned HTTP 200 during the
 
 Immediate sprint note, 2026-04-29: `index.html` added a fuller public "Schnelle Hilfe in Wien" section using already logged BMI, Rat auf Draht, PSD Wien, and FSW source anchors. No new source, benefit amount, legal deadline, copied opening-hour block, or unsourced contact directory was added.
 
+Public source page note, 2026-04-29: `quellen.html` was added as a public source/review overview and short changelog using the already logged source groups below. No new service detail, benefit amount, legal deadline, eligibility promise, or contact directory was added. Existing review cycles remain unchanged.
+
 ## How To Add A Source
 
 ```md

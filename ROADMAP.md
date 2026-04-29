@@ -142,6 +142,7 @@ Goal: help people find and trust the site.
 - Improve page titles, descriptions, and headings.
 - Add source and update dates visibly.
 - Add clear contact/impressum information only after verified.
+- Keep public source/review information easy to find. Status: first public `quellen.html` page added 2026-04-29.
 - Consider outreach to care leaver organizations, youth workers, and relevant Wien/Austria support services.
 - Add analytics only if the privacy tradeoff is explicitly accepted.
 - Use practical German search language such as "Care Leaver Wien", "nach der Jugendhilfe", "mit 18 aus der Jugendhilfe", "Care Leaver Beratung Wien", "Wohnbeihilfe Wien", and "U25 Wien".
@@ -155,6 +156,7 @@ Goal: keep information from becoming stale.
 - Create a regular source review routine. Status: first runbook and prompts added 2026-04-29.
 - Track time-sensitive claims and review dates. Status: source log and public review dates exist; automation should keep checking them.
 - Automate link checks if tooling is added. Status: basic GitHub Actions internal-link/placeholder/required-file check added 2026-04-29; optional external HTTP link smoke check added 2026-04-29 for manual/local runs and scheduled CI warnings.
+- Keep same-domain public URLs checked locally before deployment. Status: `scripts/check-site.py` now validates `careleaver.eu` links against local files.
 - Consider scheduled Codex maintenance prompts. Status: `prompts/06-overnight-operator.md` and `prompts/07-morning-review.md` added 2026-04-29.
 - Keep a simple changelog of factual updates.
 

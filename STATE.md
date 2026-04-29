@@ -21,6 +21,7 @@ Last updated: 2026-04-29
 - An immediate overnight implementation sprint was completed on 2026-04-29 before scheduled automation, focused on public usefulness, safe routing, and repeatable QA.
 - An external-link smoke-check pass was completed on 2026-04-29, adding optional networked HTTP link checks to local/manual QA and scheduled CI warnings.
 - A no-JavaScript and print resilience pass was completed on 2026-04-29, focused on the public router and templates.
+- A public source/review page pass was completed on 2026-04-29, adding `quellen.html`, sitemap coverage, and local same-domain URL validation.
 
 ## What Was Added In This Setup Pass
 
@@ -162,6 +163,29 @@ Checks run in this pass:
 - `qpdf --check /private/tmp/careleaver-nojs-print.pdf`
 - `pdftotext /private/tmp/careleaver-nojs-print.pdf -` smoke check for no-JavaScript fallback text
 
+## What Was Added In The Public Source Review Page Pass
+
+- Added `quellen.html` as a public source/review and short changelog page.
+- Linked the new page from the homepage navigation, source section, footer, and `sitemap.xml`.
+- Updated `scripts/check-site.py` so same-domain `careleaver.eu` URLs are checked against local files instead of treated as third-party external links before deployment.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/open-questions.md` to record that a public source/changelog page now exists.
+- No new service details, benefit amounts, legal deadlines, eligibility promises, copied contact directory, backend, analytics, or forms were added.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `python3 scripts/check-site.py --external`
+- `git diff --check`
+- `cat CNAME`
+- inline JavaScript syntax check with `node --check`
+- `wkhtmltoimage --width 390 quellen.html /private/tmp/careleaver-quellen-mobile.png`
+- `sips` image dimension check for the new page mobile render
+- `wkhtmltopdf --print-media-type quellen.html /private/tmp/careleaver-quellen.pdf`
+- `qpdf --check /private/tmp/careleaver-quellen.pdf`
+- local HTTP preview smoke checks for `/` and `/quellen.html`, both returning `HTTP 200`
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -196,7 +220,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a public changelog/source-review page, add a lightweight accessibility audit path, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a lightweight accessibility audit path, improve source-review automation/reporting, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

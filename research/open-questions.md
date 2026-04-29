@@ -20,7 +20,6 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - What exact shared-device privacy warning should appear before tools that store appointment/legal details locally?
 - Which Bundesland should be expanded after Wien, and only after which official source set exists?
 - Should Wien source sections show review dates per claim group: crisis, housing, money, documents, contacts?
-- Should the site include a public changelog for factual updates?
 - Which old/source-weak public claims should be softened or removed during the Wien MVP content pass?
 
 ## Resolved Or Lowered By 2026-04-29 QA
@@ -37,6 +36,7 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - waff: public page avoids the old `18-25` claim and links to waff directly; source-log records visible `18-24` wording.
 - Meldezettel: public page links to the exact Stadt Wien residence-registration page.
 - Automated link checking: `scripts/check-site.py` now supports `--external` for strict manual/local HTTP link checks and scheduled GitHub Actions runs external checks as soft warnings.
+- Public source/changelog page: `quellen.html` now gives a public review table, short change notes, and maintenance cautions.
 
 ## Product Decisions
 

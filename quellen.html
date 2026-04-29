@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quellen und Review | Care Leaver Wien</title>
+    <meta name="description" content="Oeffentliche Quellen, Pruefdaten und Aenderungsnotizen fuer die Wien-first Orientierungshilfe careleaver.eu.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://careleaver.eu/quellen.html">
+    <meta property="og:title" content="Quellen und Review | Care Leaver Wien">
+    <meta property="og:description" content="Welche Quellen careleaver.eu nutzt, wann sie geprueft wurden und wann die naechste Review faellig ist.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://careleaver.eu/quellen.html">
+    <meta property="og:locale" content="de_AT">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#114b5f">
+    <style>
+        :root {
+            --ink: #18212b;
+            --muted: #586575;
+            --bg: #f6f8fb;
+            --paper: #ffffff;
+            --line: #d8e0e8;
+            --blue: #114b5f;
+            --green: #0b6b57;
+            --red: #9b2c2c;
+            --gold: #866118;
+            --soft-blue: #e9f3f7;
+            --soft-gold: #fff7df;
+            --shadow: 0 8px 24px rgba(24, 33, 43, .08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--bg);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 16px;
+            line-height: 1.58;
+        }
+
+        a {
+            color: var(--blue);
+            text-underline-offset: .18em;
+        }
+
+        a:hover {
+            color: var(--red);
+        }
+
+        a[target="_blank"]::after {
+            content: " ↗";
+            font-size: .9em;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #f0c85a;
+            outline-offset: 3px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 100;
+            background: #fff;
+            color: var(--ink);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: .6rem .8rem;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            background: var(--paper);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .topline {
+            padding: .7rem 0;
+            background: var(--blue);
+            color: #fff;
+            font-size: .94rem;
+        }
+
+        .topline .wrap {
+            display: flex;
+            gap: .8rem;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero {
+            padding: 2.1rem 0 1.8rem;
+        }
+
+        .eyebrow {
+            margin: 0 0 .5rem;
+            color: var(--green);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            font-size: .82rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            line-height: 1.15;
+            letter-spacing: 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 9vw, 4rem);
+            max-width: 900px;
+        }
+
+        h2 {
+            margin: 0 0 .7rem;
+            font-size: clamp(1.55rem, 6vw, 2.35rem);
+        }
+
+        h3 {
+            margin: 0 0 .5rem;
+            font-size: 1.18rem;
+        }
+
+        .lead {
+            max-width: 780px;
+            margin: 1rem 0 0;
+            font-size: 1.12rem;
+            color: #2c3a47;
+        }
+
+        .actions {
+            display: flex;
+            gap: .75rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            border-radius: 8px;
+            padding: .72rem 1rem;
+            background: var(--blue);
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .button.secondary {
+            background: #e7edf3;
+            color: var(--ink);
+        }
+
+        nav {
+            background: rgba(255,255,255,.96);
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav ul {
+            display: flex;
+            gap: .4rem;
+            margin: 0;
+            padding: .6rem 0;
+            overflow-x: auto;
+            list-style: none;
+        }
+
+        nav a {
+            display: block;
+            white-space: nowrap;
+            border-radius: 999px;
+            padding: .45rem .72rem;
+            color: var(--ink);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+
+        nav a:hover,
+        nav a[aria-current="page"] {
+            background: var(--soft-blue);
+            color: var(--blue);
+        }
+
+        .band {
+            padding: 2.2rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .band:nth-child(even) {
+            background: #fff;
+        }
+
+        .section-intro {
+            max-width: 820px;
+            margin: 0 0 1.1rem;
+            color: #334150;
+        }
+
+        .note,
+        .review-note {
+            margin: 1rem 0 0;
+            padding: .9rem;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #f8fbfd;
+            color: #334150;
+        }
+
+        .review-note {
+            background: var(--soft-gold);
+            border-color: #e8cf8b;
+        }
+
+        .grid {
+            display: grid;
+            gap: .9rem;
+        }
+
+        .card {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card p {
+            margin: .45rem 0 0;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            padding: .18rem .55rem;
+            background: #e8f5ef;
+            color: var(--green);
+            border: 1px solid #b9ded0;
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+        .status.soon {
+            background: var(--soft-gold);
+            color: var(--gold);
+            border-color: #e8cf8b;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fff;
+        }
+
+        table {
+            width: 100%;
+            min-width: 820px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: .75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+        }
+
+        th {
+            background: #edf3f7;
+            color: var(--ink);
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .plain-list {
+            padding-left: 1.1rem;
+        }
+
+        .plain-list li {
+            margin: .42rem 0;
+        }
+
+        footer {
+            padding: 2rem 0;
+            background: #14202a;
+            color: #f3f7fa;
+        }
+
+        footer a {
+            color: #d7edf6;
+        }
+
+        footer p {
+            max-width: 900px;
+        }
+
+        @media (min-width: 760px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 12pt;
+            }
+
+            .topline,
+            nav,
+            .actions,
+            .skip-link {
+                display: none !important;
+            }
+
+            .band,
+            header,
+            footer {
+                border: 0;
+                background: #fff !important;
+                color: #000 !important;
+                padding: 1rem 0;
+            }
+
+            .card,
+            .note,
+            .review-note {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+
+            a {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Zum Inhalt springen</a>
+
+    <header>
+        <div class="topline">
+            <div class="wrap">
+                <span>Quellen und Review · Stand 2026-04-29</span>
+                <span>Wien-first · keine Rechtsberatung · kein Notruf</span>
+            </div>
+        </div>
+        <div class="wrap hero">
+            <p class="eyebrow">Care Leaver Wien</p>
+            <h1>Quellen und Review</h1>
+            <p class="lead">Diese Seite zeigt, welche Hauptquellen die öffentliche Orientierungshilfe nutzt, wann sie zuletzt geprüft wurden und welche Themen besonders vorsichtig bleiben.</p>
+            <div class="actions" aria-label="Schnellaktionen">
+                <a class="button" href="index.html#was-brauchst-du">Zur Orientierungshilfe</a>
+                <a class="button secondary" href="#aenderungen">Änderungsnotizen</a>
+            </div>
+        </div>
+    </header>
+
+    <nav aria-label="Quellen-Navigation">
+        <div class="wrap">
+            <ul>
+                <li><a href="index.html#schnelle-hilfe">Schnelle Hilfe</a></li>
+                <li><a href="index.html#wien">Wien</a></li>
+                <li><a href="#review" aria-current="page">Review-Tabelle</a></li>
+                <li><a href="#aenderungen">Änderungen</a></li>
+                <li><a href="#pflege">Pflegehinweise</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main">
+        <section class="band" id="review" aria-labelledby="h-review">
+            <div class="wrap">
+                <h2 id="h-review">Review-Tabelle</h2>
+                <p class="section-intro">Die Tabelle ist eine öffentliche Übersicht. Sie ersetzt nicht die offizielle Seite der jeweiligen Stelle. Besonders bei Telefonnummern, Öffnungszeiten, Beträgen, Voraussetzungen und Fristen immer direkt auf der verlinkten Quelle prüfen.</p>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Bereich</th>
+                                <th scope="col">Hauptquellen</th>
+                                <th scope="col">Zuletzt geprüft</th>
+                                <th scope="col">Nächste Prüfung</th>
+                                <th scope="col">Pflegehinweis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Notruf und Krise</td>
+                                <td><a href="https://www.bmi.gv.at/notrufnummern/" target="_blank" rel="noopener noreferrer">BMI Notrufnummern</a>, <a href="https://www.rataufdraht.at/telefonberatung" target="_blank" rel="noopener noreferrer">Rat auf Draht</a>, <a href="https://psd-wien.at/einrichtung/sozialpsychiatrischer-notdienst" target="_blank" rel="noopener noreferrer">PSD Wien</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-07-29</td>
+                                <td>Bei unmittelbarer Gefahr zuerst Notruf; diese Website ist kein Krisendienst.</td>
+                            </tr>
+                            <tr>
+                                <td>Care Leaver und MA 11 Wien</td>
+                                <td><a href="https://www.wien.gv.at/zusammenleben/care-leaver-beratung" target="_blank" rel="noopener noreferrer">Stadt Wien Care-Leaver-Beratung</a>, <a href="https://www.wien.gv.at/zusammenleben/servicestelle-kinder-jugendhilfe" target="_blank" rel="noopener noreferrer">MA 11 Servicestelle</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-07-29</td>
+                                <td>Kontaktwege, Termine und Voraussetzungen direkt bei Stadt Wien prüfen.</td>
+                            </tr>
+                            <tr>
+                                <td>Wohnen und Wohnungslosigkeit</td>
+                                <td><a href="https://www.wien.gv.at/amtswege/anmelden-wohnsitz" target="_blank" rel="noopener noreferrer">Wohnsitz anmelden</a>, <a href="https://www.wien.gv.at/amtswege/wohnbeihilfe-antrag" target="_blank" rel="noopener noreferrer">Wohnbeihilfe</a>, <a href="https://wohnberatung-wien.at/faq-kontakt" target="_blank" rel="noopener noreferrer">Wohnberatung Wien</a>, <a href="https://www.fsw.at/p/wohnungslosigkeit" target="_blank" rel="noopener noreferrer">FSW Wohnungslosenhilfe</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-07-29</td>
+                                <td>Keine Zusage auf Wohnung, Platz oder Leistung aus dieser Website ableiten.</td>
+                            </tr>
+                            <tr>
+                                <td>Geld, Konto, Beiträge, Schulden</td>
+                                <td><a href="https://www.wien.gv.at/kontakt/ma40-u25-jugendunterstuetzung" target="_blank" rel="noopener noreferrer">U25 Wien</a>, <a href="https://www.fma.gv.at/konto/basiskonto/" target="_blank" rel="noopener noreferrer">FMA Basiskonto</a>, <a href="https://www.obs.at/befreiung" target="_blank" rel="noopener noreferrer">OBS</a>, <a href="https://www.schuldenberatung.wien/schulden-was-tun" target="_blank" rel="noopener noreferrer">FSW Schuldenberatung</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-07-29</td>
+                                <td>Keine Beträge, Schwellen oder Anspruchszusagen ohne frische Quelle veröffentlichen.</td>
+                            </tr>
+                            <tr>
+                                <td>Ausbildung und Arbeit</td>
+                                <td><a href="https://www.neba.at/jugendcoaching" target="_blank" rel="noopener noreferrer">NEBA Jugendcoaching</a>, <a href="https://ausbildungbis18.at/" target="_blank" rel="noopener noreferrer">AusBildung bis 18</a>, <a href="https://www.waff.at/beruf-weiterbildung/jugendliche-und-berufseinstieg/" target="_blank" rel="noopener noreferrer">waff</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-10-29; waff 2026-07-29</td>
+                                <td>Programm- und Altersangaben direkt auf den offiziellen Seiten prüfen.</td>
+                            </tr>
+                            <tr>
+                                <td>Gesundheit und Versicherung</td>
+                                <td><a href="https://www.gesundheit.gv.at/gesundheitsleistungen/gesundheitsfoerderung/care-leaver.html" target="_blank" rel="noopener noreferrer">Gesundheitsportal Österreich</a>, <a href="https://www.gesundheitskasse.at/cdscontent/?contentid=10007.870502" target="_blank" rel="noopener noreferrer">ÖGK Mitversicherung</a></td>
+                                <td>2026-04-29</td>
+                                <td>2026-07-29 für Versicherungsfragen; 2027-04-29 für allgemeinen Kontext</td>
+                                <td>Keine Diagnose, Therapieempfehlung oder Versicherungsentscheidung über diese Website.</td>
+                            </tr>
+                            <tr>
+                                <td>Rechte und Beschwerde</td>
+                                <td><a href="https://kija-wien.at/" target="_blank" rel="noopener noreferrer">KIJA Wien</a>, <a href="https://www.ris.bka.gv.at/NormDokument.wxe?Abfrage=LrW&amp;Gesetzesnummer=20000259&amp;Paragraf=33" target="_blank" rel="noopener noreferrer">RIS WKJHG § 33</a></td>
+                                <td>2026-04-29</td>
+                                <td>KIJA 2026-07-29; Recht 2026-10-29</td>
+                                <td>Rechtlicher Hintergrund, keine Rechtsberatung und keine Fristenberatung.</td>
+                            </tr>
+                            <tr>
+                                <td>Community und Selbstvertretung</td>
+                                <td><a href="https://www.careleaver.at/" target="_blank" rel="noopener noreferrer">Care Leaver Österreich</a></td>
+                                <td>2026-04-29</td>
+                                <td>2027-04-29 oder vor Outreach</td>
+                                <td>careleaver.eu ist unabhängig und behauptet keine Partnerschaft.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="review-note"><strong>Wichtig:</strong> Eine erfolgreiche Linkprüfung bedeutet nur, dass eine Seite erreichbar war. Sie bestätigt nicht automatisch, dass Inhalte, Kontaktwege oder Voraussetzungen unverändert geblieben sind.</p>
+            </div>
+        </section>
+
+        <section class="band" id="aenderungen" aria-labelledby="h-aenderungen">
+            <div class="wrap">
+                <h2 id="h-aenderungen">Änderungsnotizen</h2>
+                <p class="section-intro">Diese Notizen sind kurz gehalten, damit sichtbar bleibt, wann öffentliche Inhalte oder Sicherheitschecks verändert wurden.</p>
+
+                <div class="grid">
+                    <article class="card">
+                        <span class="status">2026-04-29</span>
+                        <h3>Wien-first MVP veröffentlicht</h3>
+                        <p>Die Startseite wurde als praktische Wien-Orientierung mit Router, Checkliste, offiziellen Links, Vorlagen, Quellen- und Review-Tabelle aufgebaut.</p>
+                    </article>
+                    <article class="card">
+                        <span class="status">2026-04-29</span>
+                        <h3>Safety- und Quellen-QA</h3>
+                        <p>Öffentliche Wien-Routen wurden vorsichtiger formuliert, high-risk Abschnitte mit Quellen und Review-Daten versehen und Link-/Mobil-/Printchecks dokumentiert.</p>
+                    </article>
+                    <article class="card">
+                        <span class="status soon">2026-04-29</span>
+                        <h3>Quellenübersicht ergänzt</h3>
+                        <p>Diese öffentliche Review-Seite wurde ergänzt, damit Quellen, Prüffristen und Pflegehinweise leichter auffindbar sind.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="band" id="pflege" aria-labelledby="h-pflege">
+            <div class="wrap">
+                <h2 id="h-pflege">Pflegehinweise</h2>
+                <p class="section-intro">Die öffentliche Seite soll praktisch bleiben, ohne so zu tun, als könnte sie Behörden, Beratung oder Notrufstellen ersetzen.</p>
+
+                <div class="grid">
+                    <article class="card">
+                        <h3>Was öffentlich bleiben darf</h3>
+                        <ul class="plain-list">
+                            <li>Offizielle Links und vorsichtige Terminvorbereitung.</li>
+                            <li>Checklisten, die keine Leistung versprechen.</li>
+                            <li>Review-Daten und Hinweise, was direkt bei der Stelle geprüft werden muss.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>Was nicht geraten wird</h3>
+                        <ul class="plain-list">
+                            <li>Anspruchszusagen, Beträge, Schwellen oder Rechtsfristen ohne frische Quelle.</li>
+                            <li>Kopierte Kontaktlisten mit Öffnungszeiten ohne aktuelles Prüfdatum.</li>
+                            <li>Bundesland-Routen außerhalb Wien ohne eigene Quellenprüfung.</li>
+                        </ul>
+                    </article>
+                    <article class="card">
+                        <h3>Interner Pflegepfad</h3>
+                        <ul class="plain-list">
+                            <li>Quellen zuerst in <a href="https://github.com/RecklessPuppy/careleaver.eu/blob/main/research/source-log.md" target="_blank" rel="noopener noreferrer">research/source-log.md</a> dokumentieren.</li>
+                            <li>Unsichere Details in <a href="https://github.com/RecklessPuppy/careleaver.eu/blob/main/research/open-questions.md" target="_blank" rel="noopener noreferrer">research/open-questions.md</a> sammeln.</li>
+                            <li>Öffentliche Fakten erst danach auf der Startseite ändern.</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <p class="note">Die nächste turnusmäßige Prüfung für Krise, Kontakte, Geld und Wohnen ist 2026-07-29. Vor breiter Öffentlichkeitsarbeit bleiben Betreiber-/Impressumsdaten und eine menschliche Faktenprüfung offene Punkte.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <p>careleaver.eu ist eine unabhängige Orientierungshilfe. Sie ersetzt keine Rechtsberatung, keine medizinische oder therapeutische Hilfe und keinen Notruf.</p>
+            <p><a href="index.html">Zurück zur Startseite</a></p>
+        </div>
+    </footer>
+</body>
+</html>
