@@ -22,6 +22,8 @@ Bundesland router note, 2026-04-29: `index.html` added an explicit "not in Wien 
 
 Brief/fristen route note, 2026-04-29: `index.html` added a practical "Brief, Bescheid oder mögliche Frist" route. The public wording says the site does not calculate deadlines or replace legal advice, and it only suggests sorting steps such as marking dates, sender, and reference numbers and asking the responsible office or advice route for clarification. No deadline, appeal period, eligibility rule, legal advice, benefit amount, contact detail, or new factual source claim was added.
 
+Glossary note, 2026-04-29: `index.html` added a short "Begriffe schnell erklärt" section for common terms such as Bescheid, Frist, Aktenzeichen/Geschäftszahl, Meldezettel, Vertrauensperson, and zuständige Stelle. The section is framed as a reading aid only, links Meldezettel/Wohnsitz wording to the already logged Stadt Wien residence-registration source, and explicitly avoids legal advice, deadline calculation, benefit decisions, appeal instructions, eligibility rules, contact details, amounts, or new service claims.
+
 ## How To Add A Source
 
 ```md

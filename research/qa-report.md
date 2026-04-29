@@ -93,6 +93,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the route, finder option, anchor, and "Diese Website berechnet keine Fristen" safety wording remain present.
 - No legal deadline, appeal period, legal advice, eligibility rule, benefit amount, contact detail, backend, analytics, form submission, or server-side data collection was added.
 
+## Glossary Lesehilfe Addendum 2026-04-29
+
+- Added a public "Begriffe schnell erklärt" section for common bureaucratic words such as Bescheid, Frist, Aktenzeichen/Geschäftszahl, Meldezettel, Vertrauensperson, and zuständige Stelle.
+- The section is framed as a reading aid only and tells users to ask the responsible office or a counselling route when a word matters in a real letter.
+- Added public source/review rows and a changelog note for the glossary.
+- Extended `scripts/check-site.py` so the glossary anchor, safety wording, and source-page changelog note remain present.
+- No legal deadline, appeal instruction, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

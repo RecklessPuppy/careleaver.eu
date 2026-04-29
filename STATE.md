@@ -37,6 +37,37 @@ Last updated: 2026-04-29
 - A template privacy hardening pass was completed on 2026-04-29, disabling browser autocomplete on sensitive template free-text fields and adding a checker guardrail.
 - A Bundesland router safety pass was completed on 2026-04-29, adding an explicit non-Wien route to the homepage need-finder and checker guardrails against unchecked Bundesland expansion.
 - A brief/deadline preparation route pass was completed on 2026-04-29, adding a safe "Brief, Bescheid oder mögliche Frist" path to the homepage router, no-JavaScript fallback, Next-Step Finder, and documents section.
+- A glossary reading-aid pass was completed on 2026-04-29, adding cautious explanations for common Amtswörter and checker guardrails against removing the safety framing.
+
+## Glossary Reading-Aid Pass 2026-04-29
+
+### What Changed
+
+- Added a public "Begriffe schnell erklärt" section to the homepage for common terms: Bescheid, Frist, Aktenzeichen/Geschäftszahl, Meldezettel, Vertrauensperson, and zuständige Stelle.
+- Added the glossary to the main navigation.
+- Added matching public source/review rows on `index.html` and `quellen.html`.
+- Added a short public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the glossary anchor, safety wording, and source-page changelog note remain present.
+- Updated `research/source-log.md` and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal instruction, eligibility rule, benefit amount, service promise, copied contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- The glossary is intentionally a reading aid only. It does not explain legal remedies, calculate deadlines, or decide benefits.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Brief / Fristen Route Pass 2026-04-29
 
