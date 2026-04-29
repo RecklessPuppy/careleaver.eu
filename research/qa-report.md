@@ -116,6 +116,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the route, finder option, anchor, and source-page changelog note remain present.
 - No eligibility rule, age range, benefit amount, job/training promise, deadline, contact detail, backend, analytics, form submission, or server-side data collection was added.
 
+## Print Link Visibility Addendum 2026-04-29
+
+- Added print CSS so external official links show their full URLs when `index.html`, `quellen.html`, or printed template popups are printed.
+- Extended `scripts/check-site.py` so both public pages keep the print URL guardrail.
+- Added a short public changelog note on `quellen.html`.
+- No public factual claims, contact details, legal/benefit/housing/health/emergency instructions, backend, analytics, forms, or personal-data collection were added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

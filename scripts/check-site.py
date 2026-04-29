@@ -769,6 +769,8 @@ def check_index_guardrails(errors: list[str]) -> None:
     check_accessibility_css_guardrails(Path("index.html"), index, errors, requires_pill_targets=True)
     check_appointment_cards(index, errors)
     check_template_privacy_fields(errors)
+    if index.count('a[href^="http"]::after') < 2 or "attr(href)" not in index:
+        errors.append("index.html: print output should expose external URLs, including section-print popups")
 
 
 def check_accessibility_css_guardrails(
@@ -853,6 +855,7 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         "Begriffe-Lesehilfe ergänzt",
         "Begleitperson-Vorlage ergänzt",
         "Arbeits- und Ausbildungsroute ergänzt",
+        "Druck-URLs ergänzt",
         "keine Rechtsberatung",
         "kein Notruf",
     ]
@@ -873,6 +876,8 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         errors.append("quellen.html: font-size should not use viewport-relative units")
 
     check_accessibility_css_guardrails(Path("quellen.html"), page, errors)
+    if 'a[href^="http"]::after' not in page or "attr(href)" not in page:
+        errors.append("quellen.html: print output should expose external URLs")
 
 
 def fold_text(value: str) -> str:

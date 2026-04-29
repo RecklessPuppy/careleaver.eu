@@ -40,6 +40,35 @@ Last updated: 2026-04-29
 - A glossary reading-aid pass was completed on 2026-04-29, adding cautious explanations for common Amtswörter and checker guardrails against removing the safety framing.
 - A support-person template pass was completed on 2026-04-29, adding a cautious copyable "Vertrauensperson fragen" script and checker guardrails.
 - An education/work navigation pass was completed on 2026-04-29, adding a cautious "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, Next-Step Finder, and checker guardrails.
+- A print link visibility pass was completed on 2026-04-29, making printed public pages and printed template popups include external official URLs on paper.
+
+## Print Link Visibility Pass 2026-04-29
+
+### What Changed
+
+- Added print CSS to `index.html` and `quellen.html` so external official links print with their full URLs.
+- Added the same printed-URL behavior to the template/plan popup print window generated from `index.html`.
+- Added a short public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so future edits cannot silently remove the printed external URL behavior.
+- No public factual claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- Printed URLs help paper handoffs, but they do not verify whether a linked source has changed since the last source review.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Education / Work Navigation Pass 2026-04-29
 

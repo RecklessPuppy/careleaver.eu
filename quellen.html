@@ -421,6 +421,13 @@
 
             a {
                 color: #000;
+                overflow-wrap: anywhere;
+            }
+
+            a[href^="http"]::after {
+                content: " (" attr(href) ")";
+                font-size: 9pt;
+                font-weight: 400;
             }
         }
     </style>
@@ -663,6 +670,11 @@
                         <span class="status">2026-04-29</span>
                         <h3>Begleitperson-Vorlage ergänzt</h3>
                         <p>Die Vorlagen enthalten jetzt einen kurzen Text, um eine vertraute Person zum Sortieren, Mitschreiben oder Nachfragen zu bitten; er macht keine Zusage, dass Begleitung überall möglich ist.</p>
+                    </article>
+                    <article class="card">
+                        <span class="status">2026-04-29</span>
+                        <h3>Druck-URLs ergänzt</h3>
+                        <p>Gedruckte Seiten und Terminvorlagen zeigen jetzt externe Link-Adressen mit an, damit offizielle Quellen auf Papier leichter wiedergefunden werden.</p>
                     </article>
                 </div>
             </div>
