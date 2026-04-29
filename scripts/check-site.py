@@ -483,6 +483,7 @@ def check_index_guardrails(errors: list[str]) -> None:
         '<link rel="canonical" href="https://careleaver.eu/">',
         'id="schnelle-hilfe"',
         'id="was-brauchst-du"',
+        'id="h-kleiner-schritt"',
         'id="quellen"',
         "2026-04-29",
         "2026-07-29",

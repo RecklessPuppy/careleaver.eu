@@ -409,6 +409,36 @@
             margin: .3rem 0;
         }
 
+        .next-actions {
+            margin: 1rem 0 1.2rem;
+        }
+
+        .next-actions h3 {
+            margin-bottom: .7rem;
+        }
+
+        .next-action-grid {
+            display: grid;
+            gap: .9rem;
+        }
+
+        .next-action {
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .next-action h4 {
+            margin: 0 0 .45rem;
+            font-size: 1.02rem;
+        }
+
+        .next-action p {
+            margin: .45rem 0 0;
+        }
+
         .status {
             display: inline-flex;
             align-items: center;
@@ -687,7 +717,8 @@
             }
 
             .card-grid,
-            .source-grid {
+            .source-grid,
+            .next-action-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -702,6 +733,10 @@
             }
 
             .router-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .next-action-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
 
@@ -744,6 +779,7 @@
 
             .card,
             .router-card,
+            .next-action,
             .source-card,
             .check-item,
             .finder,
@@ -887,6 +923,27 @@
                         <li>Telefonnummern, Öffnungszeiten, Voraussetzungen, Beträge und Fristen direkt auf den verlinkten offiziellen Seiten prüfen.</li>
                         <li>Auf gemeinsam genutzten Geräten lokale Daten löschen, wenn du Häkchen oder Entwürfe speicherst.</li>
                     </ul>
+                </aside>
+
+                <aside class="next-actions" aria-labelledby="h-kleiner-schritt">
+                    <h3 id="h-kleiner-schritt">Heute ein kleiner nächster Schritt</h3>
+                    <div class="next-action-grid">
+                        <article class="next-action">
+                            <h4>Wenn es dringend ist</h4>
+                            <p>Nutze zuerst die Hilferouten oben. Bitte eine vertraute Person, neben dir zu bleiben, mitzuhören oder mitzulesen.</p>
+                            <p><a href="#schnelle-hilfe">Zu schneller Hilfe</a></p>
+                        </article>
+                        <article class="next-action">
+                            <h4>Wenn ein Termin ansteht</h4>
+                            <p>Öffne genau eine passende offizielle Seite, schreibe drei Fragen auf und starte den Ein-Seiten-Plan.</p>
+                            <p><a href="#one-page-plan">Zum Ein-Seiten-Plan</a></p>
+                        </article>
+                        <article class="next-action">
+                            <h4>Wenn ein Brief unklar ist</h4>
+                            <p>Lege ihn in deine Mappe oder mach ein Foto, markiere jedes Datum und frage eine Stelle oder Vertrauensperson nach dem nächsten Schritt.</p>
+                            <p><a href="#dokumente">Zu Dokumenten und Terminen</a></p>
+                        </article>
+                    </div>
                 </aside>
 
                 <div class="router-grid">

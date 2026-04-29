@@ -24,6 +24,7 @@ Last updated: 2026-04-29
 - A public source/review page pass was completed on 2026-04-29, adding `quellen.html`, sitemap coverage, and local same-domain URL validation.
 - A lightweight accessibility-check pass was completed on 2026-04-29, adding static HTML accessibility guardrails to `scripts/check-site.py`.
 - A source-review automation pass was completed on 2026-04-29, adding public/source-log review-date checks to `scripts/check-site.py`.
+- A homepage quick-action pass was completed on 2026-04-29, adding a low-pressure "Heute ein kleiner nächster Schritt" block near the top router.
 
 ## What Was Added In This Setup Pass
 
@@ -229,6 +230,29 @@ Checks run in this pass:
 - `git diff --check`
 - `cat CNAME`
 - local bounded HTTP preview for `/` and `/quellen.html`, both returned `HTTP 200`
+
+## What Was Added In The Homepage Quick-Action Pass
+
+- Added a short "Heute ein kleiner nächster Schritt" block in the top "Was brauchst du gerade?" area.
+- The new block gives three safe, practical actions: urgent help first, prepare one appointment, and sort unclear letters without guessing legal deadlines.
+- Extended `scripts/check-site.py` so the quick-action block is part of the public homepage guardrails.
+- No new phone numbers, contact details, benefit amounts, legal deadlines, eligibility promises, backend, analytics, or forms were added.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --external`
+- inline JavaScript syntax check with `node --check`
+- `wkhtmltoimage --width 390 index.html /private/tmp/careleaver-quick-actions-mobile.png`
+- `sips` image dimension check for the mobile render
+- `wkhtmltopdf --print-media-type index.html /private/tmp/careleaver-quick-actions-print.pdf`
+- `qpdf --check /private/tmp/careleaver-quick-actions-print.pdf`
+- local HTTP preview smoke check for `/` returned `HTTP 200` on port 8791 after ports 8765 and 8766 were already occupied
 
 ## Current Product Decision
 
