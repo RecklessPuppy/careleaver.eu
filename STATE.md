@@ -28,6 +28,7 @@ Last updated: 2026-04-29
 - A safe structured-data SEO pass was completed on 2026-04-29, adding WebSite/WebPage/BreadcrumbList JSON-LD and guardrails against premature owner/contact schema.
 - A sitemap/canonical consistency pass was completed on 2026-04-29, extending `scripts/check-site.py` so page canonicals, `sitemap.xml`, and `robots.txt` stay aligned.
 - A morning review was completed on 2026-04-29: latest `main` was already up to date, the latest GitHub Actions runs were green, live `index.html`, `quellen.html`, and `sitemap.xml` matched local `main` by SHA-256 hash, and the custom site-check workflow was updated to `actions/checkout@v6` to address its Node.js 20 deprecation warning.
+- A rendered mobile/accessibility hardening pass was completed on 2026-04-29, adding table captions, keyboard-focusable wide table regions, breakpoint-based heading sizes instead of viewport-relative font sizing, and checker guardrails for table captions and viewport font-size regressions.
 
 ## Morning Review 2026-04-29
 
@@ -59,9 +60,38 @@ Last updated: 2026-04-29
 
 ### Next 3 Recommended Tasks
 
-1. Run a real browser/mobile accessibility pass on `index.html` and `quellen.html`, then fix only layout or accessibility issues that do not change facts.
+1. Run a full modern-browser/axe accessibility pass on `index.html` and `quellen.html` after Playwright/Chrome launch permissions are working; static and wkhtml rendered smoke checks passed in the meantime.
 2. Do a human factual review of the Wien MVP against `research/source-log.md` and `research/qa-report.md`, especially crisis, housing, money, contacts, and legal-background wording.
 3. Decide verified operator/contact/impressum wording, then add it carefully to the public site and structured data only after the details are confirmed.
+
+## Automation Pass 2026-04-29 10:05
+
+### What Changed
+
+- Added visually hidden table captions to the public source/review tables in `index.html` and `quellen.html`.
+- Made the wide table wrappers keyboard-focusable labelled regions, so horizontal table scrolling is easier to discover and operate without a mouse.
+- Replaced viewport-relative heading font sizing (`vw` inside `font-size`) with fixed breakpoint-based sizes for more predictable mobile and desktop rendering.
+- Extended `scripts/check-site.py` so future public tables need captions and future public heading font sizes cannot use viewport-relative units.
+- No factual public claims, links, contact details, deadlines, eligibility wording, benefit amounts, backend, analytics, or forms were added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py`
+- `python3 -m py_compile scripts/check-site.py`
+- inline JavaScript syntax check with `node --check`
+- `git diff --check`
+- `python3 scripts/check-site.py --external`
+- `cat CNAME`
+- local HTTP smoke checks for `/` and `/quellen.html`, both returned `HTTP 200`
+- `wkhtmltoimage --width 390` for `/` and `/quellen.html`
+- `wkhtmltoimage --width 1280` for `/`
+- `wkhtmltopdf --print-media-type` for `/`
+- `qpdf --check /private/tmp/careleaver-index-print-after.pdf`
+
+### Notes
+
+- Playwright CLI could not complete in the sandbox: first npm cache permissions blocked it, then Chrome launch/cleanup failed after redirecting cache paths to `/private/tmp`. This is still a tooling issue, not a site failure.
+- Full browser/axe accessibility QA remains the next best safe task once the Playwright/Chrome environment works.
 
 ## What Was Added In This Setup Pass
 

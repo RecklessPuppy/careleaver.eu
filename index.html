@@ -196,7 +196,7 @@
 
         h1 {
             margin: 0;
-            font-size: clamp(2rem, 9vw, 4.4rem);
+            font-size: 2rem;
             max-width: 900px;
         }
 
@@ -330,7 +330,7 @@
 
         h2 {
             margin: 0 0 .7rem;
-            font-size: clamp(1.55rem, 6vw, 2.45rem);
+            font-size: 1.55rem;
         }
 
         h3 {
@@ -656,6 +656,11 @@
             background: #fff;
         }
 
+        .table-wrap:focus-visible {
+            outline: 3px solid #f0c85a;
+            outline-offset: 3px;
+        }
+
         table {
             width: 100%;
             min-width: 780px;
@@ -706,6 +711,14 @@
         }
 
         @media (min-width: 720px) {
+            h1 {
+                font-size: 3.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
             .crisis-bar .wrap {
                 grid-template-columns: 230px 1fr;
                 align-items: center;
@@ -728,6 +741,14 @@
         }
 
         @media (min-width: 1020px) {
+            h1 {
+                font-size: 4.4rem;
+            }
+
+            h2 {
+                font-size: 2.45rem;
+            }
+
             .urgent-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
@@ -1326,8 +1347,9 @@
                 <h2 id="h-quellen">Quellen und Review</h2>
                 <p class="section-intro">High-risk Informationen stehen nicht nur im Fließtext. Jede wichtige Claim-Gruppe bekommt Quelle, Prüftermin und nächste Prüfung. Details wie Telefon, Öffnungszeiten, Beträge, Voraussetzungen und Fristen können sich ändern.</p>
 
-                <div class="table-wrap">
+                <div class="table-wrap" role="region" aria-label="Quellen- und Review-Tabelle horizontal scrollen" tabindex="0">
                     <table>
+                        <caption class="sr-only">Quellen und Review-Daten nach Themenbereich</caption>
                         <thead>
                             <tr>
                                 <th scope="col">Bereich</th>

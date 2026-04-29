@@ -118,6 +118,7 @@ class LinkParser(HTMLParser):
         self.labels_for: set[str] = set()
         self.form_controls: list[tuple[str, dict[str, str], int, bool]] = []
         self.images_missing_alt: list[tuple[str, int]] = []
+        self.tables_missing_caption: list[int] = []
         self.th_missing_scope: list[int] = []
         self.navs_missing_label: list[int] = []
         self.aria_references: list[tuple[str, list[str], int]] = []
@@ -128,6 +129,7 @@ class LinkParser(HTMLParser):
         self._text_stack: list[dict[str, object]] = []
         self._json_ld_parts: list[str] | None = None
         self._json_ld_line = 0
+        self._table_stack: list[dict[str, object]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         tag = tag.lower()
@@ -155,6 +157,10 @@ class LinkParser(HTMLParser):
             self.form_controls.append((tag, attr_map, line, self._label_depth > 0))
         if tag == "img" and "alt" not in attr_map:
             self.images_missing_alt.append((attr_map.get("src", ""), line))
+        if tag == "table":
+            self._table_stack.append({"line": line, "has_caption": False})
+        if tag == "caption" and self._table_stack:
+            self._table_stack[-1]["has_caption"] = True
         if tag == "th" and "scope" not in attr_map:
             self.th_missing_scope.append(line)
         if tag == "script" and attr_map.get("type", "").lower() == "application/ld+json":
@@ -201,6 +207,12 @@ class LinkParser(HTMLParser):
             self.json_ld_scripts.append(("".join(self._json_ld_parts), self._json_ld_line))
             self._json_ld_parts = None
             self._json_ld_line = 0
+        if tag == "table" and self._table_stack:
+            table = self._table_stack.pop()
+            if not table["has_caption"]:
+                line = table["line"]
+                assert isinstance(line, int)
+                self.tables_missing_caption.append(line)
 
         for index in range(len(self._text_stack) - 1, -1, -1):
             item = self._text_stack[index]
@@ -459,6 +471,8 @@ def check_accessibility_basics(errors: list[str]) -> None:
             errors.append(f"{path}:{line}: {tag} missing accessible text/name: {target}")
         for source, line in parser.images_missing_alt:
             errors.append(f"{path}:{line}: img missing alt attribute: {source or '[inline]'}")
+        for line in parser.tables_missing_caption:
+            errors.append(f"{path}:{line}: table missing caption")
         for line in parser.th_missing_scope:
             errors.append(f"{path}:{line}: table header missing scope attribute")
         for line in parser.navs_missing_label:
@@ -707,6 +721,9 @@ def check_index_guardrails(errors: list[str]) -> None:
         if snippet in index:
             errors.append(f"index.html: forbidden risky wording found: {snippet}")
 
+    if re.search(r"font-size\s*:[^;]*(?:vw|vh|vmin|vmax)", index, flags=re.IGNORECASE):
+        errors.append("index.html: font-size should not use viewport-relative units")
+
 
 def check_sources_page_guardrails(errors: list[str]) -> None:
     page = (ROOT / "quellen.html").read_text(encoding="utf-8")
@@ -736,6 +753,9 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
     for snippet in forbidden_snippets:
         if snippet in page:
             errors.append(f"quellen.html: forbidden risky wording found: {snippet}")
+
+    if re.search(r"font-size\s*:[^;]*(?:vw|vh|vmin|vmax)", page, flags=re.IGNORECASE):
+        errors.append("quellen.html: font-size should not use viewport-relative units")
 
 
 def fold_text(value: str) -> str:

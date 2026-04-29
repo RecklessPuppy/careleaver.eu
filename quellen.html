@@ -130,13 +130,13 @@
 
         h1 {
             margin: 0;
-            font-size: clamp(2rem, 9vw, 4rem);
+            font-size: 2rem;
             max-width: 900px;
         }
 
         h2 {
             margin: 0 0 .7rem;
-            font-size: clamp(1.55rem, 6vw, 2.35rem);
+            font-size: 1.55rem;
         }
 
         h3 {
@@ -282,6 +282,11 @@
             background: #fff;
         }
 
+        .table-wrap:focus-visible {
+            outline: 3px solid #f0c85a;
+            outline-offset: 3px;
+        }
+
         table {
             width: 100%;
             min-width: 820px;
@@ -327,9 +332,39 @@
             max-width: 900px;
         }
 
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
         @media (min-width: 760px) {
+            h1 {
+                font-size: 3.1rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
             .grid {
                 grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1020px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h2 {
+                font-size: 2.35rem;
             }
         }
 
@@ -456,8 +491,9 @@
                 <h2 id="h-review">Review-Tabelle</h2>
                 <p class="section-intro">Die Tabelle ist eine öffentliche Übersicht. Sie ersetzt nicht die offizielle Seite der jeweiligen Stelle. Besonders bei Telefonnummern, Öffnungszeiten, Beträgen, Voraussetzungen und Fristen immer direkt auf der verlinkten Quelle prüfen.</p>
 
-                <div class="table-wrap">
+                <div class="table-wrap" role="region" aria-label="Review-Tabelle horizontal scrollen" tabindex="0">
                     <table>
+                        <caption class="sr-only">Öffentliche Quellen, Prüfdaten und nächste Review-Termine</caption>
                         <thead>
                             <tr>
                                 <th scope="col">Bereich</th>

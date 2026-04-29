@@ -54,6 +54,14 @@ TODO - Benefits/legal expansion: do not add amounts, thresholds, appeal deadline
 
 TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until each has its own official source set.
 
+## Automation QA Addendum 2026-04-29 10:05
+
+- Added hidden captions to public review/source tables and made the wide table regions keyboard-focusable with accessible labels.
+- Replaced viewport-relative heading font sizing with breakpoint-based fixed sizes to keep mobile/desktop text sizing more predictable.
+- Extended `scripts/check-site.py` to fail future public tables without captions and future public `font-size` rules that use viewport units.
+- Rendered mobile/desktop image and print PDF smoke checks passed after the changes.
+- Playwright CLI still could not complete because of local npm cache and Chrome launch/cleanup permissions; a full modern-browser/axe audit remains useful when that environment is fixed.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/
