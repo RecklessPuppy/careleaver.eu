@@ -34,6 +34,35 @@ Last updated: 2026-04-29
 - A Wien appointment-prep card pass was completed on 2026-04-29, adding five provider-specific static cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA using existing official links and cautious preparation wording.
 - A touch-target and reduced-motion accessibility pass was completed on 2026-04-29, increasing mobile nav/crisis tap targets, adding reduced-motion CSS, and extending `scripts/check-site.py` with guardrails for these basics.
 - A homepage health/E-Card routing pass was completed on 2026-04-29, adding a cautious health and insurance route using already logged Gesundheitsportal Österreich and ÖGK sources, plus matching checker guardrails.
+- A template privacy hardening pass was completed on 2026-04-29, disabling browser autocomplete on sensitive template free-text fields and adding a checker guardrail.
+
+## Template Privacy Hardening Pass 2026-04-29
+
+### What Changed
+
+- Added `autocomplete="off"` to remaining one-page-plan and appointment-prep textareas.
+- Added `scripts/check-site.py` guardrails so fields with `plan-` or `appointment-` IDs must keep autocomplete disabled.
+- Added a short public changelog note on `quellen.html`.
+- Updated `research/qa-report.md` with the privacy addendum.
+- No factual public claims, source links, emergency instructions, contact details, legal/benefit/housing/health wording, backend, analytics, forms, or server-side data collection were changed.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+
+### Current Risks
+
+- Browser autocomplete controls are a guardrail, not a guarantee; shared-device users still need the visible local-data deletion warning.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Morning Review 2026-04-29
 

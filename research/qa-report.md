@@ -72,6 +72,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Visual mobile screenshot smoke check at 390 px found no obvious top-viewport overlap on `/` or `/quellen.html`.
 - No factual public claims, links, contact details, legal/benefit/housing/health/emergency instructions, backend, analytics, forms, or personal-data collection were added.
 
+## Template Privacy Addendum 2026-04-29
+
+- Added `autocomplete="off"` to the remaining free-text fields in the appointment and one-page-plan templates.
+- Extended `scripts/check-site.py` so sensitive template fields with `plan-` or `appointment-` IDs must keep browser autocomplete disabled.
+- This reduces accidental reuse of sensitive appointment text on shared devices, but it does not replace the visible shared-device warning or the "Lokale Daten löschen" action.
+- No factual public claims, contact details, legal/benefit/housing wording, emergency instructions, backend, analytics, forms, or server-side data collection were added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

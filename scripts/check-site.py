@@ -749,6 +749,7 @@ def check_index_guardrails(errors: list[str]) -> None:
 
     check_accessibility_css_guardrails(Path("index.html"), index, errors, requires_pill_targets=True)
     check_appointment_cards(index, errors)
+    check_template_privacy_fields(errors)
 
 
 def check_accessibility_css_guardrails(
@@ -796,6 +797,23 @@ def check_appointment_cards(index: str, errors: list[str]) -> None:
             errors.append(f"index.html: appointment card #{card_id} missing official-page decision warning")
         if "2026-04-29" not in card or "2026-07-29" not in card:
             errors.append(f"index.html: appointment card #{card_id} missing review dates")
+
+
+def check_template_privacy_fields(errors: list[str]) -> None:
+    parser = parse_html_files().get(Path("index.html"))
+    if parser is None:
+        errors.append("index.html: unable to parse template privacy fields")
+        return
+
+    sensitive_prefixes = ("plan-", "appointment-")
+    for tag, attrs, line, _in_wrapping_label in parser.form_controls:
+        control_id = attrs.get("id", "")
+        if not control_id.startswith(sensitive_prefixes):
+            continue
+        if attrs.get("autocomplete", "").lower() != "off":
+            errors.append(
+                f"index.html:{line}: sensitive template field #{control_id} should use autocomplete=\"off\""
+            )
 
 
 def check_sources_page_guardrails(errors: list[str]) -> None:
