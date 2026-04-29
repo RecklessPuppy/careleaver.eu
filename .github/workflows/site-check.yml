@@ -20,3 +20,13 @@ jobs:
       - name: Run static site checks
         shell: bash
         run: python3 scripts/check-site.py
+
+      - name: Run external link smoke check
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            python3 scripts/check-site.py --external --soft-external
+          else
+            python3 scripts/check-site.py --external
+          fi

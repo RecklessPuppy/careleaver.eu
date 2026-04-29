@@ -154,7 +154,7 @@ Goal: keep information from becoming stale.
 
 - Create a regular source review routine. Status: first runbook and prompts added 2026-04-29.
 - Track time-sensitive claims and review dates. Status: source log and public review dates exist; automation should keep checking them.
-- Automate link checks if tooling is added. Status: basic GitHub Actions internal-link/placeholder/required-file check added 2026-04-29.
+- Automate link checks if tooling is added. Status: basic GitHub Actions internal-link/placeholder/required-file check added 2026-04-29; optional external HTTP link smoke check added 2026-04-29 for manual/local runs and scheduled CI warnings.
 - Consider scheduled Codex maintenance prompts. Status: `prompts/06-overnight-operator.md` and `prompts/07-morning-review.md` added 2026-04-29.
 - Keep a simple changelog of factual updates.
 

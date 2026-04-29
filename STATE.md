@@ -19,6 +19,7 @@ Last updated: 2026-04-29
 - A focused safety/fact/link/mobile QA pass was completed on 2026-04-29 and logged in `research/qa-report.md`.
 - An overnight autonomous operating setup was added on 2026-04-29, including runbook, prompts, report folder, and lightweight GitHub Actions checks.
 - An immediate overnight implementation sprint was completed on 2026-04-29 before scheduled automation, focused on public usefulness, safe routing, and repeatable QA.
+- An external-link smoke-check pass was completed on 2026-04-29, adding optional networked HTTP link checks to local/manual QA and scheduled CI warnings.
 
 ## What Was Added In This Setup Pass
 
@@ -118,6 +119,26 @@ Checks run in this sprint:
 
 Browser note: the Playwright CLI wrapper hung before output and no local Playwright package was available, so this sprint used static checks plus wkhtml image/PDF smoke checks rather than a modern Chromium interaction test.
 
+## What Was Added In The External Link Check Pass
+
+- Extended `scripts/check-site.py` with `--external`, `--soft-external`, and `--external-timeout`.
+- The default local and push checks remain stable and offline-friendly.
+- Strict external HTTP checks can now run locally or from manual GitHub Actions dispatch.
+- Scheduled GitHub Actions runs now perform external link checks as soft warnings, so temporary upstream outages do not block ordinary pushes.
+- Updated `ROADMAP.md` and `research/open-questions.md` to mark the minimal automated link-checking question as lowered.
+- No public factual content or source-sensitive wording changed.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `python3 scripts/check-site.py --external`
+- `git diff --check`
+- `cat CNAME`
+- YAML parse check for `.github/workflows/site-check.yml`
+- local HTTP preview smoke check at `http://127.0.0.1:8765/` returned `HTTP 200`
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -152,7 +173,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a lightweight external-link check script that can run when network is available, improve no-JavaScript/print polish for the templates, or add a public changelog/source-review page. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: improve no-JavaScript/print polish for the templates, add a public changelog/source-review page, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 

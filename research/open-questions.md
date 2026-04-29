@@ -36,6 +36,7 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - ORF/OBS: public page links to OBS for exemption/support checks.
 - waff: public page avoids the old `18-25` claim and links to waff directly; source-log records visible `18-24` wording.
 - Meldezettel: public page links to the exact Stadt Wien residence-registration page.
+- Automated link checking: `scripts/check-site.py` now supports `--external` for strict manual/local HTTP link checks and scheduled GitHub Actions runs external checks as soft warnings.
 
 ## Product Decisions
 
@@ -44,7 +45,6 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Should appointment-prep kits be sections on the same page or separate print-friendly static pages?
 - Should printable PDFs be avoided for now to reduce duplicate maintenance risk?
 - Should contact cards prefer "official page" buttons instead of repeating phone/address details?
-- Add automated link checking later, and if yes, with what minimal tooling?
 
 ## Lower Priority / Later Expansion
 
