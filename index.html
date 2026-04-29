@@ -15,6 +15,9 @@
     <meta property="og:locale" content="de_AT">
     <meta name="twitter:card" content="summary">
     <meta name="theme-color" content="#114b5f">
+    <script>
+        document.documentElement.classList.add("js");
+    </script>
 
     <!--
         Pflegehinweis fuer zukuenftige Codex-Agenten:
@@ -499,6 +502,11 @@
             font-weight: 800;
         }
 
+        .finder-js-controls {
+            display: grid;
+            gap: .8rem;
+        }
+
         .finder select,
         .template-field textarea,
         .template-field input {
@@ -520,6 +528,29 @@
 
         .result.show {
             display: block;
+        }
+
+        .no-js-fallback {
+            margin-top: .2rem;
+            padding: .85rem;
+            border: 1px solid #c6d7e2;
+            border-radius: 8px;
+            background: #f8fbfd;
+        }
+
+        .no-js-fallback h4 {
+            margin: 0 0 .45rem;
+            font-size: 1rem;
+        }
+
+        .js .no-js-fallback {
+            display: none;
+        }
+
+        html:not(.js) .finder-js-controls,
+        html:not(.js) [data-action],
+        html:not(.js) [data-copy] {
+            display: none !important;
         }
 
         .route-list,
@@ -726,6 +757,16 @@
             a {
                 color: #000;
             }
+
+            input,
+            textarea {
+                border: 1px solid #000;
+                min-height: 2.2rem;
+            }
+
+            textarea {
+                min-height: 5.5rem;
+            }
         }
     </style>
 
@@ -795,7 +836,7 @@
 
     <noscript>
         <div class="wrap">
-            <p class="source-note">Die Inhalte und Links funktionieren auch ohne JavaScript. Nur Häkchen speichern, Kopieren per Knopf und Druckhilfen sind dann eingeschränkt.</p>
+            <p class="source-note">Die Inhalte und Links funktionieren auch ohne JavaScript. Interaktive Knöpfe werden ausgeblendet; zum Drucken bitte die Druckfunktion des Browsers verwenden.</p>
         </div>
     </noscript>
 
@@ -888,17 +929,29 @@
 
                 <div class="finder" aria-labelledby="h-finder">
                     <h3 id="h-finder">Nächste-Schritte-Finder</h3>
-                    <label for="need">Was ist gerade am wichtigsten?</label>
-                    <select id="need">
-                        <option value="">Bitte auswählen</option>
-                        <option value="unsafe">Ich habe keine sichere Unterkunft</option>
-                        <option value="care">Ich brauche Care-Leaver- oder MA-11-Hilfe</option>
-                        <option value="money">Ich brauche Hilfe mit Geld, AMS, U25 oder Schulden</option>
-                        <option value="docs">Ich muss Unterlagen für einen Termin sammeln</option>
-                        <option value="rights">Ich will etwas schriftlich bekommen oder mich beschweren</option>
-                    </select>
-                    <button type="button" data-action="show-next-step">Nächsten Schritt anzeigen</button>
-                    <div id="next-step-result" class="result" aria-live="polite"></div>
+                    <div class="finder-js-controls">
+                        <label for="need">Was ist gerade am wichtigsten?</label>
+                        <select id="need">
+                            <option value="">Bitte auswählen</option>
+                            <option value="unsafe">Ich habe keine sichere Unterkunft</option>
+                            <option value="care">Ich brauche Care-Leaver- oder MA-11-Hilfe</option>
+                            <option value="money">Ich brauche Hilfe mit Geld, AMS, U25 oder Schulden</option>
+                            <option value="docs">Ich muss Unterlagen für einen Termin sammeln</option>
+                            <option value="rights">Ich will etwas schriftlich bekommen oder mich beschweren</option>
+                        </select>
+                        <button type="button" data-action="show-next-step">Nächsten Schritt anzeigen</button>
+                        <div id="next-step-result" class="result" aria-live="polite"></div>
+                    </div>
+                    <div class="no-js-fallback" aria-labelledby="h-finder-fallback">
+                        <h4 id="h-finder-fallback">Ohne JavaScript: direkt zum passenden Abschnitt</h4>
+                        <ul class="plain-list">
+                            <li><a href="#schnelle-hilfe">Schnelle Hilfe in Wien</a></li>
+                            <li><a href="#jugendhilfe">Jugendhilfe, Nachbetreuung oder MA 11</a></li>
+                            <li><a href="#geld">Geld, AMS, U25 oder Schulden</a></li>
+                            <li><a href="#dokumente">Dokumente und Termine</a></li>
+                            <li><a href="#rechte">Beschwerde, Rechte oder Vertrauensperson</a></li>
+                        </ul>
+                    </div>
                     <p class="source-note"><strong>Quellenmuster:</strong> Jede Route verlinkt direkt zu offiziellen oder betreiberseitigen Seiten. Telefon, Öffnungszeiten, Voraussetzungen, Beträge und Fristen bitte dort aktuell prüfen.</p>
                 </div>
             </div>
@@ -1387,9 +1440,53 @@
             });
         }
 
+        function cloneForPrint(element) {
+            const clone = element.cloneNode(true);
+            const sourceFields = element.querySelectorAll("input, textarea, select");
+            const printFields = clone.querySelectorAll("input, textarea, select");
+
+            printFields.forEach((field, index) => {
+                const source = sourceFields[index];
+                if (!source) return;
+
+                if (field.tagName === "TEXTAREA") {
+                    field.textContent = source.value;
+                    return;
+                }
+
+                if (field.tagName === "SELECT") {
+                    [...field.options].forEach((option) => {
+                        option.selected = option.value === source.value;
+                        if (option.selected) {
+                            option.setAttribute("selected", "selected");
+                        } else {
+                            option.removeAttribute("selected");
+                        }
+                    });
+                    return;
+                }
+
+                if (field.type === "checkbox" || field.type === "radio") {
+                    field.checked = source.checked;
+                    if (source.checked) {
+                        field.setAttribute("checked", "checked");
+                    } else {
+                        field.removeAttribute("checked");
+                    }
+                    return;
+                }
+
+                field.value = source.value;
+                field.setAttribute("value", source.value);
+            });
+
+            return clone;
+        }
+
         function printSection(id) {
             const element = document.getElementById(id);
             if (!element) return;
+            const printable = cloneForPrint(element);
             const printWindow = window.open("", "_blank");
             if (!printWindow) {
                 alert("Das Druckfenster wurde blockiert. Du kannst die Seite auch über den Browser drucken.");
@@ -1406,10 +1503,13 @@
                         a{color:#000}
                         .actions,button{display:none}
                         .card,.script-box{border:1px solid #000;padding:12px;margin:12px 0}
-                        textarea,input{width:100%;border:1px solid #000;min-height:40px}
+                        label{display:block;font-weight:700;margin-top:10px}
+                        textarea,input{width:100%;border:1px solid #000;min-height:40px;padding:6px}
+                        textarea{min-height:90px;white-space:pre-wrap}
+                        .source-note,.privacy-note{border:1px solid #000;padding:10px}
                     </style>
                 </head>
-                <body>${element.outerHTML}</body>
+                <body>${printable.outerHTML}</body>
                 </html>
             `);
             printWindow.document.close();

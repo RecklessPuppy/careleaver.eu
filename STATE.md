@@ -20,6 +20,7 @@ Last updated: 2026-04-29
 - An overnight autonomous operating setup was added on 2026-04-29, including runbook, prompts, report folder, and lightweight GitHub Actions checks.
 - An immediate overnight implementation sprint was completed on 2026-04-29 before scheduled automation, focused on public usefulness, safe routing, and repeatable QA.
 - An external-link smoke-check pass was completed on 2026-04-29, adding optional networked HTTP link checks to local/manual QA and scheduled CI warnings.
+- A no-JavaScript and print resilience pass was completed on 2026-04-29, focused on the public router and templates.
 
 ## What Was Added In This Setup Pass
 
@@ -139,6 +140,28 @@ Checks run in this pass:
 - YAML parse check for `.github/workflows/site-check.yml`
 - local HTTP preview smoke check at `http://127.0.0.1:8765/` returned `HTTP 200`
 
+## What Was Added In The No-JavaScript / Print Pass
+
+- Added an explicit no-JavaScript fallback for the `Nächste-Schritte-Finder`, so users can still jump directly to the right section if scripts are disabled.
+- Hid interactive buttons when JavaScript is unavailable, avoiding controls that look clickable but cannot run.
+- Fixed the section print helper so typed input and textarea values are copied into the print window before printing.
+- Improved print styling for template form fields.
+- No public factual claims, contact details, benefit amounts, deadlines, or eligibility wording changed.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- inline JavaScript syntax check with `node --check`
+- `wkhtmltoimage --disable-javascript --width 390 index.html /private/tmp/careleaver-nojs-mobile.png`
+- `sips` image dimension check for the no-JavaScript mobile render
+- `wkhtmltopdf --disable-javascript --print-media-type index.html /private/tmp/careleaver-nojs-print.pdf`
+- `qpdf --check /private/tmp/careleaver-nojs-print.pdf`
+- `pdftotext /private/tmp/careleaver-nojs-print.pdf -` smoke check for no-JavaScript fallback text
+
 ## Current Product Decision
 
 The best MVP direction is a Wien-first, source-dated "Was mache ich als Naechstes?" guide for Care Leavers after child/youth welfare.
@@ -173,7 +196,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: improve no-JavaScript/print polish for the templates, add a public changelog/source-review page, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, and `index.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a public changelog/source-review page, add a lightweight accessibility audit path, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 
