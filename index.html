@@ -263,7 +263,7 @@
         .pill {
             display: inline-flex;
             align-items: center;
-            min-height: 36px;
+            min-height: 44px;
             border: 1px solid #d8e0e8;
             border: 1px solid var(--line);
             border-radius: 999px;
@@ -303,7 +303,9 @@
         }
 
         nav a {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
             white-space: nowrap;
             border-radius: 999px;
             padding: .45rem .72rem;
@@ -814,6 +816,17 @@
         @media (max-width: 720px) {
             nav {
                 position: static;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
             }
         }
 

@@ -32,6 +32,7 @@ Last updated: 2026-04-29
 - A safe post-MVP browser/mobile/accessibility QA pass was completed on 2026-04-29 with Playwright/Chromium against `/` and `/quellen.html` at 320, 390, 768, 1024, and 1440 px widths. It fixed a 320 px checklist overflow, button hover contrast, and mobile keyboard-focus visibility.
 - A human factual review packet was prepared on 2026-04-29 at `research/human-review-packet-2026-04-29.md`, grouping high-risk Wien MVP claims for owner review before broad outreach. No public factual content was changed.
 - A Wien appointment-prep card pass was completed on 2026-04-29, adding five provider-specific static cards for Care Leaver Beratung/MA 11, U25, Wohnbeihilfe/MA 50, FSW Wohnungslosenhilfe, and KIJA using existing official links and cautious preparation wording.
+- A touch-target and reduced-motion accessibility pass was completed on 2026-04-29, increasing mobile nav/crisis tap targets, adding reduced-motion CSS, and extending `scripts/check-site.py` with guardrails for these basics.
 
 ## Morning Review 2026-04-29
 
@@ -119,6 +120,33 @@ Run a human factual review of the Wien MVP against `research/source-log.md` and 
 ### Next Recommended Task
 
 Include the new appointment-prep cards in the next human factual review before broad outreach.
+
+## Touch Target / Reduced Motion Pass 2026-04-29
+
+### What Changed
+
+- Increased public navigation links on `index.html` and `quellen.html` to a 44 px minimum touch target.
+- Increased homepage crisis/action pills to a 44 px minimum touch target.
+- Added `prefers-reduced-motion: reduce` CSS handling to both public pages so smooth scrolling and any future transitions respect reduced-motion preferences.
+- Extended `scripts/check-site.py` so future public pages keep nav touch targets, homepage crisis pill touch targets, and reduced-motion CSS guardrails.
+- No public factual claims, source links, emergency instructions, contact details, legal/benefit/housing wording, backend, analytics, forms, or personal-data collection were changed.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- inline JavaScript syntax checks for `index.html` and `quellen.html`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- local HTTP preview smoke checks for `/` and `/quellen.html`
+- `wkhtmltoimage --width 390` for `/` and `/quellen.html`
+- `wkhtmltopdf --print-media-type` for `/`
+- `qpdf --check /private/tmp/careleaver-touch-targets-index-print.pdf`
+
+### Next Recommended Task
+
+Run the dedicated axe/assistive-technology review when the browser tooling is stable; owner factual review and verified operator/impressum details remain higher-priority human decisions before broad outreach.
 
 ## Human Review Packet 2026-04-29
 

@@ -743,7 +743,27 @@ def check_index_guardrails(errors: list[str]) -> None:
     if re.search(r"font-size\s*:[^;]*(?:vw|vh|vmin|vmax)", index, flags=re.IGNORECASE):
         errors.append("index.html: font-size should not use viewport-relative units")
 
+    check_accessibility_css_guardrails(Path("index.html"), index, errors, requires_pill_targets=True)
     check_appointment_cards(index, errors)
+
+
+def check_accessibility_css_guardrails(
+    path: Path,
+    text: str,
+    errors: list[str],
+    *,
+    requires_pill_targets: bool = False,
+) -> None:
+    if "@media (prefers-reduced-motion: reduce)" not in text:
+        errors.append(f"{path}: missing prefers-reduced-motion CSS guardrail")
+    if not re.search(r"nav\s+a\s*\{[^}]*min-height\s*:\s*44px", text, flags=re.IGNORECASE | re.DOTALL):
+        errors.append(f"{path}: nav links should keep a 44px touch target")
+    if requires_pill_targets and not re.search(
+        r"\.pill\s*\{[^}]*min-height\s*:\s*44px",
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    ):
+        errors.append(f"{path}: crisis/action pills should keep a 44px touch target")
 
 
 def check_appointment_cards(index: str, errors: list[str]) -> None:
@@ -805,6 +825,8 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
 
     if re.search(r"font-size\s*:[^;]*(?:vw|vh|vmin|vmax)", page, flags=re.IGNORECASE):
         errors.append("quellen.html: font-size should not use viewport-relative units")
+
+    check_accessibility_css_guardrails(Path("quellen.html"), page, errors)
 
 
 def fold_text(value: str) -> str:
