@@ -27,6 +27,7 @@ Safe fixes shipped in this QA pass:
 8. Tone: PASS. Tone is practical and respectful. It avoids savior language and avoids blaming the young person.
 9. Official sources linked where needed: PASS WITH CAUTION. High-risk sections link mainly to official or operator pages. The page should keep preferring official pages over copied contact blocks.
 10. Last-reviewed dates: IMPROVED. Public source/review dates are visible by claim group. A later automation pass added review-date checks to `scripts/check-site.py`, so public/source-log review dates now warn before they are due and fail strict checks when overdue. Crisis, money, housing, contacts, and time-sensitive routes remain on 2026-07-29 review cycles.
+11. Sitemap/canonical consistency: IMPROVED. A later automation pass added local checks that root HTML pages have the expected canonical URL, appear in `sitemap.xml`, and stay connected from `robots.txt`.
 
 ## Fact-Check Notes
 

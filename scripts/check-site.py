@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import unicodedata
+import xml.etree.ElementTree as ET
 from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import date, timedelta
@@ -122,6 +123,7 @@ class LinkParser(HTMLParser):
         self.aria_references: list[tuple[str, list[str], int]] = []
         self.interactive_missing_name: list[tuple[str, str, int]] = []
         self.json_ld_scripts: list[tuple[str, int]] = []
+        self.canonical_links: list[tuple[str, int]] = []
         self._label_depth = 0
         self._text_stack: list[dict[str, object]] = []
         self._json_ld_parts: list[str] | None = None
@@ -158,6 +160,8 @@ class LinkParser(HTMLParser):
         if tag == "script" and attr_map.get("type", "").lower() == "application/ld+json":
             self._json_ld_parts = []
             self._json_ld_line = line
+        if tag == "link" and "canonical" in attr_map.get("rel", "").lower().split():
+            self.canonical_links.append((attr_map.get("href", ""), line))
 
         element_id = attr_map.get("id")
         if element_id:
@@ -518,6 +522,104 @@ def check_structured_data(errors: list[str]) -> None:
             errors.append(f"{path}: missing required JSON-LD type: {missing_type}")
 
 
+def public_html_files() -> list[Path]:
+    return sorted(ROOT.glob("*.html"))
+
+
+def expected_canonical_url(path: Path) -> str:
+    if path.name == "index.html" and path.parent == ROOT:
+        return "https://careleaver.eu/"
+    if path.name == "index.html":
+        return f"https://careleaver.eu/{path.parent.as_posix().strip('/')}/"
+    return f"https://careleaver.eu/{path.as_posix()}"
+
+
+def path_from_site_url(url: str) -> Path | None:
+    parsed_url = urlparse(url)
+    if parsed_url.scheme != "https" or parsed_url.netloc != "careleaver.eu":
+        return None
+    path = parsed_url.path or "/"
+    if path == "/":
+        return Path("index.html")
+    if path.endswith("/"):
+        return Path(path.lstrip("/")) / "index.html"
+    return Path(path.lstrip("/"))
+
+
+def sitemap_urls(errors: list[str]) -> list[tuple[str, int]]:
+    sitemap = ROOT / "sitemap.xml"
+    try:
+        tree = ET.parse(sitemap)
+    except ET.ParseError as error:
+        errors.append(f"sitemap.xml: invalid XML: {error}")
+        return []
+
+    namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+    root = tree.getroot()
+    if root.tag != "{http://www.sitemaps.org/schemas/sitemap/0.9}urlset":
+        errors.append("sitemap.xml: root element must be sitemap urlset")
+
+    line_lookup = {
+        line.strip(): line_number
+        for line_number, line in enumerate(sitemap.read_text(encoding="utf-8").splitlines(), start=1)
+    }
+    urls: list[tuple[str, int]] = []
+
+    for url_element in root.findall("sm:url", namespace):
+        loc = url_element.find("sm:loc", namespace)
+        lastmod = url_element.find("sm:lastmod", namespace)
+        if loc is None or not loc.text or not loc.text.strip():
+            errors.append("sitemap.xml: url entry missing loc")
+            continue
+        loc_text = loc.text.strip()
+        urls.append((loc_text, line_lookup.get(f"<loc>{loc_text}</loc>", 1)))
+
+        if lastmod is None or not lastmod.text or not lastmod.text.strip():
+            errors.append(f"sitemap.xml: {loc_text} missing lastmod")
+            continue
+        try:
+            date.fromisoformat(lastmod.text.strip())
+        except ValueError:
+            errors.append(f"sitemap.xml: {loc_text} has invalid lastmod date: {lastmod.text.strip()}")
+
+    return urls
+
+
+def check_sitemap_and_canonical_consistency(errors: list[str]) -> None:
+    parsed = parse_html_files()
+    expected_by_path = {path: expected_canonical_url(path) for path in public_html_files()}
+
+    for path, expected_url in expected_by_path.items():
+        parser = parsed.get(path)
+        if parser is None:
+            errors.append(f"{path}: unable to parse canonical link")
+            continue
+        if len(parser.canonical_links) != 1:
+            errors.append(f"{path}: expected exactly one canonical link, found {len(parser.canonical_links)}")
+            continue
+        canonical_url, line = parser.canonical_links[0]
+        if canonical_url != expected_url:
+            errors.append(f"{path}:{line}: canonical must be {expected_url}, found {canonical_url}")
+
+    urls = sitemap_urls(errors)
+    sitemap_url_set = {url for url, _line in urls}
+    expected_urls = set(expected_by_path.values())
+
+    for expected_url in sorted(expected_urls - sitemap_url_set):
+        errors.append(f"sitemap.xml: missing canonical URL {expected_url}")
+    for url, line in urls:
+        target = path_from_site_url(url)
+        if target is None:
+            errors.append(f"sitemap.xml:{line}: sitemap URL must use https://careleaver.eu/: {url}")
+            continue
+        if target not in expected_by_path:
+            errors.append(f"sitemap.xml:{line}: sitemap URL has no matching root HTML page: {url}")
+
+    robots = (ROOT / "robots.txt").read_text(encoding="utf-8")
+    if "Sitemap: https://careleaver.eu/sitemap.xml" not in robots.splitlines():
+        errors.append("robots.txt: missing exact sitemap directive for https://careleaver.eu/sitemap.xml")
+
+
 def collect_external_links() -> dict[str, list[str]]:
     links: dict[str, list[str]] = {}
     for path, parser in parse_html_files().items():
@@ -790,6 +892,7 @@ def main() -> None:
     check_internal_links(errors)
     check_accessibility_basics(errors)
     check_structured_data(errors)
+    check_sitemap_and_canonical_consistency(errors)
     check_index_guardrails(errors)
     check_sources_page_guardrails(errors)
     review_dates = check_review_dates(
