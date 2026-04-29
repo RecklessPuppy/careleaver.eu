@@ -42,6 +42,40 @@ Last updated: 2026-04-29
 - An education/work navigation pass was completed on 2026-04-29, adding a cautious "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, Next-Step Finder, and checker guardrails.
 - A print link visibility pass was completed on 2026-04-29, making printed public pages and printed template popups include external official URLs on paper.
 - A broad-outreach readiness guardrail pass was completed on 2026-04-29, adding an optional `scripts/check-site.py --readiness` gate and manual GitHub Actions input that fail clearly until owner-level review and operator/impressum blockers are resolved.
+- A Termin-Nachbereitung template pass was completed on 2026-04-29, adding a cautious copyable follow-up script for getting next steps, responsible offices, missing documents, and possible date/Frist questions confirmed in writing after an appointment.
+
+## Termin-Nachbereitung Template Pass 2026-04-29
+
+### What Changed
+
+- Added a copyable "Nach dem Termin kurz bestätigen" script to the public templates.
+- Linked the existing "Nach dem Termin" document card to the new follow-up script.
+- Added a public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the follow-up script and cautious no-deadline-calculation wording remain present.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200`
+- Render smoke check: `wkhtmltoimage --width 390 index.html /private/tmp/careleaver-followup-mobile.png`
+- Print smoke check: `wkhtmltopdf --print-media-type index.html /private/tmp/careleaver-followup-print.pdf`
+- `qpdf --check /private/tmp/careleaver-followup-print.pdf`
+- `pdftotext /private/tmp/careleaver-followup-print.pdf -` confirmed the follow-up template appears in print output.
+
+### Current Risks
+
+- The template helps users ask for written confirmation, but it does not calculate deadlines or replace advice from the responsible office or a counselling route.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Broad Outreach Readiness Guardrail Pass 2026-04-29
 

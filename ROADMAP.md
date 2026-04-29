@@ -127,7 +127,7 @@ Goal: expand carefully beyond Wien.
 Goal: add practical appointment and planning tools without collecting sensitive data.
 
 - Improve document checklists.
-- Add appointment preparation templates.
+- Add appointment preparation templates. Status: after-appointment follow-up script added 2026-04-29.
 - Add printable one-page plans.
 - Add source-linked explainers for common processes.
 - Keep tools browser-side where possible.
