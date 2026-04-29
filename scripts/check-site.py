@@ -38,6 +38,9 @@ PUBLIC_FILES = ["index.html", "quellen.html", "robots.txt", "sitemap.xml"]
 EXTERNAL_LINK_SCHEMES = {"http", "https"}
 SITE_HOSTS = {"careleaver.eu", "www.careleaver.eu"}
 
+FORM_CONTROL_TAGS = {"input", "select", "textarea"}
+INTERACTIVE_TEXT_TAGS = {"a", "button"}
+
 PLACEHOLDER_PATTERNS = [
     r"lorem ipsum",
     r"REPLACE_ME",
@@ -58,22 +61,100 @@ class LinkParser(HTMLParser):
         self.id_counts: dict[str, int] = {}
         self.links: list[tuple[str, str, int]] = []
         self.blank_links_missing_rel: list[tuple[str, int]] = []
-        self._line = 1
+        self.html_lang = ""
+        self.main_count = 0
+        self.h1_count = 0
+        self.heading_levels: list[tuple[int, int]] = []
+        self.skip_links: list[tuple[str, int]] = []
+        self.labels_for: set[str] = set()
+        self.form_controls: list[tuple[str, dict[str, str], int, bool]] = []
+        self.images_missing_alt: list[tuple[str, int]] = []
+        self.th_missing_scope: list[int] = []
+        self.navs_missing_label: list[int] = []
+        self.aria_references: list[tuple[str, list[str], int]] = []
+        self.interactive_missing_name: list[tuple[str, str, int]] = []
+        self._label_depth = 0
+        self._text_stack: list[dict[str, object]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        attr_map = {key: value or "" for key, value in attrs}
+        tag = tag.lower()
+        attr_map = {key.lower(): value or "" for key, value in attrs}
         line = self.getpos()[0]
+
+        if tag == "html":
+            self.html_lang = attr_map.get("lang", "")
+        if tag == "main":
+            self.main_count += 1
+        if tag == "h1":
+            self.h1_count += 1
+        if re.fullmatch(r"h[1-6]", tag):
+            self.heading_levels.append((int(tag[1]), line))
+        if tag == "label":
+            self._label_depth += 1
+            label_target = attr_map.get("for")
+            if label_target:
+                self.labels_for.add(label_target)
+        if tag == "nav" and not (
+            attr_map.get("aria-label") or attr_map.get("aria-labelledby") or attr_map.get("title")
+        ):
+            self.navs_missing_label.append(line)
+        if tag in FORM_CONTROL_TAGS:
+            self.form_controls.append((tag, attr_map, line, self._label_depth > 0))
+        if tag == "img" and "alt" not in attr_map:
+            self.images_missing_alt.append((attr_map.get("src", ""), line))
+        if tag == "th" and "scope" not in attr_map:
+            self.th_missing_scope.append(line)
+
         element_id = attr_map.get("id")
         if element_id:
             self.ids.add(element_id)
             self.id_counts[element_id] = self.id_counts.get(element_id, 0) + 1
+
+        for attribute in ("aria-labelledby", "aria-describedby", "aria-controls"):
+            references = attr_map.get(attribute, "").split()
+            if references:
+                self.aria_references.append((attribute, references, line))
+
         href = attr_map.get("href")
         if href:
             self.links.append((href, tag, line))
+            if href == "#main" or "skip-link" in attr_map.get("class", "").split():
+                self.skip_links.append((href, line))
         if attr_map.get("target") == "_blank":
             rel = set(attr_map.get("rel", "").split())
             if not {"noopener", "noreferrer"}.issubset(rel):
                 self.blank_links_missing_rel.append((href or tag, line))
+        if tag in INTERACTIVE_TEXT_TAGS:
+            self._text_stack.append({"tag": tag, "line": line, "attrs": attr_map, "text": []})
+
+    def handle_data(self, data: str) -> None:
+        for item in self._text_stack:
+            text = item["text"]
+            assert isinstance(text, list)
+            text.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if tag == "label":
+            self._label_depth = max(0, self._label_depth - 1)
+
+        for index in range(len(self._text_stack) - 1, -1, -1):
+            item = self._text_stack[index]
+            if item["tag"] != tag:
+                continue
+            self._text_stack.pop(index)
+            attrs = item["attrs"]
+            assert isinstance(attrs, dict)
+            text = item["text"]
+            assert isinstance(text, list)
+            accessible_text = " ".join("".join(text).split())
+            has_programmatic_name = attrs.get("aria-label") or attrs.get("aria-labelledby") or attrs.get("title")
+            if not accessible_text and not has_programmatic_name:
+                line = item["line"]
+                assert isinstance(line, int)
+                target = attrs.get("href", tag)
+                self.interactive_missing_name.append((tag, target, line))
+            break
 
 
 def fail(errors: list[str]) -> None:
@@ -182,6 +263,70 @@ def check_internal_links(errors: list[str]) -> None:
 
         for href, line in parser.blank_links_missing_rel:
             errors.append(f"{path}:{line}: target=_blank link missing rel noopener noreferrer: {href}")
+
+
+def form_control_has_label(
+    tag: str,
+    attrs: dict[str, str],
+    in_wrapping_label: bool,
+    labels_for: set[str],
+) -> bool:
+    input_type = attrs.get("type", "text").lower()
+    if tag == "input" and input_type == "hidden":
+        return True
+    if tag == "input" and input_type in {"button", "submit", "reset"}:
+        return bool(attrs.get("value") or attrs.get("aria-label") or attrs.get("aria-labelledby") or attrs.get("title"))
+    return bool(
+        in_wrapping_label
+        or (attrs.get("id") and attrs["id"] in labels_for)
+        or attrs.get("aria-label")
+        or attrs.get("aria-labelledby")
+        or attrs.get("title")
+    )
+
+
+def check_accessibility_basics(errors: list[str]) -> None:
+    parsed = parse_html_files()
+
+    for path, parser in parsed.items():
+        if not parser.html_lang:
+            errors.append(f"{path}: html element missing lang attribute")
+        elif not parser.html_lang.lower().startswith("de"):
+            errors.append(f"{path}: html lang should start with de, found {parser.html_lang}")
+
+        if parser.main_count != 1:
+            errors.append(f"{path}: expected exactly one main element, found {parser.main_count}")
+        if parser.h1_count != 1:
+            errors.append(f"{path}: expected exactly one h1, found {parser.h1_count}")
+        if "main" not in parser.ids:
+            errors.append(f"{path}: skip target id=\"main\" missing")
+        if not any(href == "#main" for href, _line in parser.skip_links):
+            errors.append(f"{path}: skip link to #main missing")
+
+        previous_level = 0
+        for level, line in parser.heading_levels:
+            if previous_level and level > previous_level + 1:
+                errors.append(f"{path}:{line}: heading level jumps from h{previous_level} to h{level}")
+            previous_level = level
+
+        for attribute, references, line in parser.aria_references:
+            for reference in references:
+                if reference not in parser.ids:
+                    errors.append(f"{path}:{line}: {attribute} references missing id {reference}")
+
+        for tag, attrs, line, in_wrapping_label in parser.form_controls:
+            if not form_control_has_label(tag, attrs, in_wrapping_label, parser.labels_for):
+                control_id = attrs.get("id") or attrs.get("name") or tag
+                errors.append(f"{path}:{line}: form control missing accessible label: {control_id}")
+
+        for tag, target, line in parser.interactive_missing_name:
+            errors.append(f"{path}:{line}: {tag} missing accessible text/name: {target}")
+        for source, line in parser.images_missing_alt:
+            errors.append(f"{path}:{line}: img missing alt attribute: {source or '[inline]'}")
+        for line in parser.th_missing_scope:
+            errors.append(f"{path}:{line}: table header missing scope attribute")
+        for line in parser.navs_missing_label:
+            errors.append(f"{path}:{line}: nav missing aria-label, aria-labelledby, or title")
 
 
 def collect_external_links() -> dict[str, list[str]]:
@@ -302,6 +447,7 @@ def main() -> None:
     check_required_files(errors)
     check_public_placeholders(errors)
     check_internal_links(errors)
+    check_accessibility_basics(errors)
     check_index_guardrails(errors)
     check_sources_page_guardrails(errors)
     fail(errors)

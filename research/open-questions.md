@@ -37,6 +37,7 @@ Use this file for unresolved claims, missing sources, and decisions that should 
 - Meldezettel: public page links to the exact Stadt Wien residence-registration page.
 - Automated link checking: `scripts/check-site.py` now supports `--external` for strict manual/local HTTP link checks and scheduled GitHub Actions runs external checks as soft warnings.
 - Public source/changelog page: `quellen.html` now gives a public review table, short change notes, and maintenance cautions.
+- Lightweight accessibility QA: `scripts/check-site.py` now checks static HTML basics such as language, skip links, main/H1 structure, heading jumps, form labels, link/button names, image alt text, table header scopes, nav labels, and ARIA references. A full browser/axe audit remains useful later.
 
 ## Product Decisions
 

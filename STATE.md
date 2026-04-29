@@ -10,7 +10,7 @@ Last updated: 2026-04-29
 - Site is a static GitHub Pages site.
 - Public live site: `https://careleaver.eu`.
 - Custom domain is preserved through `CNAME`, which contains `careleaver.eu`.
-- Current public site is one static page: `index.html`, plus `robots.txt` and `sitemap.xml`.
+- Current public site has two static HTML pages: `index.html` and `quellen.html`, plus `robots.txt` and `sitemap.xml`.
 - The site is German-language and now explicitly Wien-first.
 - The site includes source-sensitive material: emergency numbers, Wien routes, rights/background, deadlines, benefit/housing notes, and health/crisis routes.
 - A research swarm was completed on 2026-04-29 to decide the product direction before public content changes.
@@ -22,6 +22,7 @@ Last updated: 2026-04-29
 - An external-link smoke-check pass was completed on 2026-04-29, adding optional networked HTTP link checks to local/manual QA and scheduled CI warnings.
 - A no-JavaScript and print resilience pass was completed on 2026-04-29, focused on the public router and templates.
 - A public source/review page pass was completed on 2026-04-29, adding `quellen.html`, sitemap coverage, and local same-domain URL validation.
+- A lightweight accessibility-check pass was completed on 2026-04-29, adding static HTML accessibility guardrails to `scripts/check-site.py`.
 
 ## What Was Added In This Setup Pass
 
@@ -156,7 +157,7 @@ Checks run in this pass:
 - `python3 scripts/check-site.py`
 - `git diff --check`
 - `cat CNAME`
-- inline JavaScript syntax check with `node --check`
+- inline JavaScript syntax check with `node`
 - `wkhtmltoimage --disable-javascript --width 390 index.html /private/tmp/careleaver-nojs-mobile.png`
 - `sips` image dimension check for the no-JavaScript mobile render
 - `wkhtmltopdf --disable-javascript --print-media-type index.html /private/tmp/careleaver-nojs-print.pdf`
@@ -185,6 +186,25 @@ Checks run in this pass:
 - `wkhtmltopdf --print-media-type quellen.html /private/tmp/careleaver-quellen.pdf`
 - `qpdf --check /private/tmp/careleaver-quellen.pdf`
 - local HTTP preview smoke checks for `/` and `/quellen.html`, both returning `HTTP 200`
+
+## What Was Added In The Accessibility Check Pass
+
+- Extended `scripts/check-site.py` with static accessibility guardrails for all root HTML pages.
+- The checker now catches missing or wrong language attributes, missing `main`/skip-link structure, missing or duplicate H1 structure, heading-level jumps, broken ARIA references, unlabelled form controls, unnamed links/buttons, images without `alt`, table headers without `scope`, and unlabelled navigation landmarks.
+- Updated `ROADMAP.md`, `research/qa-report.md`, and `research/open-questions.md` to record that a lightweight accessibility QA path now exists.
+- No public factual claims, contact details, benefit amounts, legal deadlines, eligibility wording, backend, analytics, or forms were changed.
+
+Checks run in this pass:
+
+- `git pull --ff-only origin main`
+- `git status --short --branch`
+- `python3 scripts/check-site.py`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --external`
+- inline JavaScript syntax check with `node --check`
+- local HTTP preview smoke checks for `/` and `/quellen.html`, both returned `HTTP 200`
 
 ## Current Product Decision
 
@@ -220,7 +240,7 @@ Run `prompts/06-overnight-operator.md` in Codex Automations every 90 minutes ove
 
 Recommended first task for the next Codex chat:
 
-> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: add a lightweight accessibility audit path, improve source-review automation/reporting, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
+> Read `AGENTS.md`, `PROJECT_BRIEF.md`, `STATE.md`, `ROADMAP.md`, `OPERATING_MODEL.md`, `OVERNIGHT_RUNBOOK.md`, `SOURCE_POLICY.md`, `CONTENT_SAFETY.md`, `research/qa-report.md`, `research/source-log.md`, `research/open-questions.md`, `index.html`, and `quellen.html`. Pull latest `main`, choose the highest-impact safe task that does not need missing owner facts, implement it, run checks, write a dated automation report, update `STATE.md`, commit, and push. Strong next targets: improve source-review automation/reporting, add a browser-based accessibility audit if the test setup is stable, or run the strict external-link check again and log any failures. Do not expand Bundeslaender yet.
 
 ## Safe Editing Rule For The Next Step
 
