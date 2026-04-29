@@ -138,6 +138,13 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Extended `scripts/check-site.py` so the follow-up script, cautious no-deadline-calculation wording, and public changelog note remain present.
 - No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
 
+## Unterlagen-Nachreichung Addendum 2026-04-29
+
+- Added a copyable "Unterlagen nachreichen" script to the public templates.
+- Linked the existing "Nach dem Termin" document card to the new document-submission script.
+- Extended `scripts/check-site.py` so the document-submission script, cautious copy/scan/original wording, and public changelog note remain present.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

@@ -28,6 +28,8 @@ Begleitperson-template note, 2026-04-29: `index.html` added a short copyable "Ve
 
 Termin-Nachbereitung note, 2026-04-29: `index.html` added a short copyable follow-up script for after an appointment or call. It asks for the next step, responsible office/person, missing documents, and whether a named date or possible deadline should be checked directly with the office or a counselling route. It does not calculate deadlines, add legal advice, promise service outcomes, copy contact details, or introduce new source claims.
 
+Unterlagen-Nachreichung note, 2026-04-29: `index.html` added a short copyable script for sending missing documents after a contact or appointment. It asks for receipt confirmation, missing-document clarity, and a jurisdiction hint if the office is not responsible. It tells users to check directly whether copy, scan, or original is needed and does not add legal advice, deadline calculation, eligibility claims, service promises, contact details, or new source claims.
+
 Arbeits-/Ausbildungsroute note, 2026-04-29: `index.html` added a dedicated "Schule, Lehre oder Arbeit" route to the homepage router, no-JavaScript fallback, and Nächste-Schritte-Finder. It uses the already logged NEBA, AusBildung bis 18, waff, and U25 source anchors, asks users to check official pages and prepare questions, and does not add eligibility rules, age ranges, benefit promises, job promises, deadlines, contact details, or new source claims.
 
 ## How To Add A Source

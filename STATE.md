@@ -43,6 +43,42 @@ Last updated: 2026-04-29
 - A print link visibility pass was completed on 2026-04-29, making printed public pages and printed template popups include external official URLs on paper.
 - A broad-outreach readiness guardrail pass was completed on 2026-04-29, adding an optional `scripts/check-site.py --readiness` gate and manual GitHub Actions input that fail clearly until owner-level review and operator/impressum blockers are resolved.
 - A Termin-Nachbereitung template pass was completed on 2026-04-29, adding a cautious copyable follow-up script for getting next steps, responsible offices, missing documents, and possible date/Frist questions confirmed in writing after an appointment.
+- An Unterlagen-Nachreichung template pass was completed on 2026-04-29, adding a cautious copyable script for sending missing documents and asking for receipt, missing-item, and Zuständigkeits clarification without adding new factual claims.
+
+## Unterlagen-Nachreichung Template Pass 2026-04-29
+
+### What Changed
+
+- Added a copyable "Unterlagen nachreichen" script to the public templates.
+- Linked the existing "Nach dem Termin" document card to the new missing-document follow-up script.
+- Added a public changelog note on `quellen.html`.
+- Extended `scripts/check-site.py` so the document-submission script and cautious copy/scan/original wording remain present.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-29 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- `python3 scripts/check-site.py --today 2026-04-29 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` on port 4174.
+- Render smoke check: `wkhtmltoimage --width 390 http://127.0.0.1:4174/ /private/tmp/careleaver-docs-followup-mobile.png`
+- Print smoke check: `wkhtmltopdf --print-media-type http://127.0.0.1:4174/ /private/tmp/careleaver-docs-followup-print.pdf`
+- `qpdf --check /private/tmp/careleaver-docs-followup-print.pdf`
+- `pdftotext /private/tmp/careleaver-docs-followup-print.pdf -` confirmed the new Unterlagen-Nachreichung template appears in print output.
+- `python3 scripts/check-site.py --today 2026-04-29 --readiness` failed as expected on known broad-outreach blockers.
+- Playwright CLI preview was attempted with a temporary npm cache, but Chrome launch still failed in the local sandbox; render/print smoke checks were used instead.
+
+### Current Risks
+
+- The template helps users ask for receipt and missing-document clarity, but it does not decide whether an office accepts a document format or whether a deadline exists.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then schedule the dedicated axe/assistive-technology accessibility pass.
 
 ## Termin-Nachbereitung Template Pass 2026-04-29
 

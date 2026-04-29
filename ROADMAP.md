@@ -109,7 +109,7 @@ Goal: publish a reliable, useful Wien-first version.
 - Keep the site static, mobile-friendly, and printable. Status: first pass done; browser QA still needed.
 - Add a top "Ich brauche Hilfe mit ..." router. Status: done.
 - Add Wien appointment-prep kits for MA 11/Care Leaver counselling, U25, MA 50/Wohnbeihilfe, KIJA, and housing crisis. Status: generic practical templates added; provider-specific templates can be expanded after QA.
-- Add short German scripts for calls, emails, written decisions, and bringing a trusted person. Status: first pass done.
+- Add short German scripts for calls, emails, written decisions, missing-document follow-up, and bringing a trusted person. Status: first pass done; Unterlagen-Nachreichung script added 2026-04-29.
 - Prefer official contact pages over copied contact details where possible. Status: done in the public MVP.
 
 ## Phase 3: Bundesland Expansion
