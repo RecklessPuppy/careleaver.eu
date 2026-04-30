@@ -21,6 +21,7 @@ from urllib.request import Request, urlopen
 ROOT = Path(".")
 
 REQUIRED_FILES = [
+    ".gitignore",
     "AGENTS.md",
     "PROJECT_BRIEF.md",
     "STATE.md",
@@ -110,6 +111,14 @@ REQUIRED_APPOINTMENT_CARD_LABELS = [
     "Nicht für Entscheidungen auf diese Website verlassen",
     "Geprüft",
     "Nächste Prüfung",
+]
+
+REQUIRED_GITIGNORE_PATTERNS = [
+    ".DS_Store",
+    "__pycache__/",
+    "*.py[cod]",
+    ".playwright-cli/",
+    "node_modules/",
 ]
 
 
@@ -364,6 +373,20 @@ def check_required_files(errors: list[str]) -> None:
     cname = ROOT / "CNAME"
     if cname.exists() and cname.read_text(encoding="utf-8").strip() != "careleaver.eu":
         errors.append("CNAME must contain exactly careleaver.eu")
+
+
+def check_gitignore_guardrails(errors: list[str]) -> None:
+    path = ROOT / ".gitignore"
+    if not path.exists():
+        return
+    patterns = {
+        line.strip()
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    }
+    for pattern in REQUIRED_GITIGNORE_PATTERNS:
+        if pattern not in patterns:
+            errors.append(f".gitignore: missing required local-artifact pattern: {pattern}")
 
 
 def check_public_placeholders(errors: list[str]) -> None:
@@ -1190,6 +1213,7 @@ def main() -> None:
     errors: list[str] = []
     warnings: list[str] = []
     check_required_files(errors)
+    check_gitignore_guardrails(errors)
     check_public_placeholders(errors)
     check_internal_links(errors)
     check_accessibility_basics(errors)
