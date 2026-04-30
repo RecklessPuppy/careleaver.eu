@@ -8,6 +8,13 @@ Scope: strict safety, quality, and fact-check review of the current public `inde
 
 The Wien-first MVP is mostly cautious and source-linked. It avoids legal/benefit decisions, avoids copied non-emergency contact directories, discloses local browser storage, and uses respectful practical language.
 
+## No-new-claims wording QA 2026-04-30
+
+- Reviewed the owner-review shortlist, current state/roadmap/QA notes, both public HTML pages, and the site checker for wording that could sound too certain about eligibility, service availability, housing placement, money or legal outcomes, current contact routes, or partnership/endorsement.
+- Softened a small set of homepage sentences around PSD/Rat auf Draht routing, Care-Leaver/MA-11 fit, document-prep outcomes, rights/complaint wording, Care Leaver Österreich non-affiliation wording, and Next-Step Finder route wording.
+- Reviewed `quellen.html`; no public wording change was needed there.
+- No legal, benefit, housing, emergency, health, contact, phone, email, operator, impressum, partnership, or endorsement details were added.
+
 Safe fixes shipped in this QA pass:
 
 - Added a visible BMI source pill for DEC112/SMS emergency information in the crisis area.
