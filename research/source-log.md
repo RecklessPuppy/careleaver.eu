@@ -38,6 +38,8 @@ Entwurf-Laden note, 2026-04-30: `index.html` no longer auto-loads voluntarily sa
 
 Checklisten-Speicherung note, 2026-04-30: `index.html` no longer auto-saves or auto-loads 18-24 checklist checkmarks. Users must click "Häkchen lokal speichern" or "Gespeicherte Häkchen laden" before checklist state is written to or restored from `localStorage`. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
 
+Werkzeug-Rueckmeldung note, 2026-04-30: `index.html` now shows a short visible status message after local save, load, delete, and copy actions, while keeping an ARIA live status for assistive technologies. `quellen.html` records the public maintenance note. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
+
 ## How To Add A Source
 
 ```md

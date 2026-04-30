@@ -47,6 +47,38 @@ Last updated: 2026-04-30
 - A template copy fallback pass was completed on 2026-04-30, adding a browser fallback for copy buttons when the modern Clipboard API is unavailable and a checker guardrail to keep it.
 - A template draft privacy pass was completed on 2026-04-30, requiring an explicit user action before saved free-text template drafts are loaded back into the page.
 - A checklist storage privacy pass was completed on 2026-04-30, requiring explicit user actions before 18-24 checklist checkmarks are saved to or loaded from `localStorage`.
+- A visible tool feedback pass was completed on 2026-04-30, adding a short on-page status message for save/load/delete/copy actions and a checker guardrail to keep it.
+
+## Visible Tool Feedback Pass 2026-04-30
+
+### What Changed
+
+- Added a visible `role="status"` feedback region to `index.html` for local save, load, delete, and copy actions.
+- Reused the existing `announce()` flow so feedback is visible to sighted users and still announced to assistive technologies.
+- Kept the status short-lived, non-persistent, and hidden in print output.
+- Added checker guardrails so future edits keep the live status region and visible feedback behavior.
+- Added a public changelog note on `quellen.html`.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-30 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- Inline JavaScript syntax check with `node --check`
+- `python3 scripts/check-site.py --today 2026-04-30 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` on port 4178, and the visible feedback markup appeared in the served homepage HTML.
+
+### Current Risks
+
+- The feedback confirms only local browser actions; it does not prove that data is synced, submitted, or accepted by any office.
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then decide verified operator/contact/impressum wording before broad outreach.
 
 ## Checklist Storage Privacy Pass 2026-04-30
 

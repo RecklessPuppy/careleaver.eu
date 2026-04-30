@@ -169,6 +169,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Added a public changelog note on `quellen.html`.
 - No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
 
+## Visible Tool Feedback Addendum 2026-04-30
+
+- Added a visible ARIA live status message for local save, load, delete, and copy actions.
+- Kept the status short, non-persistent, and hidden in print output.
+- Updated `scripts/check-site.py` so future edits keep the static live-status region and visible feedback behavior.
+- Added a public changelog note on `quellen.html`.
+- No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
 ## Sources Checked
 
 - https://www.bmi.gv.at/notrufnummern/

@@ -493,6 +493,33 @@
             color: var(--blue);
         }
 
+        .status-toast {
+            position: fixed;
+            right: 1rem;
+            bottom: 1rem;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            max-width: min(360px, calc(100% - 32px));
+            min-height: 44px;
+            padding: .75rem .9rem;
+            border: 1px solid #b9ded0;
+            border-left: 4px solid var(--green);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--ink);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(.5rem);
+            transition: opacity .16s ease, transform .16s ease;
+        }
+
+        .status-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .checklist {
             display: grid;
             gap: .75rem;
@@ -843,7 +870,8 @@
             .hero-actions,
             .actions,
             button,
-            .skip-link {
+            .skip-link,
+            .status-toast {
                 display: none !important;
             }
 
@@ -1886,8 +1914,11 @@
         </div>
     </footer>
 
+    <div id="live-status" class="status-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <script>
         const storagePrefix = "careleaver.eu.v1.";
+        let announceTimer;
 
         const routeContent = {
             unsafe: `
@@ -2197,11 +2228,17 @@
         function announce(message) {
             const live = document.getElementById("live-status") || document.createElement("div");
             live.id = "live-status";
-            live.className = "sr-only";
+            live.className = "status-toast";
             live.setAttribute("role", "status");
             live.setAttribute("aria-live", "polite");
+            live.setAttribute("aria-atomic", "true");
             live.textContent = message;
-            document.body.appendChild(live);
+            if (!live.parentElement) document.body.appendChild(live);
+            live.classList.add("show");
+            window.clearTimeout(announceTimer);
+            announceTimer = window.setTimeout(() => {
+                live.classList.remove("show");
+            }, 4200);
         }
 
         function highlightCurrentNav() {
