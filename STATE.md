@@ -46,6 +46,39 @@ Last updated: 2026-04-30
 - An Unterlagen-Nachreichung template pass was completed on 2026-04-29, adding a cautious copyable script for sending missing documents and asking for receipt, missing-item, and Zuständigkeits clarification without adding new factual claims.
 - A template copy fallback pass was completed on 2026-04-30, adding a browser fallback for copy buttons when the modern Clipboard API is unavailable and a checker guardrail to keep it.
 - A template draft privacy pass was completed on 2026-04-30, requiring an explicit user action before saved free-text template drafts are loaded back into the page.
+- A checklist storage privacy pass was completed on 2026-04-30, requiring explicit user actions before 18-24 checklist checkmarks are saved to or loaded from `localStorage`.
+
+## Checklist Storage Privacy Pass 2026-04-30
+
+### What Changed
+
+- Added visible "Häkchen lokal speichern" and "Gespeicherte Häkchen laden" buttons to the 18-24 checklist privacy controls.
+- Removed automatic checklist loading from page startup.
+- Removed automatic checklist saving from checkbox changes.
+- Kept the existing "Lokale Daten löschen" action for saved checklist state and saved template drafts.
+- Added checker guardrails so future edits fail if checklist state is auto-loaded on startup or auto-saved from checkbox changes.
+- Added a public changelog note on `quellen.html`.
+- Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
+- No legal deadline, appeal advice, eligibility rule, benefit amount, service promise, contact detail, backend, analytics, form submission, or server-side data collection was added.
+
+### Checks Run
+
+- `python3 scripts/check-site.py --today 2026-04-30 --report-review-dates`
+- `python3 -m py_compile scripts/check-site.py`
+- `git diff --check`
+- `cat CNAME`
+- Inline JavaScript syntax check with `node --check`
+- `python3 scripts/check-site.py --today 2026-04-30 --external --external-timeout 30`
+- Local HTTP preview: `/` and `/quellen.html` returned `HTTP 200` on port 4177, and the new checklist save/load text appeared in the served homepage HTML.
+
+### Current Risks
+
+- Users can still voluntarily store checklist state and free-text drafts in `localStorage`; the site discloses this and provides "Lokale Daten löschen".
+- Owner factual review, verified operator/impressum details, and dedicated axe/assistive-technology testing remain unresolved before broad outreach.
+
+### Next Recommended Task
+
+Run the human factual review of the Wien MVP against `research/human-review-packet-2026-04-29.md`, then decide verified operator/contact/impressum wording before broad outreach.
 
 ## Template Draft Privacy Pass 2026-04-30
 
@@ -53,7 +86,7 @@ Last updated: 2026-04-30
 
 - Added a visible "Gespeicherten Entwurf laden" button beside the existing local draft save action.
 - Removed automatic loading of saved free-text template drafts during page startup.
-- Kept checklist state loading automatically, because checklist checkmarks are lower-sensitivity and already disclosed.
+- Kept checklist state loading automatically at that time, because checklist checkmarks were lower-sensitivity and already disclosed. This was later hardened in the 2026-04-30 checklist storage privacy pass.
 - Added checker guardrails so future edits fail if saved free-text drafts are auto-loaded again.
 - Added a public changelog note on `quellen.html`.
 - Updated `ROADMAP.md`, `research/source-log.md`, and `research/qa-report.md` with safety notes for the change.
@@ -651,7 +684,7 @@ Owner should review `research/human-review-packet-2026-04-29.md`, mark the check
 - Added a visible source/review table with reviewed and next-review dates.
 - Replaced the old "Anspruchs-Check" decision framing with a "Naechste-Schritte-Finder".
 - Removed old public placeholder contact/impressum fields; verified operator/contact details remain an owner decision before broad outreach.
-- Improved privacy wording and localStorage behavior: checkboxes save locally; free-text template drafts save only after an explicit user action.
+- Improved privacy wording and localStorage behavior: checkboxes and free-text template drafts now save only after explicit user actions.
 - Added `robots.txt` and `sitemap.xml`.
 
 ## What Was Added In The QA Pass
@@ -904,7 +937,7 @@ The site should not become a legal encyclopedia, benefit calculator, chatbot, ba
 - The public page includes non-affiliation wording, but outreach wording should still be reviewed before contacting Care Leaver Oesterreich or partners.
 - The public page links to OBS for ORF-related exemption/support checks and the exact City of Vienna residence-registration page.
 - The old waff 18-25 wording was removed; current page links to waff and warns to verify waff age ranges directly there.
-- localStorage still exists for checklist state and opt-in template drafts; shared-device risk is disclosed and deletion is available.
+- localStorage still exists for explicitly saved checklist state and opt-in template drafts; shared-device risk is disclosed and deletion is available.
 - Public review dates are present, and the local/CI checker now flags overdue review dates, but crisis, money, housing, and contact routes still must actually be reviewed again by 2026-07-29.
 
 ## Next Recommended Action

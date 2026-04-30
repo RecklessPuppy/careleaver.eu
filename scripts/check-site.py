@@ -760,6 +760,16 @@ def check_index_guardrails(errors: list[str]) -> None:
         "2026-04-29",
         "2026-07-29",
         "Lokale Daten löschen",
+        "Häkchen lokal speichern",
+        "Gespeicherte Häkchen laden",
+        'data-action="save-checks"',
+        'data-action="load-checks"',
+        "Häkchen werden erst gespeichert",
+        "Gespeicherte Häkchen und Entwürfe werden erst nach Klick geladen",
+        "function saveChecks()",
+        "function loadSavedChecks()",
+        'button.addEventListener("click", saveChecks);',
+        'button.addEventListener("click", loadSavedChecks);',
         "Gespeicherten Entwurf laden",
         'data-action="load-draft"',
         "Ein gespeicherter Entwurf wird erst geladen",
@@ -790,6 +800,7 @@ def check_index_guardrails(errors: list[str]) -> None:
     check_appointment_cards(index, errors)
     check_template_privacy_fields(errors)
     check_draft_loading_privacy(index, errors)
+    check_checklist_storage_privacy(index, errors)
     if index.count('a[href^="http"]::after') < 2 or "attr(href)" not in index:
         errors.append("index.html: print output should expose external URLs, including section-print popups")
 
@@ -872,6 +883,27 @@ def check_draft_loading_privacy(index: str, errors: list[str]) -> None:
         errors.append("index.html: saved free-text drafts should load only after an explicit user action")
 
 
+def check_checklist_storage_privacy(index: str, errors: list[str]) -> None:
+    dom_ready_match = re.search(
+        r'document\.addEventListener\("DOMContentLoaded",\s*\(\)\s*=>\s*\{(?P<body>.*?)\n\s*\}\);',
+        index,
+        flags=re.DOTALL,
+    )
+    if not dom_ready_match:
+        errors.append("index.html: unable to inspect DOMContentLoaded checklist-loading behavior")
+        return
+
+    dom_ready_body = dom_ready_match.group("body")
+    if "loadSavedChecks();" in dom_ready_body or "loadChecks();" in dom_ready_body:
+        errors.append("index.html: saved checklist state should load only after an explicit user action")
+
+    if re.search(
+        r'addEventListener\("change"[\s\S]{0,500}localStorage\.setItem\(storagePrefix \+ "check\.',
+        index,
+    ):
+        errors.append("index.html: checklist changes should not auto-save to localStorage")
+
+
 def check_sources_page_guardrails(errors: list[str]) -> None:
     page = (ROOT / "quellen.html").read_text(encoding="utf-8")
     required_snippets = [
@@ -885,6 +917,7 @@ def check_sources_page_guardrails(errors: list[str]) -> None:
         'id="aenderungen"',
         "2026-04-29",
         "2026-07-29",
+        "Checklisten speichern jetzt explizit",
         "Entwürfe laden jetzt explizit",
         "Bundesland-Navigation ergänzt",
         "Brief- und Fristenroute ergänzt",

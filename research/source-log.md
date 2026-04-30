@@ -36,6 +36,8 @@ Kopier-Fallback note, 2026-04-30: `index.html` now falls back to a temporary tex
 
 Entwurf-Laden note, 2026-04-30: `index.html` no longer auto-loads voluntarily saved free-text template drafts on page load. Users must click "Gespeicherten Entwurf laden" before saved draft text is shown again, which reduces accidental disclosure on shared devices. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
 
+Checklisten-Speicherung note, 2026-04-30: `index.html` no longer auto-saves or auto-loads 18-24 checklist checkmarks. Users must click "Häkchen lokal speichern" or "Gespeicherte Häkchen laden" before checklist state is written to or restored from `localStorage`. No public factual claim, legal advice, benefit/housing/health/crisis instruction, contact detail, backend, analytics, form submission, or new source claim was added.
+
 ## How To Add A Source
 
 ```md

@@ -1161,8 +1161,10 @@
                 <p class="section-intro">Diese Liste ist keine Pflichtliste und entscheidet nichts über Ansprüche. Sie hilft dir, nichts Wichtiges zu vergessen und bei Terminen bessere Fragen zu stellen.</p>
 
                 <div class="privacy-note">
-                    <strong>Privat auf gemeinsam genutzten Geräten:</strong> Abgehakte Punkte werden nur in diesem Browser gespeichert. Freitext wird nicht automatisch gespeichert. Mit „Lokale Daten löschen“ entfernst du gespeicherte Häkchen und freiwillig gespeicherte Entwürfe.
+                    <strong>Privat auf gemeinsam genutzten Geräten:</strong> Häkchen werden erst gespeichert, wenn du „Häkchen lokal speichern“ klickst. Gespeicherte Häkchen werden erst geladen, wenn du „Gespeicherte Häkchen laden“ klickst. Freitext wird nicht automatisch gespeichert. Nach Änderungen erneut speichern; mit „Lokale Daten löschen“ entfernst du gespeicherte Häkchen und freiwillig gespeicherte Entwürfe.
                     <div class="actions">
+                        <button class="secondary" type="button" data-action="save-checks">Häkchen lokal speichern</button>
+                        <button class="secondary" type="button" data-action="load-checks">Gespeicherte Häkchen laden</button>
                         <button class="danger" type="button" data-action="clear-local">Lokale Daten löschen</button>
                     </div>
                 </div>
@@ -1879,7 +1881,7 @@
         <div class="wrap">
             <h2>Hinweise</h2>
             <p>Diese Website ist eine unabhängige Orientierungshilfe. Sie ersetzt keine Rechtsberatung, keine medizinische oder therapeutische Hilfe und keinen Notruf. Sie entscheidet nicht, ob du eine Leistung bekommst.</p>
-            <p>Es werden keine Daten an einen Server geschickt, kein Tracking eingebaut und keine Formulare übertragen. Checklisten und freiwillig gespeicherte Entwürfe bleiben nur im Browser über localStorage. Gespeicherte Entwürfe werden erst nach Klick geladen und können über „Lokale Daten löschen“ entfernt werden.</p>
+            <p>Es werden keine Daten an einen Server geschickt, kein Tracking eingebaut und keine Formulare übertragen. Checklisten-Häkchen und freiwillig gespeicherte Entwürfe werden nur gespeichert, wenn du den jeweiligen Speichern-Knopf nutzt. Gespeicherte Häkchen und Entwürfe werden erst nach Klick geladen und können über „Lokale Daten löschen“ entfernt werden.</p>
             <p>Letzte öffentliche Inhaltsprüfung dieser Version: 2026-04-29. Öffentliche Quellenübersicht: <a href="quellen.html">Quellen und Review</a>. Interne Pflege: <code>research/source-log.md</code>, <code>SOURCE_POLICY.md</code> und <code>CONTENT_SAFETY.md</code>.</p>
         </div>
     </footer>
@@ -1984,17 +1986,32 @@
             box.classList.add("show");
         }
 
-        function loadChecks() {
-            document.querySelectorAll("[data-check]").forEach((box) => {
+        function checklistBoxes() {
+            return document.querySelectorAll("[data-check]");
+        }
+
+        function saveChecks() {
+            if (!confirm("Diese Häkchen nur in diesem Browser speichern? Auf gemeinsam genutzten Geräten danach lokale Daten löschen.")) return;
+            checklistBoxes().forEach((box) => {
                 try {
-                    box.checked = localStorage.getItem(storagePrefix + "check." + box.dataset.check) === "true";
+                    localStorage.setItem(storagePrefix + "check." + box.dataset.check, box.checked ? "true" : "false");
                 } catch (error) {}
-                box.addEventListener("change", () => {
-                    try {
-                        localStorage.setItem(storagePrefix + "check." + box.dataset.check, box.checked ? "true" : "false");
-                    } catch (error) {}
-                });
             });
+            announce("Häkchen lokal gespeichert.");
+        }
+
+        function loadSavedChecks() {
+            let loaded = 0;
+            checklistBoxes().forEach((box) => {
+                try {
+                    const value = localStorage.getItem(storagePrefix + "check." + box.dataset.check);
+                    if (value !== null) {
+                        box.checked = value === "true";
+                        loaded += 1;
+                    }
+                } catch (error) {}
+            });
+            announce(loaded ? "Gespeicherte Häkchen geladen." : "Keine gespeicherten Häkchen gefunden.");
         }
 
         function saveDraft() {
@@ -2028,7 +2045,7 @@
                     if (key.startsWith(storagePrefix)) localStorage.removeItem(key);
                 });
             } catch (error) {}
-            document.querySelectorAll("[data-check]").forEach((box) => box.checked = false);
+            checklistBoxes().forEach((box) => box.checked = false);
             document.querySelectorAll("#vorlagen input, #vorlagen textarea").forEach((field) => field.value = "");
             announce("Lokale Daten gelöscht.");
         }
@@ -2221,6 +2238,12 @@
             document.querySelectorAll("[data-action='clear-local']").forEach((button) => {
                 button.addEventListener("click", clearLocalData);
             });
+            document.querySelectorAll("[data-action='save-checks']").forEach((button) => {
+                button.addEventListener("click", saveChecks);
+            });
+            document.querySelectorAll("[data-action='load-checks']").forEach((button) => {
+                button.addEventListener("click", loadSavedChecks);
+            });
             document.querySelectorAll("[data-action='print-templates']").forEach((button) => {
                 button.addEventListener("click", () => printSection("vorlagen"));
             });
@@ -2275,7 +2298,6 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             bindActions();
-            loadChecks();
             updateStickyOffsets();
             highlightCurrentNav();
         });

@@ -23,7 +23,7 @@ Safe fixes shipped in this QA pass:
 4. Crisis/emergency wording: IMPROVED. Immediate danger routes are visible. PSD Wien, Rat auf Draht, and BMI sources support the displayed crisis routes. Text-based emergency information now has a visible BMI source pill.
 5. Mobile usability: FIXED. Playwright check at 390x844 found no horizontal page overflow, but the sticky nav offset was smaller than the actual crisis bar. Desktop nav now uses a measured offset; mobile nav is static so it does not cover content.
 6. Accessibility basics: IMPROVED. The page has `lang`, skip link, landmarks, labelled form controls, visible focus styles, and accessible checkbox labels. Table column scopes were added. A later automation pass added static HTML accessibility guardrails to `scripts/check-site.py`; a full browser/axe audit is still a future improvement after a stable test setup exists.
-7. Privacy concerns: PASS WITH CAUTION. No backend, tracking, analytics, or form submission. Checklist state and explicitly saved drafts use `localStorage`; shared-device risk and deletion are disclosed.
+7. Privacy concerns: PASS WITH CAUTION. No backend, tracking, analytics, or form submission. Checklist state and template drafts use `localStorage` only after explicit save actions; shared-device risk and deletion are disclosed.
 8. Tone: PASS. Tone is practical and respectful. It avoids savior language and avoids blaming the young person.
 9. Official sources linked where needed: PASS WITH CAUTION. High-risk sections link mainly to official or operator pages. The page should keep preferring official pages over copied contact blocks.
 10. Last-reviewed dates: IMPROVED. Public source/review dates are visible by claim group. A later automation pass added review-date checks to `scripts/check-site.py`, so public/source-log review dates now warn before they are due and fail strict checks when overdue. Crisis, money, housing, contacts, and time-sensitive routes remain on 2026-07-29 review cycles.
@@ -158,6 +158,14 @@ TODO - Bundesland expansion: keep non-Wien Bundesländer as "in Arbeit" until ea
 - Changed free-text template draft handling so voluntarily saved drafts are no longer loaded automatically on page start.
 - Added a visible "Gespeicherten Entwurf laden" action for users who intentionally want to restore saved draft text.
 - Updated `scripts/check-site.py` so future edits fail if `DOMContentLoaded` auto-loads saved free-text drafts again.
+- Added a public changelog note on `quellen.html`.
+- No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
+
+## Checklist Storage Privacy Addendum 2026-04-30
+
+- Changed 18-24 checklist persistence so checkmarks are no longer auto-saved on change or auto-loaded on page start.
+- Added visible "Häkchen lokal speichern" and "Gespeicherte Häkchen laden" actions.
+- Updated `scripts/check-site.py` so future edits fail if checklist state is auto-loaded during page startup or auto-saved from checkbox changes.
 - Added a public changelog note on `quellen.html`.
 - No factual public claim, contact detail, legal/benefit/housing/health/emergency instruction, backend, analytics, form submission, or server-side data collection was added.
 
