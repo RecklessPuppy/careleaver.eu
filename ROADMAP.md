@@ -16,6 +16,8 @@ It should not become a legal encyclopedia, benefit calculator, chatbot, backend 
 
 Automation direction as of 2026-04-30: stay in maintenance/QA mode until owner factual review and verified operator/impressum wording are done; do not add new public factual content before then, except small usability or accessibility fixes that add no new claims.
 
+Next milestone as of 2026-04-30: limited trusted review using `research/trusted-review-pack-2026-04-30.md`; no broad outreach before owner/impressum/operator decisions and review feedback; automation remains maintenance/QA only.
+
 ## Phase 0: Repo / Project Setup
 
 Goal: make the project understandable to future Codex chats and maintainers.
