@@ -48,6 +48,7 @@ Last updated: 2026-04-30
 - A template draft privacy pass was completed on 2026-04-30, requiring an explicit user action before saved free-text template drafts are loaded back into the page.
 - A checklist storage privacy pass was completed on 2026-04-30, requiring explicit user actions before 18-24 checklist checkmarks are saved to or loaded from `localStorage`.
 - A visible tool feedback pass was completed on 2026-04-30, adding a short on-page status message for save/load/delete/copy actions and a checker guardrail to keep it.
+- Automation should now stay in maintenance/QA mode until owner factual review and verified operator/impressum wording are done; do not add new public factual content before then, except small usability or accessibility fixes that add no new claims.
 
 ## Visible Tool Feedback Pass 2026-04-30
 

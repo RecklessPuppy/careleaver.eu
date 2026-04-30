@@ -14,6 +14,8 @@ The site should help users prepare for real support routes: crisis help, MA 11 /
 
 It should not become a legal encyclopedia, benefit calculator, chatbot, backend service, advocacy organization, or broad stale contact database.
 
+Automation direction as of 2026-04-30: stay in maintenance/QA mode until owner factual review and verified operator/impressum wording are done; do not add new public factual content before then, except small usability or accessibility fixes that add no new claims.
+
 ## Phase 0: Repo / Project Setup
 
 Goal: make the project understandable to future Codex chats and maintainers.
