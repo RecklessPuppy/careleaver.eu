@@ -3,7 +3,7 @@
 Use this prompt when starting a fresh Codex chat for this repo.
 
 ```text
-We are working on /Users/hardwork/Developer/Codex/workspaces/careleaver.eu.
+We are working on /Users/hardwork/Developer/careleaver.eu.
 
 Please read AGENTS.md, PROJECT_BRIEF.md, STATE.md, SOURCE_POLICY.md, CONTENT_SAFETY.md, ROADMAP.md, and OPERATING_MODEL.md first.
 

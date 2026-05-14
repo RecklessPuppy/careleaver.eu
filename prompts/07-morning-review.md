@@ -3,7 +3,7 @@
 Use this prompt after an overnight automation run.
 
 ```text
-We are working on /Users/hardwork/Developer/Codex/workspaces/careleaver.eu.
+We are working on /Users/hardwork/Developer/careleaver.eu.
 
 Mode: morning owner review. Do not make code/content changes unless needed to produce the review. The goal is to summarize what happened overnight and what needs human attention.
 

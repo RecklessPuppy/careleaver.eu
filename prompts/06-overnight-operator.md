@@ -3,7 +3,7 @@
 Use this prompt in Codex Automations for unattended overnight progress.
 
 ```text
-We are working on /Users/hardwork/Developer/Codex/workspaces/careleaver.eu.
+We are working on /Users/hardwork/Developer/careleaver.eu.
 
 Mode: aggressive overnight autonomous progress.
 

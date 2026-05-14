@@ -4,7 +4,7 @@ Last updated: 2026-04-30
 
 ## Current Status
 
-- Repo is cloned locally at `/Users/hardwork/Developer/Codex/workspaces/careleaver.eu`.
+- Repo is cloned locally at `/Users/hardwork/Developer/careleaver.eu`.
 - Current branch: `main`.
 - Remote: `origin` points to `https://github.com/RecklessPuppy/careleaver.eu.git`.
 - Site is a static GitHub Pages site.
